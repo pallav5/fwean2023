@@ -1,0 +1,215 @@
+{% extends 'clienttemplates/clientbase.html' %}
+{% load static %}
+{% block gallery %}active{% endblock %}
+
+
+{% block title %}
+    Gallery
+{% endblock %}
+
+{% block css %}
+{#    <link rel="stylesheet" href="{% static 'clientstatic/gallery+lightbox/css/bootstrap.min.css' %}">#}
+{#    <link rel="stylesheet" href="{% static 'clientstatic/gallery+lightbox/css/style.css' %}">#}
+    <link rel="stylesheet" href="{% static 'clientstatic/gallery+lightbox/css/glightbox.css' %}">
+
+    <style>
+
+
+
+      @media (max-width:1281px),(min-width:801px) {
+
+         .gallery_product > img {
+
+            height: 230px;
+             width: 450px;
+
+        }
+        .gslide-image > img {
+                {#height: 500px;#}
+                {#width: 1000px;#}
+            }
+
+    }
+
+
+     @media only screen and (max-device-width: 480px){
+
+        {#.gallery_product > img {#}
+        {#    height: 100%;#}
+        {#    width : 100%;#}
+        {#}#}
+        .gslide-image > img {
+                height: 100%;
+                width: 100%;
+            }
+    }
+
+.gallery-title
+{
+    font-size: 36px;
+    color: #7C0000;
+    text-align: center;
+    font-weight: 500;
+    margin-bottom: 70px;
+}
+.gallery-title:after {
+    content: "";
+    position: absolute;
+    width: 7.5%;
+    left: 46.5%;
+    height: 45px;
+
+}
+.filter-button
+{
+    font-size: 18px;
+    border: 1px solid #7C0000;
+    border-radius: 5px;
+    text-align: center;
+    color: #7C0000;
+    margin-bottom: 30px;
+
+}
+.filter-button:hover
+{
+    font-size: 18px;
+    border: 1px solid #7C0000;
+    border-radius: 5px;
+    text-align: center;
+    color: #ffffff;
+    background-color: #7C0000;
+
+}
+.filter-button.active
+{
+    background-color:#7C0000;
+    color: white;
+}
+.port-image
+{
+    width: 100%;
+}
+
+.gallery_product
+{
+    margin-bottom: 30px;
+	-webkit-animation-duration: 1s;
+            animation-duration: 1s;
+            -webkit-animation-fill-mode: both;
+            animation-fill-mode: both;
+}
+
+.block{
+    opacity: 0;
+}
+
+@-webkit-keyframes fadeIn {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+}
+@keyframes fadeIn {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+}
+.fadeIn {
+    -webkit-animation-name: fadeIn;
+    animation-name: fadeIn;
+}
+
+    .gallery_product img{
+        transition: box-shadow .3s;
+  border: 1px solid #ccc;
+
+    }
+
+    .gallery_product:hover img{
+    box-shadow: 0 0 10px rgb(91, 38, 91);
+      }
+
+
+
+
+
+    </style>
+
+
+
+{% endblock %}
+
+{% block content %}
+
+ <!-- Section: inner-header -->
+{#    <section class="inner-header parallax layer-overlay" data-bg-img="{{albumdetail.image.url}}">#}
+{#     <div class="container pt-90 pb-50">#}
+{#        <!-- Section Content -->#}
+{#        <div class="section-content pt-100">#}
+{#          <div class="row">#}
+{#            <div class="col-md-8">#}
+{#              <h3 style="font-size: 20pt;" class="title text-white">{{ albumdetail.title}}</h3>#}
+{#            </div>#}
+{#              <div class="col-sm-4">#}
+{#              <ol class="breadcrumb white mt-10 text-right xs-text-center">#}
+{#                <li><a style="color: lightgrey" href="{% url 'fweanapp:indexpage' %}">Home</a></li>#}
+{#                <li><a style="color: lightgrey" href="{% url 'fweanapp:clientimagealbumlist' %}">Image Albums</a></li>#}
+{##}
+{#                <li class="active">{{ albumdetail.title|truncatechars_html:50}}</li>#}
+{##}
+{#              </ol>#}
+{#            </div>#}
+{#          </div>#}
+{#        </div>#}
+{#      </div>#}
+{#    </section>#}
+
+     <section>
+    <div class="container pt-10">
+        <div class="breadcrumb"><a href="{% url 'fweanapp:indexpage' %}"><span class="font-13"><b>Home |</b></span></a> <a href="{% url 'fweanapp:clientimagealbumlist' %}"><span class="font-13"><b>Image Albums |</b></span></a>  <span class="font-13"><b>{{albumdetail.title}}</b></span></div>
+    <div class="row">
+      <div class="gallery col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <h3 class="text-center pb-20 pt-5  text-uppercase"><b>IMAGES IN ALBUM "{{ albumdetail.title }}"</b></h3>
+
+      </div>
+
+
+            {% for singlealbum in albums %}
+              <a  href="{{ singlealbum.image.url}}"
+                 {{ singlealbum }}
+                class="glightbox gallery_product hvr-float col-sm-6 col-xs-12  col-lg-4 col-md-4 ">
+                <img  style="object-fit: cover; background-color: #57257D;
+    padding: 1px;" src="{{ singlealbum.image.url}}">
+                    <div class="text-center">
+             <p style="color: #5b265b; "><b> {% if singlealbum.title %}
+
+             {{ singlealbum.title }}</b></p> {% endif %}
+         </div>
+              </a>
+
+            {% endfor %}
+
+    </div>
+  </div>
+
+    </section>
+
+
+
+
+
+
+
+
+
+{% endblock %}
+{% block js %}
+    <script src="{% static 'clientstatic/gallery+lightbox/js/glightbox.min.js' %}"></script>
+    <script src="{% static 'clientstatic/gallery+lightbox/js/index.js' %}"></script>
+
+{#<script>#}
+{#$("#myDIV > .btn").click(function(){#}
+{#    $("#myDIV > .btn").removeClass("active");#}
+{#    $(this).addClass("active");#}
+{#});#}
+{#</script>#}
+
+{% endblock %}
+

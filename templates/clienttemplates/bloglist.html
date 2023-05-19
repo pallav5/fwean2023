@@ -1,0 +1,152 @@
+{% extends 'clienttemplates/clientbase.html' %}
+{% load static %}
+{% block resources%}active{% endblock %}
+
+{% block css %}
+    <style>
+    .divider p{
+        color: black;
+    }
+
+     @media only screen and (min-device-width: 1365px) {
+         .thumb img {
+             height: 240px;
+         }
+     }
+    @media only screen and (max-device-width: 750px) {
+         .thumb img {
+              height: 240px;
+          }
+
+         }
+
+     @media only screen and (max-width:1024px) and (min-width:750px) {
+         .thumb img {
+              height: 240px;
+          }
+     }
+
+    </style>
+{% endblock %}
+
+{% block title %}Blog{% endblock %}
+
+{% block content %}
+
+   <!-- Start main-content -->
+  <div class="main-content">
+
+    <!-- Section: inner-header -->
+{#    <section class="inner-header parallax layer-overlay" data-bg-img="{{slider.image1.url}}">#}
+{#     <div class="container pt-90 pb-50">#}
+{#        <!-- Section Content -->#}
+{#        <div class="section-content pt-100">#}
+{#          <div class="row">#}
+{#            <div class="col-md-8">#}
+{#              <h3 class="title text-white">Blogs</h3>#}
+{#            </div>#}
+{#              <div class="col-sm-4">#}
+{#              <ol class="breadcrumb white mt-10 text-right xs-text-center">#}
+{#                <li><a style="color: lightgrey" href="{% url 'fweanapp:indexpage' %}">Home</a></li>#}
+{##}
+{#                <li class="active">Blogs</li>#}
+{##}
+{#              </ol>#}
+{#            </div>#}
+{#          </div>#}
+{#        </div>#}
+{#      </div>#}
+{#    </section>#}
+
+    <section>
+      <div class="container pt-10 pb-0">
+          <div class="breadcrumb"><a href="{% url 'fweanapp:indexpage' %}"><span class="font-13"><b>Home |</b></span></a>  <span class="font-13"><b>Blogs</b></span></div>
+        <div class="row multi-row-clearfix">
+        <h3 class="text-center mb-40"><b>BLOGS</b></h3>
+          <div class="blog-posts">
+          {% if not blog_list %}
+                <h3 class="text-center">No any blogs currently.</h3>
+          {% endif %}
+              {% for blog in blog_list %}
+                  {% if blog_list %}
+
+
+
+
+
+            <div class="col-md-4 col-sm-6 hvr-float">
+              <article class="post  clearfix mb-30 bg-lighter">
+                <div class="entry-header">
+                  <div class="post-thumb thumb">
+                    <img style=" object-fit: cover;  object-position: 0px 0px;" src="{{ blog.image.url}}" alt="" class="img-responsive img-fullwidth">
+                  </div>
+                </div>
+                <div class="entry-content p-20 pr-10">
+                  <div class="entry-meta media mt-0 no-bg no-border">
+                    <div class="text-center pull-left flip bg-theme-colored p-10 pt-5 pb-5 mr-10">
+                      <ul>
+                        <li class="font-24 text-white font-weight-600 border-bottom ">{{ blog.date.day}}</li>
+                        <li class="font-18 text-white text-uppercase">{{ blog.date|date:'M' }}</li>
+                      </ul>
+                    </div>
+                    <div class="media-body">
+                      <div class="event-content pull-left flip">
+                        <h4 class="entry-title text-white text-uppercase m-0 mt-5"><a class="text-theme-colored" href="{% url 'fweanapp:clientblogdetail' blog.slug %}">{{ blog.title|truncatechars_html:40}}</a></h4>
+                        <i style="font-size: large" class="fa fa-calendar paragraph-color mr-5"></i> <span> {{ blog.date}}</span>
+                      </div>
+                    </div>
+                  </div>
+                 <div class="mt-10" style="font-family: Roboto, sans-serif; font-size: 12pt;" >{{ blog.description|safe|truncatechars_html:150 }}</div>
+                  <a href="{% url 'fweanapp:clientblogdetail' blog.slug %}" class="btn-read-more">Read more</a>
+                  <div class="clearfix"></div>
+                </div>
+              </article>
+            </div>
+
+
+                   {% endif %}
+               {% endfor %}
+           <div class="col-md-12 text-center ">
+                {% if is_paginated %}
+                    <ul class="pagination theme-colored">
+                    {% if page_obj.has_previous %}
+                      <li><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+                    {% else %}
+                      <li class="disabled"><span>&laquo;</span></li>
+                    {% endif %}
+                    {% for i in paginator.page_range %}
+                      {% if page_obj.number == i %}
+                        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                      {% else %}
+                        <li><a href="?page={{ i }}">{{ i }}</a></li>
+                      {% endif %}
+                    {% endfor %}
+                    {% if page_obj.has_next %}
+                      <li><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+                    {% else %}
+                      <li class="disabled"><span>&raquo;</span></li>
+                    {% endif %}
+                  </ul>
+                {% endif %}
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <!-- end main-content -->
+
+
+{% endblock %}
+
+{% block js %}
+
+        <script>
+  $("span").removeAttr("style");
+  $("p").removeAttr("style");
+
+
+    </script>
+
+{% endblock %}

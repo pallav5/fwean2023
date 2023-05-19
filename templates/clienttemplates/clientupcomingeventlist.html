@@ -1,0 +1,217 @@
+
+{% extends 'clienttemplates/clientbase.html' %}
+{% load static %}
+{% block media %}active{% endblock %}
+{% block upcomingevents %}active{% endblock %}
+{% block title %}Upcoming Events{% endblock %}
+
+
+
+{% block css %}
+    <style>
+      .schedule-box {
+  transition: box-shadow .3s;
+  {#border: 1px solid #ccc;#}
+ }
+.schedule-box:hover {
+  box-shadow: 0 0 6px rgb(91, 38, 91);
+}
+
+    .element{
+    color: rgb(0, 0, 0);
+    font-size: 3px;
+}
+    </style>
+
+
+{% endblock %}
+
+{% block content %}
+
+
+
+<!-- Start main-content -->
+  <div class="main-content">
+
+    <!-- Section: inner-header -->
+{#   <section class="inner-header parallax layer-overlay" data-bg-img="{{org.profile_image.url}}">#}
+{#     <div class="container pt-90 pb-50">#}
+{#        <!-- Section Content -->#}
+{#        <div class="section-content pt-100">#}
+{#          <div class="row">#}
+{#            <div class="col-md-8">#}
+{#              <h3 class="title text-white">Upcoming EVents</h3>#}
+{#            </div>#}
+{#              <div class="col-sm-4">#}
+{#              <ol class="breadcrumb white mt-10 text-right xs-text-center">#}
+{#                <li><a style="color: lightgrey" href="{% url 'fweanapp:indexpage' %}">Home</a></li>#}
+{##}
+{#                <li class="active">Upcoming Events</li>#}
+{##}
+{#              </ol>#}
+{#            </div>#}
+{#          </div>#}
+{#        </div>#}
+{#      </div>#}
+{#    </section>#}
+
+    <!-- Section: Events List -->
+    <section>
+      <div style="padding-top: 30px;" class="container pb-0">
+        <div class="section-content">
+          <div class="row">
+
+          <h3  class="text-center text-theme-colored text-uppercase mb-40"><b>Upcoming Events</b></h3>
+
+            <div class="col-sm-12 col-md-9 ">
+             {% for event in upcomingeventlist %}
+              <div class="schedule-box maxwidth500 bg-lighter clearfix mb-10">
+                <div class="col-md-4">
+                  <div class="thumb mt-20">
+                    <img class="img-fullwidth  " alt="" src="{{ event.image1.url }}">
+                  </div>
+                </div>
+                <div class="col-md-8">
+                  <div class="schedule-details clearfix p-15 pt-30">
+                    <div class="text-center pull-left flip bg-theme-colored p-10 pt-5 pb-5 mr-10">
+                      <ul>
+                        <li class="font-24 text-white font-weight-600 border-bottom ">{{ event.start_date.day}}</li>
+                        <li class="font-18 text-white text-uppercase">{{ event.start_date|date:'M' }}</li>
+                      </ul>
+                    </div>
+                    <h4 class="title mt-0"><a href="{% url 'fweanapp:clientupcomingeventdetail' event.slug %}">{{ event.title}}</a></h4>
+                    <ul class="list-inline text-gray">
+                      <li class="paragraph-color"><i class="fa fa-calendar mr-5"></i>
+                          {{event.start_date}} </li>
+                      {% if event.location %} <li class="paragraph-color"><i class="fa fa-map-marker mr-5"></i> {{ event.location }}
+
+                       </li> {% endif %}
+                    </ul>
+                    <div class="clearfix"></div>
+                    <p class="mt-10 text-justify text-black">{{ event.description|truncatechars_html:200|safe }}</p>
+                    <div class="mt-10">
+
+                     <a href="{% url 'fweanapp:clientupcomingeventdetail' event.slug %}" class="btn btn-dark btn-theme-colored btn-sm mt-10" >Details</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+
+            </div>
+
+
+
+
+            <div class="col-md-3 bg-light col-sm-12 pt-sm-30">
+              <h4 class="text-uppercase title line-bottom mt-0 "><i class="fa fa-calendar text-gray-darkgray mr-10"></i>Latest News</h4>
+
+              {% for event in newsandevents %}
+                 {% if newsandevents %}
+
+
+
+
+              <article class="post media-post clearfix pb-0 mb-10">
+                <a href="#" class="post-thumb mr-20"><img style="width: 60px; height: 50px; object-fit: cover;" alt="" src="{{event.image1.url}}"></a>
+                <div class="post-right">
+                  <h5 class="mt-0 mb-5"><a class="text-theme-colored" href="{% url 'fweanapp:clientnewsandeventsdetail' event.slug %}">{{ event.title|truncatechars_html:40}}</a></h5>
+                  <ul class="list-inline font-12 mb-5">
+                    <li class="pr-0 paragraph-color"><i class="fa fa-calendar mr-5"></i> {{ event.get_date}} {{ event.get_month }}, {{ event.get_year }}
+
+                      {% if event.location %}
+
+                        <li class="pl-5"><i class="fa fa-map-marker mr-5"></i>{{ event.location}}</li>
+                              {% endif %}
+                      </ul>
+{#                  <p style="font-size: small;"  class="mb-0">{{ event.description|truncatechars_html:50|safe}}</p>#}
+{#                  <a class="text-theme-colored font-13" href="{% url 'fweanapp:clientupcomingeventdetail' %}">Read More →</a>#}
+                </div>
+              </article>
+                   {% endif %}
+
+                {% endfor %}
+
+{#                {% for event in upcomingeventshomepage %}#}
+{#                 {% if upcomingeventshomepage %}#}
+{##}
+{##}
+{##}
+{##}
+{#              <article class="post media-post clearfix pb-0 mb-10">#}
+{#                <a href="#" class="post-thumb mr-20"><img style=" width: 60px; height: 50px; object-fit: cover;" alt="" src="{{event.image1.url}}"></a>#}
+{#                <div class="post-right">#}
+{#                  <h5 class="mt-0 mb-5 text-theme-colored"><a href="{% url 'fweanapp:clientnewsandeventsdetail' event.id %}">{{ event.title}}</a></h5>#}
+{#                  <ul class="list-inline font-12 mb-5">#}
+{#                    <li class="pr-0"><i class="fa fa-calendar mr-5"></i> {{ event.get_date}} {{ event.get_month }}, {{ event.get_year }}#}
+{#                        {{ event.get_year }} |</li>#}
+{#                      {% if event.location %}#}
+{##}
+{##}
+{#                    <li class="pl-5"><i class="fa fa-map-marker mr-5"></i>{{ event.location}}</li>#}
+{#                          {% endif %}#}
+{#                  </ul>#}
+{#                  <p  class="mb-0 font-13">{{ event.description|truncatechars_html:50|safe}}</p>#}
+{#                  <a class="text-theme-colored font-13" href="{% url 'fweanapp:clientupcomingeventdetail' %}">Read More →</a>#}
+{#                </div>#}
+{#              </article>#}
+{#                   {% endif %}#}
+{##}
+{#                {% endfor %}#}
+          <div class="section-title text-center">
+          <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+              <a href="{% url 'fweanapp:clientnewsandeventslist' %}" class="text-uppercase"><button class="btn btn-sm btn-success">See more</button></a>
+            </div>
+        </div>
+
+            </div>
+
+            </div>
+
+
+
+
+
+         <div class="col-md-12 text-center ">
+                {% if is_paginated %}
+                    <ul class="pagination theme-colored">
+                    {% if page_obj.has_previous %}
+                      <li><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+                    {% else %}
+                      <li class="disabled"><span>&laquo;</span></li>
+                    {% endif %}
+                    {% for i in paginator.page_range %}
+                      {% if page_obj.number == i %}
+                        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                      {% else %}
+                        <li><a href="?page={{ i }}">{{ i }}</a></li>
+                      {% endif %}
+                    {% endfor %}
+                    {% if page_obj.has_next %}
+                      <li><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+                    {% else %}
+                      <li class="disabled"><span>&raquo;</span></li>
+                    {% endif %}
+                  </ul>
+                {% endif %}
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <!-- end main-content -->
+
+{% endblock %}
+
+{% block js %}
+
+        <script>
+  $("span").removeAttr("style");
+
+      </script>
+
+{% endblock %}

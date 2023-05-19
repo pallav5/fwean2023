@@ -1,0 +1,120 @@
+{% extends 'admintemplates/adminbase.html' %}
+{% load static %}
+{% block css %}
+    <link href="{% static 'adminstatic/base/assets/libs/magnific-popup/dist/magnific-popup.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+
+
+            <!-- ============================================================== -->
+            <!-- Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <div class="page-breadcrumb">
+                <div class="row">
+                    <div class="col-12 d-flex no-block align-items-center">
+                        <h3 class="page-title">About Us ({{ programmedetail.title }}) detail</h3>
+                        <div class="ms-auto text-end">
+                            <nav aria-label="breadcrumb">
+                                
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+            <div class="container-fluid">
+                <!-- ============================================================== -->
+                <!-- Start Page Content -->
+                <!-- ============================================================== -->
+
+
+                   <div class="container-fluid">
+                <!-- ============================================================== -->
+                <!-- Start Page Content -->
+                <!-- ============================================================== -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+
+                                <h4 class="card-title">Programme Image:</h4>
+                                <hr>
+
+
+
+                  <div class="row el-element-overlay">
+
+                  {% if programmedetail.image %}
+
+
+                    <div class="col-lg-3 offset-4 col-md-6">
+                        <div class="card">
+                            <div class="el-card-item">
+                                <div class="el-card-avatar el-overlay-1"> <img  src="{{programmedetail.image.url}}"
+                                        alt="user" />
+                                    <div class="el-overlay">
+                                        <ul class="list-style-none el-info">
+                                            <li class="el-item"><a
+                                                    class="btn default btn-outline image-popup-vertical-fit el-link"
+                                                    href="{{programmedetail.image.url}}"><i
+                                                        class="mdi mdi-magnify-plus"></i></a></li>
+{#                                            <li class="el-item"><a class="btn default btn-outline el-link"#}
+{#                                                    href="javascript:void(0);"><i class="mdi mdi-link"></i></a></li>#}
+
+
+                                        </ul>
+
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                    {% endif %}
+
+
+                     <div class="card-action">
+                         <hr>
+                           <h5> Programme Title:  "{{ programmedetail.title }}" </h5>
+                         <hr>
+
+                        </div>
+                        <div class="card-action">
+                           <h5>Description:</h5>  {{ programmedetail.description|safe }}
+                            <hr>
+                        </div>
+                        </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Container fluid  -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- footer -->
+
+
+
+
+{% endblock %}
+
+{% block js %}
+{% endblock %}

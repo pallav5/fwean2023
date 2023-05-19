@@ -1,0 +1,179 @@
+{% extends 'clienttemplates/clientbase.html' %}
+{% load static %}
+
+{% block title %}Contact Us{% endblock %}
+{% block contactus %}active{% endblock %}
+{% block css %}
+    <style>
+    p{
+         font-family:'Open Sans', sans-serif;
+            font-size: 15px;
+            color: rgb(0,32,96);
+        font-weight: 600;
+    }
+    .paragraph h4{
+        color: #6b1e6b;
+    }
+
+     @media only screen and (min-width:750px) {
+         .height {
+              height: 180px;
+          }
+     }
+.bg-yellow{
+    background: #F5C300;!important;
+}
+
+    </style>
+{% endblock %}
+
+{% block content %}
+      <!-- Start main-content -->
+
+  <div class="main-content">
+
+    <!-- Section: inner-header -->
+{#    <section class="inner-header parallax layer-overlay" data-bg-img="{{slider.image1.url}}">#}
+{#     <div class="container pt-90 pb-50">#}
+{#        <!-- Section Content -->#}
+{#        <div class="section-content pt-100">#}
+{#          <div class="row">#}
+{#            <div class="col-md-8">#}
+{#              <h3 class="title text-white">Contact Us</h3>#}
+{#            </div>#}
+{#              <div class="col-sm-4">#}
+{#              <ol class="breadcrumb white mt-10 text-right xs-text-center">#}
+{#                <li><a style="color: lightgrey" href="{% url 'fweanapp:indexpage' %}">Home</a></li>#}
+{##}
+{#                <li class="active">Contact Us</li>#}
+{##}
+{#              </ol>#}
+{#            </div>#}
+{#          </div>#}
+{#        </div>#}
+{#      </div>#}
+{#    </section>#}
+
+    <!-- Divider: Contact -->
+    <section class="divider">
+     <div class="container pt-10 ">
+        <div class="breadcrumb"><a href="{% url 'fweanapp:indexpage' %}"><span class="font-13"><b>Home |</b></span></a>  <span class="font-13"><b>Contact Us</b></span></div>
+        <div class="row mt-50">
+
+         <div class="col-md-12 col-lg-6">
+          <!-- Google Map HTML Codes -->
+            <h3 class="line-bottom mt-0 mb-30">Map location</h3>
+            <div class="map p-2">
+               <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14127.590667658491!2d85.3342463!3d27.7204457!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xfd81cae85f54eef8!2sFederation%20of%20Woman%20Entrepreneurs&#39;%20Associations%20of%20Nepal%20(FWEAN)!5e0!3m2!1sen!2snp!4v1625582503859!5m2!1sen!2snp" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+
+          <div class="col-md-12 col-lg-6 paragraph ">
+            <div class="row">
+              <h3 class="line-bottom mt-0 mb-50 ml-15">Organization Contact Details</h3>
+
+              <div  class=" col-xs-12 col-sm-6 col-md-6 ">
+                <div   class="height icon-box media bg-yellow p-30  "> <a class="media-left pull-left flip" > <i class="fa fa-map-marker paragraph-color"></i></a>
+                  <div class="media-body">
+                      <h4 class="mt-0 paragraph-color"><a class="paragraph-color" >Our Office Location </a></h4>
+                    <p>{{ org.address }}</p>
+                  </div>
+                </div>
+              </div>
+              <div  class="col-xs-12 col-sm-6 col-md-6">
+                <div class="height icon-box media bg-yellow p-30 "> <a class="media-left pull-left flip" > <i class="fa  fa-phone mt-20 paragraph-color"></i></a>
+                  <div class="media-body">
+                      <h4 class="mt-20 "><a class="paragraph-color" >Contact Number</a></h4>
+                    <p>{{ org.contact_no }}, {% if org.alt_contact_no %} {{ org.alt_contact_no }} {% endif %}</p>
+                  </div>
+                </div>
+              </div>
+              <div  class="col-xs-12 col-sm-6 col-md-6">
+                <div class=" height icon-box media bg-yellow p-30 "> <a class="media-left pull-left flip" > <i class="fa fa-envelope mt-30 paragraph-color"></i></a>
+                  <div class="media-body">
+                    <h4 class="mt-30 paragraph-color"><a class="paragraph-color" >Email Address</a></h4>
+                    <p>{{ org.email }}</p>
+                  </div>
+                </div>
+              </div>
+
+                <div class="col-xs-12 col-sm-6 col-md-6">
+                <div class="height  icon-box media bg-yellow p-30 ">
+                    <div class="media-body ">
+                    <a class="media-left pull-left flip ml-40" href="https://www.facebook.com/FWEAN/" > <i class="fa font-25  fa-facebook-square paragraph-color"></i></a>
+
+                    <h4 class="mt-0 "><a class="paragraph-color" href="https://www.facebook.com/FWEAN/">Facebook</a></h4>
+                  <a class="media-left pull-left flip ml-40" href="https://www.instagram.com/fwean.np/" > <i class="fa font-25  fa-instagram  paragraph-color"></i></a>
+
+                    <h4 class="mt-0 "><a class="paragraph-color" href="https://www.instagram.com/fwean.np/">Instagram</a></h4>
+                   <a class="media-left pull-left flip ml-40" href="https://twitter.com/fweannepal"> <i class="fa font-25 fa-twitter  paragraph-color"></i></a>
+                     <h4 class="mt-0 "><a class="paragraph-color" href="https://twitter.com/fweannepal">Twitter</a></h4>
+                      {% if org.instagram %}
+{#                      <p>{{ org.instagram }}</p>#}
+                    {% endif %}
+                  </div>
+                </div>
+
+              </div>
+
+{#                <div class="col-xs-12 col-sm-6 col-md-6">#}
+{#                <div  class="height icon-box media bg-deep p-30 "> <a class="media-left pull-left flip" href="https://twitter.com/fweannepal"> <i class="fa fa-twitter mt-50 ml-40 text-theme-colored"></i></a>#}
+{#                  <div class="media-body">#}
+{#                      <h4 class="mt-0 mt-50"><a class="text-theme-colored" href="https://twitter.com/fweannepal">Twitter</a></h4>#}
+{#                    {% if org.twitter %}#}
+{#                      <p>{{ org.twitter }}</p>#}
+{#                    {% endif %}#}
+{#                  </div>#}
+{#                </div>#}
+{#              </div>#}
+
+{#                <div class="col-xs-12 col-sm-6 col-md-6">#}
+{#                <div class=" height icon-box media bg-deep p-30 "> <a class="media-left pull-left flip" > <i class="fab fa-viber mt-20 ml-30 text-theme-colored"></i></a>#}
+{#                  <div class="media-body">#}
+{#                    <h4 class="mt-20">Viber</h4>#}
+{#                    {% if org.viber %}#}
+{#                      <p>{{ org.viber }}</p>#}
+{#                    {% endif %}#}
+{#                  </div>#}
+{#                </div>#}
+{#              </div>#}
+
+{#             {% if org.youtube %}#}
+{#            <div class="col-xs-12 col-sm-6 col-md-6">#}
+{#                <div  class="height icon-box media bg-deep p-30 "> <a class="media-left pull-left flip" > <i class="fab fa-youtube text-theme-colored"></i></a>#}
+{#                  <div class="media-body">#}
+{#                    <h4 class="mt-0">Youtube</h4>#}
+{##}
+{#                      <p>{{ org.youtube }}</p>#}
+{##}
+{#                  </div>#}
+{#                </div>#}
+{#              </div>#}
+{#            {% endif %}#}
+
+             {% if org.whatsapp %}
+
+             <div class="col-xs-12 col-sm-6 col-md-6">
+                <div  class="height icon-box media bg-deep p-30 "> <a class="media-left pull-left flip" > <i class="fa fa-whatsapp text-theme-colored"></i></a>
+                  <div class="media-body">
+                    <h4 class="mt-0">Our Whatsapp Number</h4>
+                    {% if org.whatsapp %}
+                      <p>{{ org.whatsapp }}</p>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            {% endif %}
+
+            </div>
+          </div>
+
+       </div>
+      </div>
+    </section>
+  </div>
+{% block js %}
+
+
+    {% endblock %}
+{% endblock %}

@@ -1,0 +1,6 @@
+
+RewriteEngine on
+RewriteCond %{HTTP_HOST} ^membership\.fwean\.org\.np$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.membership\.fwean\.org\.np$
+RewriteRule ^(.*)$ "https\:\/\/fwean\.org\.np\/membership\-form\/$1" [R=301,L]
+

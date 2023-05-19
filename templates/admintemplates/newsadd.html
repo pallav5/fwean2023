@@ -1,0 +1,119 @@
+{% extends 'admintemplates/adminbase.html' %}
+{% load static %}
+{% block head %}
+{{ form.media }}
+{% endblock %}
+
+{% block css %}
+
+
+{#    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" type="text/css" media="all" rel="stylesheet" />#}
+{#<link href="{% static 'froala_editor/css/froala_editor.min.css' %}" type="text/css" media="all" rel="stylesheet" />#}
+{#<link href="{% static 'froala_editor/css/froala_style.min.css' %} type="text/css" media="all" rel="stylesheet" />#}
+{#<script type="text/javascript" src="{% static 'froala_editor/js/froala_editor.min.js' %}"></script>#}
+
+
+{% endblock %}
+
+{% block content %}
+
+            <div class="row mt-2">
+                    <div class="col-md-12">
+                        <div class="card container-fluid">
+
+                            <form id="submitform" class="row g-3 mt-2 mb-5" action="" method="post" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <h3 class="unde">Add New News</h3>
+
+                                     <div class="col-md-12">
+                                {% if form.errors %}
+                                    {% for field in form %}
+                                        {% for error in field.errors %}
+                                            <div class="alert alert-danger">
+                                                <strong>{{ error|escape }}</strong>
+                                            </div>
+                                        {% endfor %}
+                                    {% endfor %}
+                                    {% for error in form.non_field_errors %}
+                                        <div class="alert alert-danger">
+                                            <strong>{{ error|escape }}</strong>
+                                        </div>
+                                    {% endfor %}
+                                {% endif %}
+                                    </div>
+
+                            <div class="row">
+
+                                <div class="col-md-12">
+                                <label for="inputCity" class="form-label">Publish</label>
+                                 {{ form.is_active }}
+                              </div>
+
+
+                              <div class="col-md-6">
+                                <label for="inputCity" class="form-label">Title</label><span class="font-20" style="color:red;">*</span>
+                                 {{ form.title }}
+                              </div>
+
+                              <div class="col-md-6">
+                                <label for="inputState" class="form-label">Image1 </label><span class="font-20" style="color:red;">*</span>
+                                {{ form.image1 }}
+                              </div>
+                                 <div class="col-md-6">
+                                <label for="inputState" class="form-label">Image2</label>
+                                {{ form.image2 }}
+                              </div>
+                                 <div class="col-md-6">
+                                <label for="inputState" class="form-label">Location </label>
+                                {{ form.location }}
+                              </div>
+                                    </div>
+
+                             <div class="row">
+                                 <div class="col-md-6 mt-2">
+                                  <label for="inputState" class="form-label">Date<span class="font-20" style="color:red;">*</span> </label>
+                                 {{ form.date }}
+                                 </div>
+                             </div>
+
+                             <div class="row">
+                                 <div class="col-md-12 mt-2">
+                                  <label for="inputState" class="form-label">Description<span class="font-20" style="color:red;">*</span> </label>
+                                 {{ form.description }}
+                                 </div>
+                             </div>
+
+
+
+
+
+                              <div class="col-12 text-center">
+                                <input id="submitbutton" value="Submit" type="submit" class="btn btn-lg btn-primary"></input>
+                              
+                              </div>
+                            </form>
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+
+
+            {% endblock %}
+
+
+
+            {% block js %}
+            <script>
+                $('#submitform').submit(function(e)  {
+           // e.preventDefault();
+           $('#submitbutton').attr("disabled", true);
+             $('#submitbutton').attr('value', 'Please wait...');
+         });
+       
+           </script>
+
+
+{% endblock %}

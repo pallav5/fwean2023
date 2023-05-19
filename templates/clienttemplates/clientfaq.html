@@ -1,0 +1,208 @@
+{% extends 'clienttemplates/clientbase.html' %}
+{% load static %}
+{% block newsandevents %}active{% endblock %}
+{% block title %}FAQs{% endblock %}
+
+{% block css %}
+
+    <style>
+    @import url(https://fonts.googleapis.com/css?family=Lato:300,400,700);
+{##}
+{##}
+{#body {#}
+  {#font-family: "Lato", sans-serif;#}
+{#  font-size: 18px;#}
+{#  background: #fff;#}
+{#  line-height:26px;#}
+{#}#}
+
+h1 {
+ font-family: "Lato", sans-serif;
+font-weight: 700;
+font-style: normal;
+  color: #57257D;
+  font-size: 32px;
+
+}
+
+
+
+.content {
+  width: 80%;
+  padding: 20px;
+  margin: 0 auto;
+  padding: 0 60px 0 0;
+}
+
+  @media only screen and (max-device-width: 480px){
+        .content {
+  width: 100%;
+  padding: 20px;
+  margin: 0 auto;
+
+}
+
+  }
+
+.centerplease {
+  margin: 0 auto;
+  max-width: 270px;
+  font-size: 40px;
+}
+
+.question {
+  color: #fff;
+  position: relative;
+  background:        #57257D;
+  margin: 0;
+  padding: 10px 10px 10px 50px;
+  display: block;
+  width:100%;
+  cursor: pointer;
+}
+
+
+    .answers{
+  font-family:'Open Sans', sans-serif;
+            font-size: 15px;
+            color: rgb(0,32,96);
+  background: #f2f2f2;
+  padding: 0px 15px;
+  margin: 0px 0;
+  height: 0;
+  overflow: hidden;
+  z-index: -1;
+  position: relative;
+  opacity: 0;
+  -webkit-transition: .7s ease;
+  -moz-transition: .7s ease;
+  -o-transition: .7s ease;
+  transition: .7s ease;
+}
+
+.questions:checked ~ .answers{
+  height: auto;
+  opacity: 1;
+  padding: 15px;
+}
+
+.plus {
+  color:#fff;
+  position: absolute;
+  margin-left: 10px;
+  margin-top: 5px;
+  z-index: 5;
+  font-size: 2em;
+  line-height: 100%;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+  -webkit-transition: .3s ease;
+  -moz-transition: .3s ease;
+  -o-transition: .3s ease;
+  transition: .3s ease;
+}
+
+.questions:checked ~ .plus {
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.questions {
+  display: none;
+}
+
+    .answers > p {
+       font-family:'Open Sans', sans-serif;
+            font-size: 15px;
+            color: rgb(0,32,96)!important;
+    }
+
+
+    </style>
+
+{% endblock %}
+
+{% block content %}
+
+     <!-- Section: inner-header -->
+    <!-- Section: inner-header -->
+   <section style="height: 180px;" class="inner-header divider parallax layer-overlay overlay-dark-6" data-bg-img="{{ slider.image1.url }}">
+      <div class="container pt-60 pb-60">
+        <!-- Section Content -->
+        <div class="section-content">
+          <div class="row">
+            <div class="col-md-12 text-center">
+              <h3 class="font-28 text-white text-uppercase">FAQs</h3>
+              <!-- <ol class="breadcrumb text-center text-black mt-10">
+                <li><a style="color: lightgrey" href="{% url 'fweanapp:indexpage' %}">Home</a></li>
+{#                <li><a href="#">Pages</a></li>#}
+                <li class="active text-white">FAQS</li>
+              </ol> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+<div class="container pt-10 pb-20">
+  <div class="breadcrumb"><a href="{% url 'fweanapp:indexpage' %}"><span class="font-13"><b>Home |</b></span></a>   <span class="font-13"><b>FAQS</b></span></div>
+<div class="content">
+<div>
+<h3 class="line-bottom ">Frequently Asked Questions</h3>
+</div>
+
+{% for faq in faqs %}
+
+
+
+<div class="pb-5">
+  <input type="checkbox" id="question1{{ faq.id }}" name="q"  class="questions">
+
+  <label for="question1{{ faq.id }}" class="question">
+     <h4 class="text-white">+ {{ faq.question}} </h4>
+
+  </label>
+
+  <div  class="answers text-justify">
+    {{ faq.answer|safe}}
+
+  </div>
+</div>
+
+    {% endfor %}
+    </div>
+<!-- _____________________________________________________ -->
+
+
+
+</div>
+
+
+
+{% endblock %}
+
+
+
+{% block js %}
+ <script>
+  $("span").removeAttr("style");
+
+{#  var element1 = document.getElementsByClassName('introduction')#}
+{#element1.style.background = "red";#}
+
+
+  var element = $("p")
+  element.removeAttr("style");
+{##}
+{#  var p = document.querySelector(".introduction p");#}
+{#p.style.color = "red";#}
+
+    </script>
+{% endblock %}
+

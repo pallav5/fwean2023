@@ -1,0 +1,325 @@
+
+
+{% extends 'admintemplates/adminbase.html' %}
+
+{% block css %}
+
+{% endblock %}
+
+{% block content %}
+
+ <!--<div class="page-breadcrumb">-->
+ <!--               <div class="row">-->
+ <!--                   <div class="col-12 d-flex no-block align-items-center">-->
+ <!--                       <h4 class="page-title">Dashboard</h4>-->
+ <!--                       <div class="ms-auto text-end">-->
+ <!--                           <nav aria-label="breadcrumb">-->
+ <!--                               <ol class="breadcrumb">-->
+ <!--                                   <li class="breadcrumb-item"><a href="#">Home</a></li>-->
+ <!--                                   <li class="breadcrumb-item active" aria-current="page">Library</li>-->
+ <!--                               </ol>-->
+ <!--                           </nav>-->
+ <!--                       </div>-->
+ <!--                   </div>-->
+ <!--               </div>-->
+ <!--           </div>-->
+
+
+ <div class="container-fluid">
+
+            <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title"></h5>
+                                <div class="row">
+                                    <!-- Column -->
+
+
+                                    <div class="col-md-6 col-lg-3 col-xlg-3">
+                                        {% if org %}
+
+
+                                         <a href="{% url 'fweanapp:adminorganizationdetail' org.id %}">
+                                            {% else %}
+                                             <a href="{% url 'fweanapp:adminorganizationcreate'  %}">
+                                              {% endif %}
+                                        <div class="card card-hover">
+                                            <div style="height: 150px;" class="box bg-cyan text-center">
+                                                <h1 class="font-light text-white mt-4 "><i class="mdi mdi-office"></i>
+                                                </h1>
+                                                <h6 class="text-white">Organization</h6>
+                                            </div>
+                                        </div>
+                                      </a>
+                                    </div>
+
+                                    <!-- Column -->
+                                    <div class="col-md-6 col-lg-3 col-xlg-3">
+                                         <a href="{% url 'fweanapp:imagealbumlist'  %}">
+                                        <div class="card card-hover">
+                                            <div style="height: 150px;" class="box bg-success text-center">
+                                                <h1 class="font-light text-white mt-4"><i
+                                                        class="mdi mdi-image-album"></i></h1>
+                                                <h6 class="text-white">Image and Video <br>(Gallery)</h6>
+                                                 <h6 class="text-white">{{ imageandvideos.count }}</h6>
+                                            </div>
+                                        </div>
+                                         </a>
+                                    </div>
+                                    <!-- Column -->
+                                    <div class="col-md-6 col-lg-3 col-xlg-3">
+                                        <a href="{% url 'fweanapp:adminsliderlist'  %}">
+                                        <div class="card card-hover">
+                                            <div style="height: 150px;" class="box bg-warning text-center">
+                                                <h1 class="font-light text-white mt-4"><i class="mdi mdi-slack"></i></h1>
+                                                <h6 class="text-white">Sliders</h6>
+                                            </div>
+                                        </div>
+                                        </a>
+                                    </div>
+                                    <!-- Column -->
+                                    <div class="col-md-6 col-lg-3 col-xlg-3">
+                                        <a href="{% url 'fweanapp:adminaboutuslist'  %}">
+                                        <div class="card card-hover">
+                                            <div  style="height: 150px;" class="box bg-danger text-center">
+                                                <h1 class="font-light text-white mt-4"><i class="mdi mdi-account-box-outline"></i>
+                                                </h1>
+                                                <h6 class="text-white">About Us</h6>
+                                                 <h6 class="text-white">{{ aboutus.count }}</h6>
+                                            </div>
+                                        </div>
+                                        </a>
+                                    </div>
+                                 <!-- Column -->
+                                    <div class="col-md-6 col-lg-3 col-xlg-3">
+                                        <a href="{% url 'fweanapp:adminprojectlist'  %}">
+                                        <div class="card card-hover">
+                                            <div  style="height: 150px;" class="box bg-orange text-center">
+                                                <h1 class="font-light text-white mt-4"><i class="mdi mdi-projector"></i>
+                                                </h1>
+                                                <h6 class="text-white">Projects</h6>
+                                                 <h6 class="text-white">{{ projects.count }}</h6>
+                                            </div>
+                                        </div>
+                                        </a>
+                                    </div>
+                                 <!-- Column -->
+                                    <div class="col-md-6 col-lg-3 col-xlg-3">
+                                        <a href="{% url 'fweanapp:adminprogrammelist'  %}">
+                                        <div class="card card-hover">
+                                            <div  style="height: 150px;" class="box bg-dark text-center">
+                                                <h1 class="font-light text-white mt-4"><i class="mdi mdi-professional-hexagon"></i>
+                                                </h1>
+                                                <h6 class="text-white">Programmes</h6>
+                                                 <h6 class="text-white">{{ programmes.count }}</h6>
+                                            </div>
+                                        </div>
+                                        </a>
+                                    </div>
+                                 <!-- Column -->
+                                    <div class="col-md-6 col-lg-3 col-xlg-3">
+                                        <a href="{% url 'fweanapp:adminsuccessstorieslist'  %}">
+                                        <div class="card card-hover">
+                                            <div  style="height: 150px;" class="box bg-info text-center">
+                                                <h1 class="font-light text-white mt-4"><i class="mdi mdi-book-multiple"></i>
+                                                </h1>
+                                                <h6 class="text-white">Success Stories</h6>
+                                                 <h6 class="text-white">{{ successstories.count }}</h6>
+                                            </div>
+                                        </div>
+                                        </a>
+                                    </div>
+
+                                 <!-- Column -->
+                                    <div class="col-md-6 col-lg-3 col-xlg-3">
+                                        <a href="{% url 'fweanapp:adminsubscriberlist' %}">
+                                        <div class="card card-hover">
+                                            <div  style="height: 150px;" class="box bg-danger text-center">
+                                                <h1 class="font-light text-white mt-4"><i class="mdi mdi-email"></i>
+                                                </h1>
+                                                <h6 class="text-white">Subscribers</h6>
+                                                 <h6 class="text-white">{{ subscribers.count }}</h6>
+                                            </div>
+                                        </div>
+                                        </a>
+                                    </div>
+
+                                <!-- Column -->
+                                    <div class="col-md-6 col-lg-3 col-xlg-3">
+                                        <a href="{% url 'fweanapp:adminbloglist' %}">
+                                        <div class="card card-hover">
+                                            <div  style="height: 150px;" class="box bg-purple text-center">
+                                                <h1 class="font-light text-white mt-4"><i class="mdi mdi-blogger"></i>
+                                                </h1>
+                                                <h6 class="text-white">Blog</h6>
+                                                 <h6 class="text-white">{{ blogs.count }}</h6>
+                                            </div>
+                                        </div>
+                                        </a>
+                                    </div>
+
+                                 <!-- Column -->
+                                    <div class="col-md-6 col-lg-3 col-xlg-3">
+                                        <a href="{% url 'fweanapp:admindonorlist' %}">
+                                        <div class="card card-hover">
+                                            <div  style="height: 150px;" class="box bg-dark text-center">
+                                                <h1 class="font-light text-white mt-4"><i class="mdi mdi-cash"></i>
+                                                </h1>
+                                                <h6 class="text-white">Donors</h6>
+                                                 <h6 class="text-white">{{ donors.count }}</h6>
+                                            </div>
+                                        </div>
+                                        </a>
+                                    </div>
+
+                                 <!-- Column -->
+                                    <div class="col-md-6 col-lg-3 col-xlg-3">
+                                        <a href="{% url 'fweanapp:adminfaqlist' %}">
+                                        <div class="card card-hover">
+                                            <div  style="height: 150px;" class="box bg-purple text-center">
+                                                <h1 class="font-light text-white mt-4"><i class="mdi mdi-calendar-question"></i>
+                                                </h1>
+                                                <h6 class="text-white">FAQs</h6>
+                                                 <h6 class="text-white">{{ faqs.count }}</h6>
+                                            </div>
+                                        </div>
+                                        </a>
+                                    </div>
+
+                                 <!-- Column -->
+                                    <div class="col-md-6 col-lg-3 col-xlg-3">
+                                        <a href="{% url 'fweanapp:adminimportantlinkslist' %}">
+                                        <div class="card card-hover">
+                                            <div  style="height: 150px;" class="box bg-purple text-center">
+                                                <h1 class="font-light text-white mt-4"><i class="mdi mdi-link"></i>
+                                                </h1>
+                                                <h6 class="text-white">Important Links</h6>
+                                                 <h6 class="text-white">{{ importantlinks.count }}</h6>
+                                            </div>
+                                        </div>
+                                        </a>
+                                    </div>
+
+
+                                <!-- Column -->
+                                    <div class="col-md-6 col-lg-3 col-xlg-3">
+                                        <a href="{% url 'fweanapp:adminnewslist' %}">
+                                        <div class="card card-hover">
+                                            <div  style="height: 150px;" class="box bg-success text-center">
+                                                <h1 class="font-light text-white mt-4"><i class="mdi mdi-newspaper"></i>
+                                                </h1>
+                                                <h6 class="text-white">News and Events</h6>
+                                                 <h6 class="text-white">{{ newsandevents.count }}</h6>
+                                            </div>
+                                        </div>
+                                        </a>
+                                    </div>
+
+
+                                 <!-- Column -->
+                                   <!-- Column -->
+                                    <div class="col-md-6 col-lg-3 col-xlg-3">
+                                        <a href="{% url 'fweanapp:adminboardmemberlist' %}">
+                                        <div class="card card-hover">
+                                            <div  style="height: 150px;" class="box bg-secondary text-center">
+                                                <h1 class="font-light text-white mt-4"><i class="mdi mdi-human-female"></i>
+                                                </h1>
+                                                <h6 class="text-white">Board Members</h6>
+
+                                            </div>
+                                        </div>
+                                        </a>
+                                    </div>
+
+                                    <div class="col-md-6 col-lg-3 col-xlg-3">
+                                        <a href="{% url 'fweanapp:adminfeedbackslist' %}">
+                                        <div class="card card-hover">
+                                            <div  style="height: 150px;" class="box bg-info text-center">
+                                                <h1 class="font-light text-white mt-4"><i class="mdi mdi-reply"></i>
+                                                </h1>
+                                                <h6 class="text-white">Feedbacks</h6>
+                                                  <h6 class="text-white">{{ feedbacks.count }}</h6>
+                                            </div>
+
+                                        </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-md-6 col-lg-3 col-xlg-3">
+                                        <a href="{% url 'fweanapp:adminpublicationlist' %}">
+                                        <div class="card card-hover">
+                                            <div  style="height: 150px;" class="box bg-secondary text-center">
+                                                <h1 class="font-light text-white mt-4"><i class="mdi mdi-publish"></i>
+                                                </h1>
+                                                <h6 class="text-white">Publications</h6>
+                                                  <h6 class="text-white">{{ publications.count }}</h6>
+                                            </div>
+
+                                        </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-md-6 col-lg-3 col-xlg-3">
+                                        <a href="{% url 'fweanapp:adminmembershipcontentlist' %}">
+                                        <div class="card card-hover">
+                                            <div  style="height: 150px;" class="box bg-warning text-center">
+                                                <h1 class="font-light text-white mt-4"><i class="mdi mdi-nature-people"></i>
+                                                </h1>
+                                                <h6 class="text-white">Membership Contents</h6>
+                                                  <h6 class="text-white">{{memcontents.count }}</h6>
+                                            </div>
+
+                                        </div>
+                                        </a>
+                                    </div>
+                                    
+                                    
+                                    
+                                       <div class="col-md-6 col-lg-3 col-xlg-3">
+                                        <a href="{% url 'fweanapp:adminmembershipformlist' %}">
+                                        <div class="card card-hover">
+                                            <div  style="height: 150px;" class="box bg-info text-center">
+                                                <h1 class="font-light text-white mt-4"><i class="mdi mdi-publish"></i>
+                                                </h1>
+                                                <h6 class="text-white">Membership Form</h6>
+                                                  <h6 class="text-white">{{ membership_form.count }}</h6>
+                                            </div>
+
+                                        </div>
+                                        </a>
+                                    </div>
+
+
+
+                                    <!--<div class="col-md-6 col-lg-3 col-xlg-3">-->
+                                    <!--    <a href="{% url 'fweanapp:adminemailrecipentlist' %}">-->
+                                    <!--    <div class="card card-hover">-->
+                                    <!--        <div  style="height: 150px;" class="box bg-success text-center">-->
+                                    <!--            <h1 class="font-light text-white mt-4"><i class="mdi mdi-email"></i>-->
+                                    <!--            </h1>-->
+                                    <!--            <h6 class="text-white">Email Recipents</h6>-->
+                                    <!--              <h6 class="text-white">{{ email_recipents.count }}</h6>-->
+                                    <!--        </div>-->
+
+                                    <!--    </div>-->
+                                    <!--    </a>-->
+                                    <!--</div>-->
+
+
+                                    <!-- Column -->
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+ </div>
+
+
+
+{% endblock %}
+
+{% block js %}
+
+{% endblock %}

@@ -1,0 +1,285 @@
+{% extends 'clienttemplates/clientbase.html' %}
+{% load static %}
+{% block blog %}active{% endblock %}
+{% block resources %}active{% endblock %}
+
+{% block css %}
+
+    <style>
+
+    </style>
+
+{% endblock %}
+
+{% block title %}Blog{% endblock %}
+
+{% block content %}
+
+  <!-- Start main-content -->
+  <div class="main-content">
+
+    <!-- Section: inner-header -->
+{#   <section class="inner-header parallax layer-overlay" data-bg-img="{{slider.image1.url}}">#}
+{#     <div class="container pt-90 pb-50">#}
+{#        <!-- Section Content -->#}
+{#        <div class="section-content pt-100">#}
+{#          <div class="row">#}
+{#            <div class="col-md-6">#}
+{#              <h3 style="font-size: 18pt;" class="title text-white">{{ blog_detail.title }}</h3>#}
+{#            </div>#}
+{#              <div class="col-sm-4 col-md-offset-2">#}
+{#              <ol class="breadcrumb white mt-10 text-right xs-text-center">#}
+{#                <li><a style="color: lightgrey" href="{% url 'fweanapp:indexpage' %}">Home</a></li>#}
+{##}
+{#                <li class="active">{{ blog_detail.title|truncatechars_html:25 }}</li>#}
+{##}
+{#              </ol>#}
+{#            </div>#}
+{#          </div>#}
+{#        </div>#}
+{#      </div>#}
+{#    </section>#}
+
+    <!-- Section: Blog -->
+    <section>
+      <div class="container  mb-30 pt-10 pb-30">
+          <div class="breadcrumb"><a href="{% url 'fweanapp:indexpage' %}"><span class="font-13"><b>Home |</b></span></a> <a href="{% url 'fweanapp:clientbloglist' %}"><span class="font-13"><b>Blogs |</b></span></a>  <span class="font-13"><b>{{blog_detail.title|truncatechars_html:44}}</b></span></div>
+        <div class="row">
+        <div class="col-md-3  ">
+             <div class="">
+                  <div class=""> <img style=" object-fit: contain;" src="{{ blog_detail.image.url}}" alt="" class="img-responsive img-fullwidth"> </div>
+                </div>
+
+
+
+            <div class="pt-30 hidden-xs bg-light p-20 hidden-sm ">
+              <h4 class="text-uppercase title line-bottom mt-0 "><i class="fa fa-calendar text-gray-darkgray mr-10"></i>More Blogs</h4>
+
+             {% for blog in moreblogs %}
+                 {% if moreblogs %}
+
+
+
+
+              <article class="post media-post  clearfix pb-0 mb-10">
+                <a href="#" class="post-thumb mr-20"><img style=" width: 60px; height: 50px; object-fit: cover;" alt="" src="{{blog.image.url}}"></a>
+                <div class="post-right">
+                  <h5 class="mt-0 mb-5 text-black "><a class="text-theme-colored" href="{% url 'fweanapp:clientblogdetail' blog.slug %}">{{ blog.title}}</a></h5>
+                  <ul class="list-inline font-12 mb-5">
+                    <li class="pr-0 paragraph-color"><i class="fa fa-calendar mr-5"></i> {{ blog.date}}
+
+                  </ul>
+                    </div>
+              </article>
+                   {% endif %}
+
+                {% endfor %}
+          <div class="section-title text-center">
+          <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+              <a href="{% url 'fweanapp:clientbloglist' %}" class="text-uppercase"><button class="btn btn-sm btn-success">See more</button></a>
+            </div>
+        </div>
+
+            </div>
+
+            </div>
+
+        </div>
+
+          <div class="col-md-9 ">
+            <div class="blog-posts single-post">
+              <article class="text-justify  text-black post clearfix mb-0">
+
+                <div class="entry-content">
+                  <div class="entry-meta media no-bg no-border  pb-20">
+
+                      <div class="text-center pull-left flip bg-theme-colored p-10 pt-5 pb-5 mr-10">
+                      <ul>
+                        <li class="font-24 text-white font-weight-600 border-bottom ">{{ blog_detail.date.day}}</li>
+                        <li class="font-18 text-white text-uppercase">{{ blog_detail.date|date:'M' }}</li>
+                      </ul>
+                    </div>
+
+                    <div class="media-body pl-15">
+                      <div class="event-content pull-left flip">
+                        <h4 style="text-align: left" class="entry-title text-theme-colored text-uppercase m-0">{{ blog_detail.title}}</h4>
+                         <i class="fa paragraph-color fa-calendar mr-5"></i>
+                          <span>{{blog_detail.date}}</span>
+                         </div>
+                    </div>
+                  </div>
+                  {{ blog_detail.description|safe }}
+
+{#                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna et sed aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>#}
+{#                  <div class="mt-30 mb-0">#}
+{#                    <h5 class="pull-left mt-10 mr-20 text-theme-colored">Share:</h5>#}
+{#                    <ul class="styled-icons icon-circled m-0">#}
+{#                      <li><a href="#" data-bg-color="#3A5795"><i class="fa fa-facebook text-white"></i></a></li>#}
+{#                      <li><a href="#" data-bg-color="#55ACEE"><i class="fa fa-twitter text-white"></i></a></li>#}
+{#                      <li><a href="#" data-bg-color="#A11312"><i class="fa fa-google-plus text-white"></i></a></li>#}
+{#                    </ul>#}
+{#                  </div>#}
+                </div>
+              </article>
+              <div class="tagline text-black p-0 pt-20 mt-5">
+                <div class="row">
+                  <div class="col-md-8">
+
+                  </div>
+                  <div class="col-md-4">
+
+                  </div>
+                </div>
+              </div>
+
+              <div class="comments-area text-black">
+                <h4 class="comments-title line-bottom">Comments</h4>
+                <ul class="comment-list">
+                    {% for comment in blogcomments %}
+
+
+
+                  <li>
+                    <div class="media comment-author"> <a class="media-left pull-left flip"><img class="img-thumbnail" src="/media/pngwing.com%20(1).png" alt=""></a>
+                      <div class="media-body">
+                        <h5 class="media-heading comment-heading">{{ comment.name}} says:</h5>
+                        <div class="comment-date"> <i class="fa fa-calendar mr-5"></i> {{ comment.get_date }} {{ comment.get_month }}, {{ comment.get_year }}</div>
+                        <p class="text-justify" style="color: darkslateblue;">{{ comment.comment}}</p>
+                         </div>
+                    </div>
+                  </li>
+                     {% endfor %}
+
+                </ul>
+              </div>
+              <div class="comment-box text-black">
+                <div class="row">
+                  <div class="col-sm-12">
+                    <h5>Leave a Comment</h5>
+                    <div class="row">
+                      <form id="blog_form" method="post" action="{% url 'fweanapp:clientblogcomment' blog_detail.slug %}"  >
+                          {% csrf_token %}
+                        <div class="col-sm-6 pt-0 pb-0">
+                          <div class="form-group">
+                              {{commentform.name}}
+                          </div>
+                          <div class="form-group">
+                              {{commentform.email}}
+                          </div>
+
+                        </div>
+                        <div class="col-sm-6">
+                          {{ commentform.comment }}
+
+                        </div>
+                           <div class="form-group text-center ">
+                            <button style="background: #00274C;" id="blogbutton" type="submit" class="btn text-white text-center  btn-flat mt-10 " data-loading-text="Please wait...">Submit</button>
+                          </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+           <div class="col-md-12 bg-light">
+                 <div class="pt-30 hidden-lg  hidden-md">
+              <h4 class="text-uppercase title line-bottom mt-0 "><i class="fa fa-calendar text-gray-darkgray mr-10"></i>More Blogs</h4>
+
+             {% for blog in moreblogs %}
+                 {% if moreblogs %}
+
+
+
+
+              <article class="post media-post  clearfix pb-0 mb-10">
+                <a href="#" class="post-thumb mr-20"><img style=" width: 60px; height: 50px; object-fit: cover;" alt="" src="{{blog.image.url}}"></a>
+                <div class="post-right">
+                  <h5 class="mt-0 mb-5 text-black "><a class="text-theme-colored" href="{% url 'fweanapp:clientblogdetail' blog.slug %}">{{ blog.title}}</a></h5>
+                  <ul class="list-inline font-12 mb-5">
+                    <li class="pr-0 paragraph-color"><i class="fa fa-calendar mr-5"></i> {{ blog.date}}
+
+                  </ul>
+                    </div>
+              </article>
+                   {% endif %}
+
+                {% endfor %}
+          <div class="section-title text-center">
+          <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+              <a href="{% url 'fweanapp:clientbloglist' %}" class="text-uppercase"><button class="btn btn-sm btn-success">See more</button></a>
+            </div>
+        </div>
+
+            </div>
+
+            </div>
+           </div>
+
+        </div>
+
+      </div>
+    </section>
+  </div>
+  <!-- end main-content -->
+
+{% endblock %}
+
+{% block js %}
+
+     <script type="text/javascript">
+
+
+   toastr.options = {
+  "closeButton": true,
+  "debug": true,
+  "newestOnTop": false,
+  "progressBar": false,
+  "positionClass": "toast-top-right",
+  "preventDuplicates": false,
+  "onclick": null,
+  "showDuration": "300",
+  "hideDuration": "1000",
+  "timeOut": "8000",
+  "extendedTimeOut": "1000",
+  "showEasing": "swing",
+  "hideEasing": "linear",
+  "showMethod": "fadeIn",
+  "hideMethod": "fadeOut"
+}
+
+   $("#blog_form").submit(function(e){
+     // prevent from normal form behaviour
+      e.preventDefault();
+      $('#blogbutton').attr("disabled", true);
+      $this = $(this);
+      $.ajax({
+         type:"POST",
+         url: $this.attr('action'),
+         data: $this.serialize(),
+
+         success : function(data){
+          console.log(data)
+
+              toastr["success"]("Thank you! your comment has been received")
+              $this.trigger("reset");
+
+
+         },
+         complete: function() {
+          $('#blogbutton').attr("disabled", false);
+        }
+      });
+   });
+</script>
+
+    <script>
+    $("span").removeAttr("style");
+    $("p").removeAttr("style");
+    </script>
+
+    {% endblock %}

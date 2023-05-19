@@ -1,0 +1,231 @@
+{% extends 'clienttemplates/clientbase.html' %}
+{% load static %}
+{% block blog %}active{% endblock %}
+
+{% block css %}
+
+    <style>
+
+    </style>
+
+{% endblock %}
+
+{% block title %}Feedbacks{% endblock %}
+
+{% block content %}
+  <!-- Start main-content -->
+  <div class="main-content">
+    <!-- Section: inner-header -->
+    <section style="height: 180px;" class="inner-header divider parallax layer-overlay overlay-dark-6" data-bg-img="{{ slider.image1.url }}">
+      <div class="container pt-60 pb-60">
+        <!-- Section Content -->
+        <div class="section-content">
+          <div class="row">
+            <div class="col-md-12 text-center">
+              <h3 class="font-28 text-white text-uppercase">Send us your Feedbacks</h3>
+<!--              <ol class="breadcrumb text-center text-black mt-10">-->
+<!--                <li><a style="color: lightgrey" href="{% url 'fweanapp:indexpage' %}">Home</a></li>-->
+<!--{#                <li><a href="#">Pages</a></li>#}-->
+<!--                <li class="active text-white">Feedbacks</li>-->
+<!--              </ol>-->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+     <div class="container pt-10 pb-40 text-black">
+        <div class="breadcrumb"><a href="{% url 'fweanapp:indexpage' %}"><span class="font-13"><b>Home |</b></span></a>  <span class="font-13"><b>Feedbacks</b></span></div>
+        <div class="row mt-50">
+
+
+
+
+
+          <div style="border:1px solid grey; box-shadow: 0px 2px 2px 2px #888888;  " class="col-md-8 ">
+            <form  id="feedback_form"  name="reg-form" class="register-form" method="post">
+                {% csrf_token %}
+              <div class="icon-box mb-0 mt-30 p-0">
+                <div  class="icon icon-bordered icon-rounded icon-sm pull-left mb-0 mr-10">
+                  <i style="color: purple" class=" fa fa-reply"></i>
+                </div>
+                <h4 class=" pt-10 mt-0 mb-30">Send us your feedback now.</h4>
+              </div>
+              <hr>
+              <i class="font-16">Please kindly fill up the following form with your feedback.</i>
+              <div class="row mt-10">
+                <div class="form-group col-md-6">
+                    <label>Your full name:</label>
+                    {{feedbackform.full_name}}
+                </div>
+                <div class="form-group col-md-6">
+                  <label>Email Address</label>
+                  {{ feedbackform.email }}
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group col-md-12">
+                  <label for="form_choose_username">Subject</label>
+                    {{feedbackform.subject}}
+                </div>
+              </div><div class="row">
+                <div class="form-group col-md-12">
+                  <label for="form_choose_username">Feedback</label>
+                    {{feedbackform.message}}
+                </div>
+              </div>
+             {% if messages %}
+
+
+              {% for message in messages %}
+              {% if message.tags == "warning"%}
+               <div class="container text-danger" > {{message}} </div>
+               {% endif %}
+              {% endfor %}
+             {% endif %}
+              <div class="g-recaptcha col-lg-12 col-sm-12 " data-sitekey="6LcyRmccAAAAADhlX8UDfuUyf8cPH-YjI7fhr8SZ"></div>
+
+              <div class="form-group text-center">
+                 <input style="background: #F0AC00"  id="feedbackbutton" class="  btn btn-lg text-white mt-15" value="Submit" type="submit"></input>
+              </div>
+            </form>
+
+          </div>
+               <div class="ml-lg-70 mt-sm-70 col-md-3 pt-sm-30 bg-light">
+              <h4 class="text-uppercase title line-bottom mt-0 "><i class="fa fa-calendar text-gray-darkgray mr-10"></i>Upcoming Events </h4>
+              {% if upcomingeventshomepage %}
+              {% for event in upcomingeventshomepage %}
+                
+
+
+
+
+              <article class="post media-post clearfix pb-0 mb-10">
+                <a href="{% url 'fweanapp:clientupcomingeventdetail' event.slug %}" class="post-thumb mr-20"><img style="width: 80px; height: 60px; object-fit: cover;" alt="" src="{{event.image1.url}}"></a>
+                <div class="post-right">
+                  <h5 class="mt-0 mb-5"><a class="text-theme-colored" href="{% url 'fweanapp:clientupcomingeventdetail' event.slug %}">{{ event.title}}</a></h5>
+                  <ul class="list-inline font-12 mb-5">
+                    <li class="pr-0"><i class="fa fa-calendar mr-5"></i> {{ event.start_date}}
+
+                      {% if event.location %}
+
+                        <li class="pl-5"><i class="fa fa-map-marker mr-5"></i>{{ event.location}}</li>
+                              {% endif %}
+                      </ul>
+{#                  <p style="font-size: small;"  class="mb-0">{{ event.description|truncatechars_html:50|safe}}</p>#}
+{#                  <a class="text-theme-colored font-13" href="{% url 'fweanapp:clientupcomingeventdetail' %}">Read More →</a>#}
+                </div>
+              </article>
+                  
+
+                {% endfor %}
+                {%else%} <h5 class="text-center">No any upcoming events.</h5>
+                {% endif %}
+
+          <div class="section-title text-center">
+            {% if upcomingeventshomepage %} 
+          <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+              <a href="{% url 'fweanapp:clientnewsandeventslist' %}" class="text-uppercase"><button class="btn btn-sm btn-success">See more</button></a>
+            </div>
+        </div>
+        {%endif%}
+
+            </div>
+
+            </div>
+
+
+        </div>
+      </div>
+    </section>
+  </div>
+  <!-- end main-content -->
+{% endblock %}
+
+{% block js %}
+ <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <!-- <script type="text/javascript">
+
+
+   toastr.options = {
+  "closeButton": true,
+  "debug": true,
+  "newestOnTop": false,
+  "progressBar": false,
+  "positionClass": "toast-top-right",
+  "preventDuplicates": false,
+  "onclick": null,
+  "showDuration": "300",
+  "hideDuration": "1000",
+  "timeOut": "8000",
+  "extendedTimeOut": "1000",
+  "showEasing": "swing",
+  "hideEasing": "linear",
+  "showMethod": "fadeIn",
+  "hideMethod": "fadeOut"
+}
+
+   $("#feedback_form").submit(function(e){
+     // prevent from normal form behaviour
+      e.preventDefault();
+      $('#feedbackbutton').attr("disabled", true);
+      $this = $(this);
+      $.ajax({
+         type:"POST",
+         url: $this.attr('action'),
+         data: $this.serialize(),
+
+         success : function(data){
+          console.log(data)
+
+              toastr["success"]("Thank you for your feedback")
+              $this.trigger("reset");
+
+
+         },
+         complete: function() {
+          $('#feedbackbutton').attr("disabled", false);
+        }
+      });
+   });
+</script> -->
+
+
+<script>
+
+  toastr.options = {
+"closeButton": true,
+"debug": true,
+"newestOnTop": false,
+"progressBar": false,
+"positionClass": "toast-top-right",
+"preventDuplicates": false,
+"onclick": null,
+"showDuration": "300",
+"hideDuration": "1000",
+"timeOut": "8000",
+"extendedTimeOut": "1000",
+"showEasing": "swing",
+"hideEasing": "linear",
+"showMethod": "fadeIn",
+"hideMethod": "fadeOut"
+}
+ {% if messages %}
+
+
+ {% for message in messages %}
+    toastr["{{message.tags}}"]('{{ message }}')
+ {% endfor %}
+{% endif %}
+ </script>
+
+<script>
+  $('#feedback_form').submit(function(e)  {
+  
+      $('#feedbackbutton').attr('value', 'Please wait...');
+  });
+  </script>
+
+    {% endblock %}

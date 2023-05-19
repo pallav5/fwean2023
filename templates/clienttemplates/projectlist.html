@@ -1,0 +1,269 @@
+
+{% extends 'clienttemplates/clientbase.html' %}
+{% load static %}
+{% block title %} {{ donor }} Projects {% endblock %}
+{% block projects %}active{% endblock %}
+{% block projectsandprogrammes %}active{% endblock %}
+
+{% block css %}
+    <style>
+    body {
+      {#background: #57257D;#}
+  /* fallback for old browsers */
+  {#background: -webkit-linear-gradient(to right, #0575E6,#57257D);#}
+  /* Chrome 10-25, Safari 5.1-6 */
+  {#background: linear-gradient(to right, #0575E6, #57257D    );#}
+
+    }
+
+    body {
+  background-color: white;
+}
+
+.well {
+  background-color: #ddd;
+}
+
+      .schedule-box {
+  transition: box-shadow .3s;
+  border: 1px solid #ccc;
+ }
+.schedule-box:hover {
+  box-shadow: 0 0 20px rgb(91, 38, 91);
+}
+.accom:hover{
+    color: white;
+    text-decoration: white;
+}
+    .accom{
+        color: white;
+    }
+
+          p{
+         font-family:'Open Sans', sans-serif;
+            font-size: 15px;
+            color: rgb(0,32,96);
+
+    }
+
+    </style>
+{% endblock %}
+{% block content %}
+
+
+
+<!-- Start main-content -->
+  <div class="main-content">
+
+    <!-- Section: inner-header -->
+{#    <section class="inner-header divider parallax layer-overlay overlay-dark-5" data-stellar-background-ratio="0.5" data-bg-img="{{ slider.image2.url}}">#}
+{#      <div class="container pt-100 pb-50">#}
+{#        <!-- Section Content -->#}
+{#        <div class="section-content pt-100">#}
+{#          <div class="row">#}
+{#            <div class="col-md-8">#}
+{#              <h3 class="title text-white">{{donor}} Projects</h3>#}
+{#            </div>#}
+{#              <div class="col-sm-4">#}
+{#              <ol class="breadcrumb white mt-10 text-right xs-text-center">#}
+{#                <li><a style="color: lightgrey" href="{% url 'fweanapp:indexpage' %}">Home</a></li>#}
+{##}
+{#                <li class="active">{{donor}} Projects</li>#}
+{#              </ol>#}
+{#            </div>#}
+{#          </div>#}
+{#        </div>#}
+{#      </div>#}
+{#    </section>#}
+
+    <!-- Section: projects List -->
+    <section>
+      <div class="container pt-10 b-0">
+      <h3 class="text-uppercase text-center">  <b>{{donor}} Projects </b></h3>
+          <div class="well">
+  <ul class="nav nav-tabs text-center">
+    <a href="javascript:void(0)" data-toggle="tab" style="color: white" data-target="#page1"><button class="active tab btn btn-lg btn-theme-colored text-uppercase ">Ongoing</button></a>
+    <a href="javascript:void(0)" data-toggle="tab" style="color: white" data-target="#page2"><button style="background: #00274C; " class="active tab btn btn-lg btn-theme-colored text-uppercase ">Accomplished</button></a>
+
+
+
+    <div id="nav-buttons" class="pull-right">
+        <div id="tabDropdown" class="btn-group btn-group-sm">
+            <div id="tabDrop" class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu" data-toggle="dropdown">
+
+            </div>
+                   </div>
+
+    </div>
+  </ul>
+
+
+
+</div>
+  <div class="tab-content" >
+<div id="page1" class="tab-pane active">
+ <h4 class="text-theme-colored text-uppercase text-center"><b>Ongoing Projects</b></h4>
+{% if not ongoing %}
+
+
+    <h5  class="text-center text-black"> No any ongoing {{ donor.title }} projects.</h3>
+{% endif %}
+       {% for project in ongoing %}
+
+
+
+            <div class="col-sm-12 col-md-12 col-lg-12">
+              <div class="schedule-box maxwidth500 bg-lighter clearfix mb-30">
+
+                <div class="col-md-12">
+                  <div class="schedule-details clearfix p-15 pt-30">
+
+                    <h4 class=" mt-0 "><a class="text-theme-colored" href="{% url 'fweanapp:clientprojectdetail' project.slug %}">{{ project.title}}</a></h4>
+                    <ul class="list-inline text-gray">
+                      <li class="paragraph-color"><i class="fa fa-calendar mr-5 "></i> {{project.date}}  </li>
+
+                    </ul>
+                    <div class="clearfix"></div>
+                    <p class="mt-10 text-justify text-black">{{ project.description|truncatechars_html:150|safe }}</p>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+               {% endfor %}
+    </div>
+    <div id="page2" class="tab-pane">
+    <h4 class="text-theme-colored text-uppercase text-center"><b>Accomplished Projects</b></h4>
+    {% if not accomplished %}
+
+
+    <h5  style="color: #00274C" class=" text-center mb-50"> No any accomplished {{ donor.title }} projects.</h5>
+{% endif %}
+     {% for project in accomplished %}
+
+
+
+            <div class="col-sm-12 col-md-12 col-lg-12">
+              <div class="schedule-box maxwidth500 bg-lighter clearfix mb-30">
+
+                <div class="col-md-12">
+                  <div class="schedule-details clearfix p-15 pt-30">
+
+                    <h4 class="title mt-0"><a href="{% url 'fweanapp:clientprojectdetail' project.slug %}">{{ project.title}}</a></h4>
+                    <ul class="list-inline text-gray">
+                      <li><i class="fa fa-calendar mr-5"></i> {{project.date}}  </li>
+
+                    </ul>
+                    <div class="clearfix"></div>
+                    <p class="mt-10 text-justify text-black">{{ project.description|truncatechars_html:400|safe }}</p>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+               {% endfor %}
+    </div>
+
+  </div>
+
+
+      </div>
+    </section>
+
+
+
+
+
+  </div>
+  <!-- end main-content -->
+
+{% endblock %}
+{% block js %}
+    <script !src="">
+    window.onresize = function(event) {
+    CheckTabSize();
+};
+
+$('.nav-tabs li').click(function() {
+    setTimeout(SetActiveTabsYourself, 10);
+});
+
+var ShownTabs = '.nav-tabs .tab[style!="display: none;"]';
+var HiddenTabs = '.nav-tabs .tab[style*="display: none;"]';
+function CheckTabSize() {
+      //Get Tab Area
+    var buttonWidth = $('#nav-buttons').width();
+    var tabAreaWidth = $('.nav-tabs').width() - buttonWidth;
+    var tabWidths = 0;
+    var firstHidden;
+
+    //Add Up the Tabs' Widths
+    $.each($(ShownTabs), function(idx, obj){
+      tabWidths += $(obj).outerWidth(); //padding
+    });
+
+    //Find out which ones to hide
+    while(tabWidths > tabAreaWidth) {
+      var hider = $(ShownTabs).last();
+      tabWidths -= $(hider).outerWidth();
+      $(hider).hide();
+    }
+
+    //See if we can show any
+    firstHidden = $(HiddenTabs).first();
+    while(firstHidden.length > 0 && (tabWidths + firstHidden.width()) < tabAreaWidth) {
+      tabWidths += $(firstHidden).outerWidth();
+      $(firstHidden).show();
+      firstHidden = $(HiddenTabs).first();
+    }
+
+    //Affect drop-down button
+    if ($(HiddenTabs).length === 0) {
+      $('#tabDrop').hide();
+    } else {
+      $('#tabDrop').show();
+    }
+
+    //Hide drop-down tabs as necessary
+    var shown = $(ShownTabs);
+
+    $.each($('#tabDropdown li'), function(idx, obj){
+        var isInShown = $.grep(shown, function(el){ return $(el).find('a').data('target') == $(obj).find('a').data('target'); }).length > 0;
+        if (isInShown) {
+            $(obj).hide();
+        } else {
+            $(obj).show();
+        }
+    });
+}
+function SetActiveTabsYourself() {
+    $('.nav-tabs li').removeClass('active');
+    var activeTab = $('.tab-pane.active');
+    if (activeTab.length > 0) {
+        var activeID = $(activeTab[0]).attr('id');
+        $('.nav-tabs li a[data-target=#' + activeID + ']').parent().addClass('active');
+    }
+}
+
+setTimeout(CheckTabSize, 100);
+setTimeout(SetActiveTabsYourself, 100);
+
+
+
+    </script>
+
+       <script>
+  $("span").removeAttr("style");
+
+{#  var element1 = document.getElementsByClassName('introduction')#}
+{#element1.style.background = "red";#}
+
+
+  var element = $("p")
+  element.removeAttr("style");
+{##}
+{#  var p = document.querySelector(".introduction p");#}
+{#p.style.color = "red";#}
+
+    </script>
+{% endblock %}

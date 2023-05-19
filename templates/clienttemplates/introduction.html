@@ -1,0 +1,115 @@
+{% extends 'clienttemplates/clientbase.html' %}
+{% load static %}
+{% block aboutus %}active{% endblock %}
+
+{% block css %}
+    <style>
+    .divider p{
+        color: black;
+    }
+
+    @media only screen and (max-device-width: 750px) {
+         .image img {
+              height: 300px;
+          }
+
+         }
+
+     @media only screen and (max-width:1024px) and (min-width:750px) {
+         .image img {
+              height: 300px;
+          }
+     }
+
+     p{
+         font-family:'Open Sans', sans-serif;
+            font-size: 15.5px;
+            color: rgb(0,32,96);
+
+    }
+          a,span,strong{
+                       color: rgb(0,32,96);
+          }
+
+    </style>
+{% endblock %}
+
+{% block title %}About Us{% endblock %}
+
+{% block content %}
+
+    <!-- Start main-content -->
+  <div class="main-content">
+    <!-- Section: inner-header -->
+{#   <section class="inner-header parallax layer-overlay" data-bg-img="{{org.profile_image.url}}">#}
+{#     <div class="container pt-90 pb-50">#}
+{#        <!-- Section Content -->#}
+{#        <div class="section-content pt-100">#}
+{#          <div class="row">#}
+{#            <div class="col-md-8">#}
+{#              <h3 class="title text-white">Introduction</h3>#}
+{#            </div>#}
+{#              <div class="col-sm-4">#}
+{#              <ol class="breadcrumb white mt-10 text-right xs-text-center">#}
+{#                <li><a style="color: lightgrey" href="{% url 'fweanapp:indexpage' %}">Home</a></li>#}
+{##}
+{#                <li class="active">Introduction</li>#}
+{##}
+{#              </ol>#}
+{#            </div>#}
+{#          </div>#}
+{#        </div>#}
+{#      </div>#}
+{#    </section>#}
+
+
+       <section class="divider parallax layer-overlay overlay-deep"  data-stellar-background-ratio="0.5">
+
+        <div class="row text-justify">
+           <section>
+      <div class="container pt-10">
+        <div class="row container-fluid">
+          <div class="breadcrumb"><a href="{% url 'fweanapp:indexpage' %}"><span class="font-13"><b>Home |</b></span></a>  <span class="font-13"><b>About Us</b></span></div>
+        
+         <h3 class=" ml-lg-20 ml-xs-20"><b>WHO WE ARE?</b></h3>
+          <div class="image col-md-4 mt-lg-20  text-center hvr-float-shadow ">
+              {% if org.profile_image %}
+
+
+            <img class=" image mr-15 m-sm-5 h-50 " src="{{ org.profile_image.url}}" alt="">
+           {% endif %}
+          </div>
+
+{#        <div class="row container-fluid">#}
+
+          <div class=" {% if org.profile_image %} col-md-8 {% else %} col-md-12 {% endif %} ">
+
+            <p>{{ org.introduction|safe }}</p>
+
+            </div>
+        </div>
+{#        </div>#}
+      </div>
+    </section>
+  </div>
+  <!-- end main-content -->
+
+
+    </section>
+
+
+{% block js %}
+
+<script>
+  $("span").removeAttr("style");
+
+{#  var element1 = document.getElementsByClassName('introduction')#}
+{#element1.style.background = "red";#}
+
+
+  {#var element = $("p")#}
+  {#element.removeAttr("style");#}
+
+    </script>
+{% endblock %}
+{% endblock %}

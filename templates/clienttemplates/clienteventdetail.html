@@ -1,0 +1,237 @@
+{% extends 'clienttemplates/clientbase.html' %}
+{% load static %}
+{% block media %}active{% endblock %}
+{% block title %}News and Event{% endblock %}
+
+{% block css %}
+    <style>
+        .description-image img {
+        margin-bottom: 20px;
+    }
+        
+          p{
+         font-family:'Open Sans', sans-serif;
+            /*font-size: 16px;*/
+            /*color: rgb(0,32,96);*/
+
+    }
+    </style>
+{% endblock %}
+
+{% block content %}
+
+  <!-- Start main-content -->
+  <div class="main-content">
+
+    <!-- Section: inner-header -->
+{#    <section class="inner-header parallax layer-overlay" data-bg-img="{{clienteventdetail.image1.url}}">#}
+{#     <div class="container pt-90 pb-50">#}
+{#        <!-- Section Content -->#}
+{#        <div class="section-content pt-100">#}
+{#          <div class="row">#}
+{#            <div class="col-md-8">#}
+{#              <h3 class="title text-white">News and Events</h3>#}
+{#            </div>#}
+{#              <div class="col-sm-4">#}
+{#              <ol class="breadcrumb white mt-10 text-right xs-text-center">#}
+{#                <li><a style="color: lightgrey" href="{% url 'fweanapp:indexpage' %}">Home</a></li>#}
+{##}
+{#                <li class="active">{{ clienteventdetail.title|truncatechars_html:20}}</li>#}
+{##}
+{#              </ol>#}
+{#            </div>#}
+{#          </div>#}
+{#        </div>#}
+{#      </div>#}
+{#    </section>#}
+
+    <section >
+      <div class="container pb-0 pt-10">
+          <div class="breadcrumb"><a href="{% url 'fweanapp:indexpage' %}"><span class="font-13"><b>Home |</b></span></a> <a href="{% url 'fweanapp:clientnewsandeventslist' %}"><span class="font-13"><b>NEWS & EVENTS |</b></span></a>  <span class="font-13"><b>{{clienteventdetail.title|truncatechars_html:44}}</b></span></div>
+        <div class="row">
+        <div class="container-fluid pb-50">
+             <h4 class="text-center text-uppercase">{{ clienteventdetail.title}}</h3>
+        </div>
+          <div class="col-md-5 ">
+
+            <div class="owl-carousel-1col" data-nav="true">
+              <div class="item">
+                <img style="height: 300px; max-height: 300px; object-fit: cover;" src="{{ clienteventdetail.image1.url}}" alt="">
+              </div>
+                {% if clienteventdetail.image2 %}
+
+
+              <div class="item">
+                <img style="height: 300px; max-height: 300px; object-fit: cover;" src="{{ clienteventdetail.image2.url}}" alt="">
+              </div>
+                {% endif %}
+              </div>
+          </div>
+          <div class="col-md-3">
+            <ul>
+              <li>
+                <h4> <b>Topic:</b></h4>
+                  <h5 class="font-16 text-uppercase">{{ clienteventdetail.title}}</h5>
+              </li>
+              <li>
+                  {% if clienteventdetail.host %}
+
+
+                <h4><b>Host:</b></h4>
+                <h5>{{ clienteventdetail.host}}</h5>
+                   {% endif %}
+              </li>
+              <li>
+                  {% if clienteventdetail.location %}
+
+
+              <h4><b>Location:</b> <span class="font-15"> {{ clienteventdetail.location }} </span> </h4>
+                  {% endif %}
+
+              </li>
+              <li>
+                  <h4><b>Date:</b>
+               <span class="font-15"> {{clienteventdetail.date}}</span></h4>
+              </li>
+
+
+            </ul>
+          </div>
+
+         <div  class="bg-light col-md-4 pt-sm-30 hidden-xs hidden-sm hidden-">
+              <h4 class="text-uppercase title line-bottom mt-0 "><i class="fa fa-calendar text-gray-darkgray mr-10"></i>More News</h4>
+
+             {% for event in allnewsandevents %}
+                 {% if allnewsandevents %}
+
+
+              <article class="post media-post clearfix pb-0 mb-10 ">
+                <a href="#" class="post-thumb mr-20"><img style=" width: 80px; height: 50px; object-fit: cover;" alt="" src="{{event.image1.url}}"></a>
+                <div class="post-right">
+                  <h5 class="mt-0 mb-5 "><a class="text-theme-colored" href="{% url 'fweanapp:clientnewsandeventsdetail' event.slug %}">{{ event.title|truncatechars_html:60}}</a></h5>
+                  <ul class="list-inline font-12 mb-5">
+                    <li class="pr-0 paragraph-color"><i class="fa fa-calendar mr-5"></i> {{ event.get_date}} {{ event.get_month }}, {{ event.get_year }}
+{#                        {{ event.get_year }} |</li>#}
+                      {% if event.location %}
+
+
+                    <li class="pl-5"><i class="fa fa-map-marker mr-5"></i>{{ event.location}}</li>
+                      {% endif %}
+                  </ul>
+{#                  <p  class="mb-0 font-13">{{ event.description|truncatechars_html:50|safe}}</p>#}
+{#                  <a class="text-theme-colored font-13" href="{% url 'fweanapp:clientupcomingeventdetail' %}">Read More →</a>#}
+                </div>
+              </article>
+                   {% endif %}
+
+                {% endfor %}
+
+          <div class="section-title text-center">
+          <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+              <a href="{% url 'fweanapp:clientnewsandeventslist' %}" class="text-uppercase"><button class="btn btn-sm btn-success">See more</button></a>
+            </div>
+        </div>
+
+            </div>
+
+            </div>
+        </div>
+        <div class="row mt-lg-20 mt-xs-20 description-image">
+          <div class="col-md-12 ">
+            <h4 class="mt-0"><b>Description</b></h4>
+            <p class="text-justify text-black">{{ clienteventdetail.description|safe}}</p>
+          </div>
+
+            <div  class="col-md-12">
+                 <div  class="col-md-4 pt-sm-30 hidden-lg hidden-md  ">
+              <h4 class="text-uppercase title line-bottom mt-0 "><i class="fa fa-calendar text-gray-darkgray mr-10"></i>More<span class="text-theme-colored"> News</span></h4>
+
+             {% for event in allnewsandevents %}
+                 {% if allnewsandevents %}
+
+
+              <article class="post media-post clearfix pb-0 mb-10 ">
+                <a href="#" class="post-thumb mr-20"><img style=" width: 80px; height: 50px; object-fit: cover;" alt="" src="{{event.image1.url}}"></a>
+                <div class="post-right">
+                  <h5 class="mt-0 mb-5 text-theme-colored"><a href="{% url 'fweanapp:clientnewsandeventsdetail' event.slug %}">{{ event.title|truncatechars_html:60}}</a></h5>
+                  <ul class="list-inline font-12 mb-5">
+                    <li class="pr-0"><i class="fa fa-calendar mr-5"></i> {{ event.get_date}} {{ event.get_month }}, {{ event.get_year }}
+{#                        {{ event.get_year }} |</li>#}
+                      {% if event.location %}
+
+
+                    <li class="pl-5"><i class="fa fa-map-marker mr-5"></i>{{ event.location}}</li>
+                      {% endif %}
+                  </ul>
+{#                  <p  class="mb-0 font-13">{{ event.description|truncatechars_html:50|safe}}</p>#}
+{#                  <a class="text-theme-colored font-13" href="{% url 'fweanapp:clientupcomingeventdetail' %}">Read More →</a>#}
+                </div>
+              </article>
+                   {% endif %}
+
+                {% endfor %}
+
+          <div class="section-title text-center">
+          <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+              <a href="{% url 'fweanapp:clientnewsandeventslist' %}" class="text-uppercase"><button class="btn btn-sm btn-success">See more</button></a>
+            </div>
+        </div>
+
+            </div>
+
+            </div>
+            </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Divider: Call To Action -->
+{#    <section class="bg-theme-colored">#}
+{#      <div class="container pt-0 pb-0">#}
+{#        <div class="row">#}
+{#          <div class="col-md-12">#}
+{#            <div class="call-to-action pt-30 pb-30">#}
+{#              <div class="col-md-9">#}
+{#                <h3 class="text-white">Lets Change the world we all together, join us now as a volunteer</h3>#}
+{#              </div>#}
+{#              <div class="col-md-3 text-right sm-text-center">#}
+{#                <a class="btn btn-transparent btn-border btn-circled btn-lg mt-15" href="#">Become a Volunteer</a>#}
+{#              </div>#}
+{#            </div>#}
+{#          </div>#}
+{#        </div>#}
+{#      </div>#}
+{#    </section>#}
+  </div>
+  <!-- end main-content -->
+
+{% endblock %}
+
+{% block js %}
+ <script>
+    //   $("span").removeAttr("style");
+
+    $(document).ready(function() {
+
+$(".owl-carousel-1col").owlCarousel({
+
+  
+        loop:false,
+      nav:false,
+      items:1,
+      margin:0,
+      autoplay:true,
+      autoplayHoverPause:true,
+
+    });
+
+});
+
+    // </script>  
+
+{% endblock %}
+

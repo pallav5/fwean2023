@@ -1,0 +1,217 @@
+
+{% extends 'clienttemplates/clientbase.html' %}
+{% load static %}
+{% block resources %}active{% endblock %}
+{% block title %}Publications{% endblock %}
+
+{% block css %}
+    <style>
+
+
+    </style>
+{% endblock %}
+{% block content %}
+
+
+<!-- Start main-content -->
+  <div class="main-content">
+
+    <!-- Section: inner-header -->
+{#     <section class="inner-header parallax layer-overlay" data-bg-img="{{slider.image1.url}}">#}
+{#      <div class="container pt-200 pb-20">#}
+{#        <!-- Section Content -->#}
+{#        <div class="section-content">#}
+{#          <div class="row">#}
+{#            <div class="col-sm-8 xs-text-center">#}
+{#              <h2 class="text-white mt-10">Publications</h2>#}
+{#            </div>#}
+{#            <div class="col-sm-4">#}
+{#              <ol class="breadcrumb white mt-10 text-right xs-text-center">#}
+{#               <li><a style="color: lightgrey" href="{% url 'fweanapp:indexpage' %}">Home</a></li>#}
+{#                <li class="active">Publications</li>#}
+{#              </ol>#}
+{#            </div>#}
+{#          </div>#}
+{#        </div>#}
+{#      </div>#}
+{#    </section>#}
+
+
+ <section>
+      <div class="container text-black pt-10 pb-0">
+           <div class="breadcrumb"><a href="{% url 'fweanapp:indexpage' %}"><span class="font-13"><b>Home |</b></span></a>  <span class="font-13"><b>Publications</b></span></div>
+        <div class="section-content">
+          <div class="row">
+
+            <div class="col-sm-12 col-md-9 col-lg-9 mb-50">
+             <h3 class="text-center text-uppercase mb-30 "><b>PUBLICATIONS</b></h3>
+
+              <div class="schedule-box maxwidth500 bg-lighter clearfix  ">
+
+                <div class="col-md-12 ">
+                    {% for publication in publications %}
+                      <!-- {% if publication.image %}
+            <a href="#" class="post-thumb"><img style="; height: 60px; width: 80px; object-fit: contain;" alt="" src="{{publication.image.url}}"></a>
+                    {% endif %} -->
+                        <div class="row">
+                    <div class="post col-md-2 col-sm-2 col-xs-12  media-post clearfix pb-0 mt-30 mb-30 ">
+                      <a class="post-thumb ml-xs-70 "> <img  class="pt-0" style=" width: 160px; height: 100px; object-fit: contain;" alt="" src="/media/pdf1.png"></a>
+                    </div>
+                    
+                   <div class="post col-md-8 col-xs-12 col-sm-8 media-post clearfix pb-0 mt-lg-30 mt-xs-0 mt-md-30 mb-30 ">
+                      
+                 
+                     <h4 class="title mt-0"><a class=" text-theme-colored"
+{#                                              href="{% url 'fweanapp:clientpublicationdetail' publication.slug %}"#}
+                    >{{ publication.title}}</a></h4>
+                    <ul class="list-inline paragraph-text">
+                      <li style="color: rgb(0,32,96);" class="paragraph-text"><i class="fa paragraph-text fa-calendar  mr-5"></i> published on {{ publication.get_date}} {{ publication.get_month}}, {{ publication.get_year}}</li>
+
+                    </ul>
+                    <p style="word-wrap:break-word;" class="mt-10"> <i style="color: red" class="fa fa-file-pdf paragraph-text fa-2x"></i>  {{ publication.file.name}}</p>
+
+
+
+{#                   {% if publication.description %}#}
+{##}
+{##}
+{#                    <p class="mt-10">{{ publication.description|safe|truncatechars_html:200}}</p>#}
+{##}
+{#                    {% endif %}#}
+
+
+                      <div class="mt-10">
+                     <a class="btn btn-dark btn-theme-colored btn-sm mt-10" href="{{ publication.file.url }}"><i class="fa fa-eye"></i> Preview</a>
+                     <a type="hidden"  id="buttonId" slug = "{{publication.slug }}" data-url="{% url 'fweanapp:publicationcounter' publication.slug %}"   download="{{ publication.file }}" href="{{ publication.file.url }}" style="background: #00274C;"   class="btn text-white  btn-sm mt-10 file_button"><i class="fa fa-download"></i> Download</a> 
+                     
+                    </div>
+                  </div>
+                </div>
+                     {% endfor %}
+                </div>
+
+               <div class="col-md-12 text-center ">
+                {% if is_paginated %}
+                    <ul class="pagination theme-colored">
+                    {% if page_obj.has_previous %}
+                      <li><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+                    {% else %}
+                      <li class="disabled"><span>&laquo;</span></li>
+                    {% endif %}
+                    {% for i in paginator.page_range %}
+                      {% if page_obj.number == i %}
+                        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                      {% else %}
+                        <li><a href="?page={{ i }}">{{ i }}</a></li>
+                      {% endif %}
+                    {% endfor %}
+                    {% if page_obj.has_next %}
+                      <li><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+                    {% else %}
+                      <li class="disabled"><span>&raquo;</span></li>
+                    {% endif %}
+                  </ul>
+                {% endif %}
+            </div>
+
+              </div>
+
+            </div>
+
+
+              <div class="col-md-3 col-lg-3 pt-sm-30 col-sm-12 bg-light  mt-lg-80 mt-sm-0 mt-md-80 mb-30">
+              <h4 class="text-uppercase title line-bottom "><i class="fa fa-calendar  mr-10"></i>Upcoming Events </h4>
+              {% if upcomingeventshomepage %}
+              {% for event in upcomingeventshomepage %}
+                 
+
+
+
+
+              <article class="post media-post clearfix pb-0 mb-10">
+                <a href="{% url 'fweanapp:clientupcomingeventdetail' event.slug %}" class="post-thumb mr-20"><img style="width: 60px; height: 60px; object-fit: cover;" alt="" src="{{event.image1.url}}"></a>
+                <div class="post-right">
+                  <h5 class="mt-0 mb-5"><a class="text-theme-colored" href="{% url 'fweanapp:clientupcomingeventdetail' event.slug %}">{{ event.title}}</a></h5>
+                  <ul class="list-inline paragraph-color font-12 mb-5">
+                    <li class="pr-0"><i class="fa fa-calendar mr-5"></i> {{ event.start_date}}
+
+                      {% if event.location %}
+
+                        <li class="pl-5"><i class="fa fa-map-marker mr-5"></i>{{ event.location}}</li>
+                              {% endif %}
+                      </ul>
+                    <br>
+{#                  <p style="font-size: small;"  class="mb-0">{{ event.description|truncatechars_html:50|safe}}</p>#}
+{#                  <a class="text-theme-colored font-13" href="{% url 'fweanapp:clientupcomingeventdetail' %}">Read More →</a>#}
+                </div>
+              </article>
+              
+                   
+
+                {% endfor %}
+                {% else %} <h5 class="text-center mb-20 pb-xs-30">No any upcoming events.</h5>
+                {% endif %}
+
+
+          <div class="section-title text-center">
+            {% if upcomingeventshomepage %}
+            <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+              <a href="{% url 'fweanapp:clientupcomingeventlist' %}" class="text-uppercase"><button class="btn btn-sm btn-success">See more</button></a>
+            </div>
+        </div>
+        {% endif%}
+
+            </div>
+
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+    </section>
+
+  <!-- end main-content -->
+
+
+{% endblock %}
+{% block js %}
+    <script>
+    $(function() {
+    $('a[href$=".pdf"]').prop('target', '_blank');
+});
+    </script>
+
+        <script>
+  $("span").removeAttr("style");
+
+  var element1 = document.getElementsByClassName('introduction')
+element1.style.background = "red";
+
+
+  var element = $("p")
+  element.removeAttr("style");
+
+  var p = document.querySelector(".introduction p");
+p.style.color = "red";
+
+    </script>
+
+
+
+<script type="text/javascript">
+
+$(".file_button").click(function(e){
+
+  var url = $(this).attr("data-url");
+ 
+  $.ajax({
+        type: 'GET',
+        url: url,
+    }); 
+  });
+
+</script>
+{% endblock %}

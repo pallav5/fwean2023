@@ -1,0 +1,126 @@
+{% extends 'clienttemplates/clientbase.html' %}
+{% load static %}
+{% block successstories %}active{% endblock %}
+
+
+{% block css %}
+    <style>
+
+    .divider p{
+        color: black;
+    }
+
+    @media only screen and (max-device-width: 750px) {
+         .image img {
+              height: 300px;
+          }
+
+         }
+
+     @media only screen and (max-width:1024px) and (min-width:750px) {
+         .image img {
+              height: 300px;
+          }
+     }
+
+    </style>
+{% endblock %}
+
+{% block title %}Success Story{% endblock %}
+
+{% block content %}
+
+    <!-- Start main-content -->
+  <div class="main-content">
+    <!-- Section: inner-header -->
+{#    <section class="inner-header parallax layer-overlay" data-bg-img="{{successstory.image1.url}}">#}
+{#     <div class="container pt-90 pb-50">#}
+{#        <!-- Section Content -->#}
+{#        <div class="section-content pt-100">#}
+{#          <div class="row">#}
+{#            <div class="col-md-8">#}
+{#              <h3 class="title  text-white">{{ successstory.title}}</h3>#}
+{#            </div>#}
+{#              <div class="col-sm-4">#}
+{#              <ol class="breadcrumb white mt-10 text-right xs-text-center">#}
+{#                <li><a style="color: lightgrey" href="{% url 'fweanapp:indexpage' %}">Home</a></li>#}
+{#                <li><a style="color: lightgrey" href="{% url 'fweanapp:clientsuccessstorieslist' %}">Success Stories</a></li>#}
+{##}
+{#                <li class="active">{{ successstory.title}}</li>#}
+{##}
+{#              </ol>#}
+{#            </div>#}
+{#          </div>#}
+{#        </div>#}
+{#      </div>#}
+{#    </section>#}
+
+
+       <section class="divider parallax layer-overlay overlay-deep"  data-stellar-background-ratio="0.5">
+
+        <div class="row ">
+           <section>
+      <div class="container pt-10">
+          <div class="breadcrumb"><a href="{% url 'fweanapp:indexpage' %}"><span class="font-13"><b>Home |</b></span></a> <a href="{% url 'fweanapp:clientsuccessstorieslist' %}"><span class="font-13"><b>Success Stories |</b></span></a>  <span class="font-13"><b>{{successstory.title}}</b></span></div>
+        <div class="row container-fluid pt-20">
+           <div style="display: flex;
+          justify-content: center;" class="image col-md-3 hvr-grow mb-20 {% if successstory.image1 and successstory.image2 and not successstory.image3 %} col-md-offset-3 {% endif %} {% if successstory.image1 and successstory.image3 and not successstory.image2 %} col-md-offset-3 {% endif %}  mx-auto text-center ">
+              {% if successstory.image1 %}
+
+
+            <img style=" object-fit: cover;" class=" image mr-15 m-sm-5 h-50 " src="{{ successstory.image1.url}}" alt="">
+
+           {% endif %}
+
+          </div>
+
+          {% if successstory.image2 %}
+                  <div class="image hvr-float col-md-3  mx-auto text-center ">
+            <img style="object-fit: cover;" class=" image mr-15 m-sm-5 h-50 " src="{{ successstory.image2.url}}" alt="">
+                  </div>
+           {% endif %}
+
+            {% if successstory.image3 %}
+                  <div class="image hvr-float col-md-3  mx-auto text-center ">
+            <img style=" object-fit: cover;" class=" image mr-15 m-sm-5 h-50 " src="{{ successstory.image3.url}}" alt="">
+                  </div>
+           {% endif %}
+
+{#        <div class="row container-fluid">#}
+          <div class=" {% if  successstory.image2 or successstory.image3 %} col-md-12 {% else %} col-md-9 {% endif %} ">
+
+            <div class="entry-date media-left text-center flip bg-theme-colored pt-5 pr-15 pb-5 pl-15">
+                      <ul>
+                        <li class="font-16 text-white font-weight-600 border-bottom">{{ successstory.date.day }}</li>
+                        <li class="font-12 text-white text-uppercase">{{ successstory.date|date:'M' }}</li>
+                      </ul>
+                    </div>
+                    <div class="media-body pl-15">
+                      <div class="event-content pull-left flip">
+                        <h4 class="entry-title text-uppercase m-0">{{ successstory.title}}</h4>
+                         <i class="fa fa-calendar paragraph-color mr-5"></i>
+                          <span class="paragraph-color">{{successstory.date}}</span>
+                         </div>
+                    </div>
+
+            <p class="text-justify">{{ successstory.description|safe }}</p>
+
+            </div>
+        </div>
+{#        </div>#}
+      </div>
+    </section>
+  </div>
+  <!-- end main-content -->
+
+
+    </section>
+
+
+{% block js %}
+    <script>
+    $("span").removeAttr("style");
+    </script>
+
+    {% endblock %}
+{% endblock %}

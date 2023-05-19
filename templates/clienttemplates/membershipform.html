@@ -1,0 +1,1508 @@
+
+{% extends 'clienttemplates/clientbase.html' %}
+<!-- {% load static %} -->
+{% block geologicalcoverage %}active{% endblock %}
+
+{% block title %}Membership form {% endblock %}
+{% block css %}
+
+
+    <style>
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+
+
+
+/* Absolute Center Spinner */
+.loading {
+  position: fixed;
+  z-index: 999;
+  height: 2em;
+  width: 2em;
+  overflow: show;
+  margin: auto;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+/* Transparent Overlay */
+.loading:before {
+  content: '';
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+    background: radial-gradient(rgba(20, 20, 20,.8), rgba(0, 0, 0, .8));
+
+  background: -webkit-radial-gradient(rgba(20, 20, 20,.8), rgba(0, 0, 0,.8));
+}
+
+/* :not(:required) hides these rules from IE9 and below */
+.loading:not(:required) {
+  /* hide "loading..." text */
+  font: 0/0 a;
+  color: transparent;
+  text-shadow: none;
+  background-color: transparent;
+  border: 0;
+}
+
+.loading:not(:required):after {
+  content: '';
+  display: block;
+  font-size: 10px;
+  width: 1em;
+  height: 1em;
+  margin-top: -0.5em;
+  -webkit-animation: spinner 150ms infinite linear;
+  -moz-animation: spinner 150ms infinite linear;
+  -ms-animation: spinner 150ms infinite linear;
+  -o-animation: spinner 150ms infinite linear;
+  animation: spinner 150ms infinite linear;
+  border-radius: 0.5em;
+  -webkit-box-shadow: rgba(255,255,255, 0.75) 1.5em 0 0 0, rgba(255,255,255, 0.75) 1.1em 1.1em 0 0, rgba(255,255,255, 0.75) 0 1.5em 0 0, rgba(255,255,255, 0.75) -1.1em 1.1em 0 0, rgba(255,255,255, 0.75) -1.5em 0 0 0, rgba(255,255,255, 0.75) -1.1em -1.1em 0 0, rgba(255,255,255, 0.75) 0 -1.5em 0 0, rgba(255,255,255, 0.75) 1.1em -1.1em 0 0;
+box-shadow: rgba(255,255,255, 0.75) 1.5em 0 0 0, rgba(255,255,255, 0.75) 1.1em 1.1em 0 0, rgba(255,255,255, 0.75) 0 1.5em 0 0, rgba(255,255,255, 0.75) -1.1em 1.1em 0 0, rgba(255,255,255, 0.75) -1.5em 0 0 0, rgba(255,255,255, 0.75) -1.1em -1.1em 0 0, rgba(255,255,255, 0.75) 0 -1.5em 0 0, rgba(255,255,255, 0.75) 1.1em -1.1em 0 0;
+}
+
+/* Animation */
+
+@-webkit-keyframes spinner {
+  0% {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@-moz-keyframes spinner {
+  0% {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@-o-keyframes spinner {
+  0% {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes spinner {
+  0% {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+
+    input[type=checkbox] {
+    transform: scale(1.5);
+        margin: 10px;   
+}
+
+.toast {
+  opacity: 1 !important;
+}
+
+
+
+label,b{
+    color: black;
+
+}
+
+.h5{
+    font-size: 10pt !important;
+}
+
+
+    .add-row, .delete-row {
+        margin-top : 5px !important;
+        margin-left: 15px;
+
+    }
+
+    .text-danger{
+        color: red;
+    }
+   
+    </style>
+{% endblock %}
+{% block content %}
+
+
+
+<div class="">
+    <div class="container pt-10 pb-0">
+  <div class="breadcrumb"><a href="{% url 'fweanapp:indexpage' %}"><span class="font-13"><b style="color:purple;">Home |</b></span></a>   <span class="font-13"><b>Membership Form</b></span></div>
+  </div>
+
+
+    <form id="membership_form" class='pt-0' method = "post"  enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="col-md-12">
+                                <!-- {% if form.errors %}
+                                    {% for field in form %}
+                                        {% for error in field.errors %}
+                                            <div class="alert alert-danger">
+                                                <strong>{{ error|escape }}</strong>
+                                            </div>
+                                        {% endfor %}
+                                    {% endfor %}
+                                    {% for error in form.non_field_errors %}
+                                        <div class="alert alert-danger">
+                                            <strong>{{ error|escape }}</strong>
+                                        </div>
+                                    {% endfor %}
+                                {% endif %} -->
+                                    </div>
+
+
+
+<hr>
+
+    <div style="border: 1px solid lightgray; background-color:#e6eeff;" class="container">
+       
+           
+           <span> <h3 class="text-center  mt-50">Membership Form</h2> <h6 class="text-center">(Apply now for the membership)</h6>
+
+
+           <b><span> Note: </span> <span class="text-danger font-18"> *  </span>  <span class="font-14"> Represents Mandatory Field </span></b>
+       
+       
+            
+            <div class="row">
+                <div class="ml-15">
+                <h5> <u> 1. Personal Details.</u></h5>
+                        </div>
+            <div class="col-sm-6 form-group">
+                <label for="name-f">Full Name: <span class="text-danger font-18">*</span></label>
+                {{form.name}}
+                 </div>
+
+                 <div class="col-sm-6 form-group">
+                    <label for="name-f">Your Image (PP size):<span class="text-danger font-18">*</span></label>
+                    {{form.picture}}
+                    <div id="imagePreview"></div>
+                   <span class="text-danger">{{ form.errors.picture }}</span>
+                     </div>
+            <div class="col-sm-6     form-group">
+                <label >Date of birth:<span class="text-danger font-18">*</span></label>
+                {{ form.date_of_birth }}
+                </div>
+            <div class="col-sm-6 form-group">
+                <label for="email">Residential Address:<span class="text-danger font-18">*</span></label>
+               {{ form.address }}
+                </div>
+
+                </div>
+                <hr style="border-color: gray;">
+                <div class="row">
+                    <div class="ml-15">
+                <h5> <u>Family Detail:</u></h5>
+                        </div>
+                <div class="col-sm-6 form-group">
+
+
+                <label for="address-1">Father's name:<span class="text-danger font-18">*</span></label>
+                {{ form.fathers_name }}
+                 </div>
+            <div class="col-sm-6 form-group">
+                <label for="address-2">Mother's name:<span class="text-danger font-18">*</span></label>
+                {{ form.mothers_name }}
+                 </div>
+
+</div>
+
+            <div class="row">
+
+            <div class="col-sm-4 form-group">
+                <label for="State">Marital Status:<span class="text-danger font-18">*</span></label>
+                {{ form.marital_status  }}
+                 </div>
+
+
+
+
+                </div>
+
+            <div style="display:none;" class="row container ml-20 spouse">
+         <div  class="col-sm-6 col-md-4 form-group ">
+                <label  for="State">a) Spouse's name:  <span class="text-danger font-18">*</span> </label>
+                {{ form.spouse_name  }}
+                 </div>
+                <div class="col-sm-6 col-md-4 form-group">
+                <label for="State">b) Spouse's profession: <span class="text-danger font-18">*</span></label>
+                {{ form.spouse_profession  }}
+                 </div>
+                <div class="col-sm-6 col-md-4 form-group">
+                <label for="State">c) Spouse's Company's name:</label>
+                {{ form.spouse_profession  }}
+                 </div>
+
+    </div>
+
+
+
+            <div style="display:none;" class="row container ml-20 spouse">
+         <div class="col-sm-6 col-md-6 form-group">
+                <label for="State">d) Son's name:</label>
+                {{ form.son_name  }}
+                 </div>
+                <div class="col-sm-6 col-md-6 form-group">
+                <label for="State">e) Daughter's Name:</label>
+                {{ form.daughter_name  }}
+                 </div>
+
+
+    </div>
+
+
+              <div class="row">
+
+            <div class="col-sm-4 form-group">
+                <label for="State">Phone:<span class="text-danger font-18">*</span></label>
+                {{ form.phone_no  }}
+                 </div>
+                  <div class="col-sm-4 form-group">
+                <label for="State">Mobile:<span class="text-danger font-18">*</span></label>
+                {{ form.mobile_no }}
+                 </div>
+                  <div class="col-sm-4 form-group">
+                <label for="State">E-mail:<span class="text-danger font-18">*</span></label>
+                {{ form.email  }}
+                 </div>
+
+
+
+                </div>
+
+
+             <div class="row">
+
+            <div class="col-sm-6 form-group">
+                <label for="State">Educational Qualification:<span id="edu_id" class="text-danger font-18">*</span></label>
+                {{ form.educational_qualification  }}
+                 </div>
+
+                 <div class="col-sm-6 form-group">
+                <label for="State">Edu. Qualification Others? Specify: <span id="edu_id_others" style="display: none;" class="text-danger font-18">*</span> </label>
+                {{ form.edu_qualifications_others }}
+                 </div>
+
+
+                </div>
+
+                <hr style="border-color: gray;">
+            <div class="row">
+            <div class="ml-15">
+                <h5> <u> Enterprise Detail:<span class="text-danger font-18">*</span></u></h5>
+                        </div>
+            <div class="col-sm-4 form-group">
+                <label for="State">Enterprise Type:<span id="enterprise_id" class="text-danger font-18">*</span></label>
+                {{ form.enterprise_type }}
+                 </div>
+
+                 <div class="col-sm-5 form-group">
+                <label for="State">Others? Specify: <span id="enterprise_id_others" style="display: none;" class="text-danger font-18">*</span></label>
+                {{ form.enterprise_type_others }}
+                 </div>
+
+                <div class="col-sm-3 form-group">
+                <label for="State">Enterprise Scale:<span class="text-danger font-18">*</span></label>
+                {{ form.enterprise_scale }}
+                 </div>
+
+
+
+
+                </div>
+
+                <hr>
+
+            <div class="row">
+            <div class="ml-15">
+                <h5>2. Do you want to give additional personal information? If yes, please specify here.</h5>
+                        </div>
+            <div class="col-sm-8 form-group">
+{#                <label for="State">Enterprise Type:</label>#}
+                {{ form.additional_personal_information}}
+                 </div>
+
+
+
+
+
+
+                </div>
+
+
+                <hr style="border-color: gray;">
+            <div class="row">
+            <div class="ml-15">
+                <h5>3. Company Detail.</h5>
+                        </div>
+            <div class="col-sm-4 form-group">
+                <label for="State">Company name:<span class="text-danger font-18">*</span></label>
+                {{ form.company_name}}
+                 </div>
+                <div class="col-sm-4 form-group">
+                <label for="State">Company address:<span class="text-danger font-18">*</span></label>
+                {{ form.company_address}}
+                 </div>
+                <div class="col-sm-4 form-group">
+                <label for="State">Company phone:<span class="text-danger font-18">*</span></label>
+                {{ form.company_phone_no}}
+                 </div>
+
+
+                <div class="col-sm-4 form-group">
+                <label for="State">Email:</label>
+                {{ form.company_email}}
+                 </div>
+                <div class="col-sm-4 form-group">
+                <label for="State">Website:</label>
+                {{ form.company_website}}
+                 </div>
+                <div class="col-sm-4 form-group">
+                <label for="State">Designation:<span class="text-danger font-18">*</span></label>
+                {{ form.designation}}
+                 </div>
+
+
+
+                <div class="col-sm-4 form-group">
+                <label for="State">PAN/VAT No.:<span class="text-danger font-18">*</span></label>
+                {{ form.pan_vat}}
+                 </div>
+                <div class="col-sm-4 form-group">
+                <label for="State">Registration Date:<span class="text-danger font-18">*</span></label>
+                {{ form.registration_date}}
+                 </div>
+                <div class="col-sm-4 form-group">
+                <label for="State">Yearly Turnover: <span class="text-danger font-18">*</span></label>
+                {{ form.yearly_turnover}}
+                 </div>
+                <div class="col-sm-4 form-group">
+                <label for="State">Current Assets: <span class="text-danger font-18">*</span></label>
+                {{ form.current_assets}}
+                 </div>
+
+
+                </div>
+
+                <hr>
+             <div class="row">
+            <div class="ml-15">
+                <h5>4. Which address you want your correspondence to reach?<span  class="text-danger font-18">*</span></h5>
+                        </div>
+            <div class="col-sm-4 form-group">
+                <label for="State">Select: <span id="correspondence_id" class="text-danger font-18">*</span></label>
+                {{ form.correspondence_to_reach}}
+                 </div>
+                 <div class="col-sm-6 form-group">
+                <label for="State">Any Other? Please specify: <span id="correspondence_id_others" style="display: none;" class="text-danger font-18">*</span></label>
+                {{ form.correspondence_to_reach_others}}
+                 </div>
+
+
+
+
+
+
+                </div>
+
+                <hr style="border-color: gray;">
+
+                {{ membershiporganization_form.management_form}}
+                {{ membershiporganization_form.non_form_errors }}
+
+            <div class="row">
+                
+            <div class="ml-15">
+                <h5>5. Are you a member of any other organization? If yes, please specify here?</h5>
+                        </div>
+            
+            
+                        {% for form in membershiporganization_form.forms %}
+                       
+                       
+                            <div class=" inline {{ membershiporganization_form.prefix }}">
+
+                            
+                                <div class="col-md-6 ">
+                             <h1> {{ form.id }} </h1>
+
+                            {{ form.image.errors }}
+                                <label> Name of Organization: </label>
+                                {{ form.name_of_other_org }}
+                                </div>
+                               
+                                <div class="col-md-6 mt-20">
+                                
+                                <label> Designation: </label>
+                                {{ form.designation_of_other_org }}
+
+                                 </div>
+                                    </div>
+                                    
+                                       {% endfor %}
+
+
+
+               
+                                    </div>
+                                    <hr style="border-color: gray;">
+            
+                <div class="row">
+            <div class="ml-15">
+                <h5>6. DETAILS RELATED TO FWEAN </h5>
+                        </div>
+            <div class="col-sm-8 form-group">
+                <label for="State">a) How did you come to know about FWEAN? <span class="text-danger font-18">*</span></label>
+                {{ form.how_did_you_know_about_fwean}}
+                 </div>
+                 <div  class="col-sm-12 form-group">
+                <label for="State">b) Why do you want to become a member of FWEAN? <span class="text-danger font-18">*</span></label>
+
+               <div style = "" class="ml-20">
+                  <ol>
+
+                   <li><b>1. {{ form.why_do_you_want_to_become_a_member.0 }}</b></li>
+                    <label>2. Programs related with:</label>
+                    {% for a in form.why_do_you_want_to_become_a_member|slice:"1:4" %}
+
+
+                 <li class="ml-20"> {{ a }}</li>
+                     {% endfor %}
+                <li><b>3. {{ form.why_do_you_want_to_become_a_member.4 }}</b></li>
+                <li><b>4. {{ form.why_do_you_want_to_become_a_member.5 }}</b></li>
+
+               </ol></div>
+
+
+
+                 </div>
+
+                <div class="col-sm-8 form-group">
+                <label for="State">c) Any Other? Please specify</label>
+               {{ form.why_do_you_want_to_become_a_member_other }}
+
+                 </div>
+
+                <div class="col-sm-12 form-group mt-20">
+                <label for="State">d) We would like to know how you see yourself contributing to the objectives of FWEAN. <span class="text-danger font-18">*</span> </label>
+                <div class="ml-20 ">  <ol>   {% for a in form.contributing_to_the_objectives %}
+
+
+                 <li><b> {{ forloop.counter }}.</b> {{ a }}</li>
+                     {% endfor %}</ol></div>
+
+
+
+                 </div>
+
+            <div class="col-sm-8 form-group ml-40">
+                <label for="State">7. Any Other? Please specify</label>
+               {{ form.contributing_to_the_objectives_other }}
+
+                 </div>
+                <div class="col-sm-8 form-group ml-40">
+                <label for="State">8. Please elaborate on your choice(s) <span class="text-danger font-18">*</span></label>
+               {{ form.elborate_on_your_choices }}
+
+                 </div>
+
+
+                <div class="col-sm-6 form-group ">
+                <label for="State">e) How much time can you give to FWEAN activities? <span class="text-danger font-18">*</span></label>
+               {{ form.time_can_you_give_to_fwean_activities }}
+
+                 </div>
+                <div class="col-sm-6 form-group ">
+                <label for="State">f) What time would you prefer for FWEAN Programs? <span class="text-danger font-18">*</span></label>
+               {{ form.time_would_yo_prefer_for_fwean_programs }}
+
+                 </div>
+
+                <div class="col-sm-6 form-group ">
+                <label for="State">g) What type of programs would you want in FWEAN? <span class="text-danger font-18">*</span></label>
+                    <h5>i) <u>Business Related  </u> <span class="text-danger font-18">*</span> </h5>
+
+
+              <div class="ml-40 ">  <ol>
+
+{#                   <li><b>1. {{ form.why_do_you_want_to_become_a_member.0 }}</b></li>#}
+{#                    <label>2. Programs related with:</label>#}
+                    {% for a in form.type_of_programs_would_you_want_in_fwean|slice:"0:6" %}
+
+
+                 <li class="ml-20">  {{ a }}</li>
+                     {% endfor %}
+
+               </ol></div>
+                </div>
+             <div class="col-sm-6 form-group mt-lg-30 mt-md-30 mt-sm-30 ">
+                 <h5>ii) <u>General Interest </u>  <span class="text-danger font-18">*</span> </h5>
+
+                 <div class="ml-40 ">  <ol>
+
+{#                   <li><b>1. {{ form.why_do_you_want_to_become_a_member.0 }}</b></li>#}
+{#                    <label>2. Programs related with:</label>#}
+                    {% for a in form.type_of_programs_would_you_want_in_fwean|slice:"6:" %}
+
+
+                 <li class="ml-20">  {{ a }}</li>
+                     {% endfor %}
+
+               </ol></div>
+
+                 </div>
+
+
+
+
+                 </div>
+
+                    <div class="row">
+                            <div class="col-sm-12 col-md-12  form-group ">
+                                 <h5>iii) <u>Any Other? Specify </u> </h5>
+                           
+            {{ form.type_of_programs_would_you_want_in_fwean_others }}
+                </div>
+            </div>   
+
+
+            <div class="row">
+              
+            <div class="col-sm-6 form-group">
+                <label for="name-f">h) Membership proposed by (Existing Member) : <span class="text-danger font-18">*</span></label>
+                {{form.membership_proposed_by}}
+                 </div>
+                </div>
+
+                 <div class="row">
+                 <div class="col-sm-6 form-group">
+                    <label for="name-f">i) Membership Applied For:<span class="text-danger font-18">*</span></label>
+                    
+                    {{form.membership_applied_for}}
+                 
+                     </div>
+                     </div>
+  
+
+                
+
+
+                <div class="row">
+                    <div class="ml-15">
+                    <h5> <u> Documents (Required). </u> <span class="text-danger font-18">*</span> </h5>
+                            </div>
+                <div class="col-sm-6 form-group">
+                    <label for="name-f">Copy of registration certificate: <span class="text-danger font-18">*</span></label>
+                    <span  class="text-danger">{{form.errors.registration_certificate}}</span>
+                    {{form.registration_certificate}}
+  
+                     </div>
+    
+                     <div class="col-sm-6 form-group">
+                        <label for="name-f">Copy of PAN/VAT:<span class="text-danger font-18">*</span></label>
+                        <span  class="text-danger">{{form.errors.pan_vat_certificate}}</span>
+                        {{form.pan_vat_certificate}}
+                      
+                         </div>
+                <div class="col-sm-6 form-group">
+                    <label for="name-l">Copy of Citizen/Passport:<span class="text-danger font-18">*</span></label>
+                    <span  class="text-danger">{{form.errors.citizenship_passport}}</span>
+                    {{ form.citizenship_passport }}
+                    </div>
+                <div class="col-sm-6 form-group">
+                    <label for="email">Your CV:<span class="text-danger font-18">*</span></label>
+                    <span  class="text-danger">{{form.errors.cv}}</span>
+                   {{ form.cv }} </div>
+     
+                    </div>
+  
+                <div class="row">
+                    
+                <div class="col-sm-6 form-group">
+                    <label for="name-f">Copy of TAX clearance: <span class="text-danger font-18">*</span></label>
+                    <span  class="text-danger">{{form.errors.tax_clearance}}</span>
+                    {{form.tax_clearance}}
+                     </div>
+    
+                  
+                    </div>
+                
+                    <hr style="border-color: gray;">
+            <div class="row">
+            <div class="col-sm-12 text-center form-group mb-0">
+                <input id="submitbutton" value="Submit" type="submit" class="btn btn-lg  mb-10 btn-success float-right"> </input>
+             </div>
+            </div>
+
+                <div>
+            <!-- <img src="/media/loading-cargando.gif" id="gif" style="display: none; margin: 0 auto; width: 80px; "> -->
+        </div>
+         
+                </div>
+                
+
+
+        </form>
+       </div>
+
+
+       <div id="gif" style="display: none;" class="loading">Loading&#8230;</div>
+
+<div class="content"></div>
+
+{% endblock %}
+
+{% block js %}
+
+
+
+
+<script>
+
+    
+</script>
+
+
+
+<script type="text/javascript">
+
+    
+
+// var count = $('.checkboxes:checked').length;
+// toastr["error"](count.toString());
+    $(document).ready(function(){
+        var checkboxes = $('.checkboxes');
+        
+            if($('.checkboxes:checked').length>0) {
+
+                checkboxes.removeAttr('required');
+            } 
+            else {
+                checkboxes.attr('required', 'required');
+                
+            }
+      
+
+         checkboxes.change(function(){
+            if($('.checkboxes:checked').length>0) {
+                checkboxes.removeAttr('required');
+            } else {
+                checkboxes.attr('required', 'required');
+                // alert('At least one check list is required');
+            }
+        });
+    });
+    </script>   
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        var checkboxes = $('.checkboxes2');
+        
+       
+            if($('.checkboxes2:checked').length>0) {
+                checkboxes.removeAttr('required');
+            } else {
+                checkboxes.attr('required', 'required');
+            }
+       
+
+         checkboxes.change(function(){
+            if($('.checkboxes2:checked').length>0) {
+                checkboxes.removeAttr('required');
+            } else {
+                checkboxes.attr('required', 'required');
+            }
+        });
+    });
+    </script>   
+
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        var checkboxes = $('.checkboxes3');
+        
+            if($('.checkboxes3:checked').length>0) {
+                checkboxes.removeAttr('required');
+            } else {
+                checkboxes.attr('required', 'required');
+            }
+       
+
+         checkboxes.change(function(){
+            if($('.checkboxes3:checked').length>0) {
+                checkboxes.removeAttr('required');
+            } else {
+                checkboxes.attr('required', 'required');
+            }
+        });
+    });
+    </script> 
+
+
+
+<script>
+    $('#membership_form').submit(function(e) {
+    $('#gif').css('display', 'block');
+});
+</script>
+
+
+<script>
+
+toastr.options = {
+"closeButton": true,
+"debug": true,
+"newestOnTop": false,
+"progressBar": false,
+"positionClass": "toast-top-right",
+"preventDuplicates": false,
+"onclick": null,
+"showDuration": "300",
+"hideDuration": "1000",
+"timeOut": "8000",
+"extendedTimeOut": "1000",
+"showEasing": "swing",
+"hideEasing": "linear",
+"showMethod": "fadeIn",
+"hideMethod": "fadeOut"
+}
+
+
+    {% if messages %}
+
+
+{% for message in messages %}
+   toastr["{{message.tags}}"]('{{ message }}')
+{% endfor %}
+{% endif %}
+</script>
+
+
+<script>
+
+
+ //education_qualification
+    $('#id_educational_qualification').on('change', function (e) {
+       
+     if( document.getElementById('id_educational_qualification').value === '' ){
+        $("#id_edu_qualifications_others").attr("required",true);
+        $('#edu_id_others').css('display', 'inline-block');
+        $('#edu_id').css('display', 'none');
+    }
+    else{
+        $('#edu_id_others').css('display', 'none');
+        $('#edu_id').css('display', 'inline-block');
+    }
+
+  
+});
+</script>
+
+
+
+
+
+<script>
+
+
+    //education_qualification
+       $('#id_enterprise_type').on('change', function (e) {
+          
+        if( document.getElementById('id_enterprise_type').value === '' ){
+           $("#id_enterprise_type_others").attr("required",true);
+           $('#enterprise_id_others').css('display', 'inline-block');
+           $('#enterprise_id').css('display', 'none');
+       }
+       else{
+           $('#enterprise_id_others').css('display', 'none');
+           $('#enterprise_id').css('display', 'inline-block');
+       }
+   
+     
+   });
+   </script>
+
+
+
+
+<script>
+
+
+    //Corresponding to reach
+       $('#id_correspondence_to_reach').on('change', function (e) {
+          
+        if( document.getElementById('id_correspondence_to_reach').value === '' ){
+           $("#id_correspondence_to_reach_others").attr("required",true);
+           $('#correspondence_id_others').css('display', 'inline-block');
+           $('#correspondence_id').css('display', 'none');
+       }
+       else{
+           $('#correspondence_id_others').css('display', 'none');
+           $('#correspondence_id').css('display', 'inline-block');
+       }
+   
+     
+   });
+   </script>
+
+
+
+
+<script>
+   $('#submitbutton').click( function (e) {
+     
+    // Education Qualification
+    if( document.getElementById('id_educational_qualification').value === '' ){
+        $("#id_edu_qualifications_others").attr("required",true);
+        
+        $('#edu_id_others').css('display', 'inline-block');
+        $('#edu_id').css('display', 'none');
+    }
+    else{
+        $("#id_edu_qualifications_others").attr("required",false);
+        $('#edu_id_others').css('display', 'none');
+        $('#edu_id').css('display', 'inline-block');
+        
+    }
+
+
+    // Enterprise Type
+    if( document.getElementById('id_enterprise_type').value === '' ){
+        $("#id_enterprise_type_others").attr("required",true);
+        $('#enterprise_id_others').css('display', 'inline-block');
+        $('#enterprise_id').css('display', 'none');
+    }
+    else{
+        $("#id_enterprise_type_others").attr("required",false);
+        $('#enterprise_id_others').css('display', 'none');
+        $('#enterprise_id').css('display', 'inline-block');
+        
+    }
+
+
+// Corresponding
+if( document.getElementById('id_correspondence_to_reach').value === '' ){
+        $("#id_correspondence_to_reach_others").attr("required",true);
+        $('#correspondence_id_others').css('display', 'inline-block');
+        $('#correspondence_id').css('display', 'none');
+    }
+    else{
+        $("#id_correspondence_to_reach_others").attr("required",false);
+        $('#correspondence_id_others').css('display', 'none');
+        $('#correspondence_id').css('display', 'inline-block');
+    }
+
+
+
+
+});
+
+
+
+
+
+</script>
+
+
+
+
+<script>
+
+
+$('#martial_status').on('change', function (e) {
+    var optionSelected = $("option:selected", this);
+    var valueSelected = this.value;
+
+    if (valueSelected === "Single" || valueSelected == ''  ){
+        $('.spouse').hide();
+    } else {
+        $('.spouse').show();
+        $("#id_spouse_name").attr("required",true);
+        $("#id_spouse_profession").attr("required",true);
+        
+    }
+});
+</script>
+
+
+
+
+
+
+{% for field in form %}
+{% for error in field.errors %}
+    <div style="display: none;" id="{{error}}" class="alert alert-danger">
+        <strong>{{ error|escape }}</strong>
+    </div>
+
+    <script>
+
+        
+
+
+    
+        var x = document.getElementById("{{error}}");
+        var text  = x.textContent || node.innerText;
+       
+        // alert(text);
+    
+       
+    
+    
+        
+    
+    
+    
+    
+    toastr.options = {
+      "closeButton": false,
+      "debug": false,
+      "newestOnTop": false,
+      "progressBar": false,
+      "positionClass": "toast-bottom-right",
+      "preventDuplicates": false,
+      "onclick": null,
+      "showDuration": "300",
+      "hideDuration": "1000",
+      "timeOut": "5000",
+      "extendedTimeOut": "1000",
+      "showEasing": "swing",
+      "hideEasing": "linear",
+      "showMethod": "fadeIn",
+      "hideMethod": "fadeOut"
+    }
+
+
+     ["error"](text);
+
+    
+
+    
+    </script>
+{% endfor %}
+
+{% endfor %}
+
+
+
+<script src="{% static 'adminstatic/base/dist/js/formset/jquery.formset.js' %}" ></script>
+
+<script type="text/javascript">
+        $(function() {
+            $(".inline.{{ membershiporganization_form.prefix }}").formset({
+                prefix: "{{ membershiporganization_form.prefix }}",
+            })
+
+        })
+    </script>
+
+
+
+
+
+<!-- Script for picture -->
+<script>
+
+
+
+$('#id_picture').on('change', function (e) {
+    
+
+
+    var fileInput = document.getElementById('id_picture');
+    var filePath = fileInput.value;
+
+
+    var files = event.target.files
+   var filename = files[0].name
+    // alert(filename.length)
+
+    if(filename.length> 100){
+        toastr["warning"]('Please upload a filename of max 100 characters.');
+        fileInput.value = '';
+        document.getElementById('imagePreview').innerHTML = '';
+        return false;
+    }
+    var allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i;
+
+    
+    
+
+
+    if(!allowedExtensions.exec(filePath) ){
+        // alert('Please upload file having extensions .jpeg/.jpg/.png/.gif only.');
+        toastr["warning"]('Please upload file having extensions .jpeg/.jpg/.png/.gif only.');
+        fileInput.value = '';
+        document.getElementById('imagePreview').innerHTML = '';
+        return false;
+    }
+
+
+
+
+    else if (fileInput.files.length > 0) {
+            for (const i = 0; i <= fileInput.files.length - 1; i++) {
+  
+                const fsize = fileInput.files.item(i).size;
+                const file = Math.round((fsize / 1024));
+
+                  
+
+
+
+                // The size of the file.
+                if (file >= 2048) {
+                    // alert(
+                    //   "File too Big, please select a file less than 2mb");
+
+                    toastr["warning"]("File too Big, please select a file less than 2mb");
+
+
+                      fileInput.value = '';
+                      document.getElementById('imagePreview').innerHTML = '';
+                    return false;
+
+                }
+
+                               
+                
+                
+                else{
+        //Image preview
+        
+        // var _URL = window.URL; # for image dimension validation 
+
+    //     var file1, img1;
+    // if ((file1 = this.files[0])) {
+    //     img1 = new Image();
+    //     img1.onload = function () {
+    //         alert("Width:" + this.width + "   Height: " + this.height);
+
+
+
+
+
+            if (fileInput.files && fileInput.files[0]) {
+
+                // if(this.width<10){
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('imagePreview').innerHTML = '<img style=" margin-top: 10px;  height: 100px; width: 100px; object-fit: cover;" src="'+e.target.result+'"/>';
+            };
+            reader.readAsDataURL(fileInput.files[0]);
+        // }
+
+        // else{
+        //     // alert('Image dimensions must be 200*200 px');
+        //     toastr["warning"]("Image must be of PP size (Dimensions: 200*200 px)");
+        //     fileInput.value = '';
+        // return false;
+        // }
+    
+    }
+
+
+            
+
+
+        // };
+        // img1.src = _URL.createObjectURL(file1);
+    // }
+
+
+
+
+
+
+        
+    }
+    }
+  }
+ 
+});
+</script>
+
+
+
+<!-- script for registration certificate -->
+<script>
+
+
+$('#id_registration_certificate').on('change', function (e) {
+    
+
+
+    var fileInput = document.getElementById('id_registration_certificate');
+    var files = event.target.files
+   var filename = files[0].name
+    // alert(filename.length)
+
+    if(filename.length> 100){
+        toastr["warning"]('Please upload a filename of max 100 characters.');
+        fileInput.value = '';
+        return false;
+    }
+    var filePath = fileInput.value;
+    var allowedExtensions = /(\.pdf|\.doc|\.docx|\.jpeg|\.jpg|\.png)$/i;
+    if(!allowedExtensions.exec(filePath) ){
+        // alert('Please upload file having extensions .jpeg/.jpg/.png/.gif only.');
+        toastr["warning"]('Please upload file having extensions .pdf/.doc/.docx only.');
+        fileInput.value = '';
+        return false;
+    }
+
+    if (fileInput.files.length === 0) {
+        alert('Empty File');
+
+    }
+
+
+
+
+    else if (fileInput.files.length > 0) {
+            for (const i = 0; i <= fileInput.files.length - 1; i++) {
+  
+                const fsize = fileInput.files.item(i).size;
+                const file = Math.round((fsize / 1024));
+                // The size of the file.
+                if (file >= 5120) {
+                    // alert(
+                    //   "File too Big, please select a file less than 2mb");
+
+                    toastr["warning"]("File too Big, please select a file less than 5 MB");
+
+
+                      fileInput.value = '';
+                      
+                    return false;
+
+                }
+                
+                
+                
+              }
+  }
+ 
+});
+</script>
+
+
+<!-- script for PAN VAT certificate -->
+<script>
+
+
+    $('#id_pan_vat_certificate').on('change', function (e) {
+        
+    
+    
+        var fileInput = document.getElementById('id_pan_vat_certificate');
+        var filePath = fileInput.value;
+
+        var files = event.target.files
+   var filename = files[0].name
+    // alert(filename.length)
+
+    if(filename.length> 100){
+        toastr["warning"]('Please upload a filename of max 100 characters.');
+        fileInput.value = '';
+        return false;
+    }
+
+        var allowedExtensions = /(\.pdf|\.doc|\.docx|\.jpeg|\.jpg|\.png)$/i;
+        if(!allowedExtensions.exec(filePath) ){
+            // alert('Please upload file having extensions .jpeg/.jpg/.png/.gif only.');
+            toastr["warning"]('Please upload file having extensions .pdf/.doc/.docx only.');
+            fileInput.value = '';
+            return false;
+        }
+    
+    
+    
+    
+        else if (fileInput.files.length > 0) {
+                for (const i = 0; i <= fileInput.files.length - 1; i++) {
+      
+                    const fsize = fileInput.files.item(i).size;
+                    const file = Math.round((fsize / 1024));
+                    // The size of the file.
+                    if (file >= 5120) {
+                        // alert(
+                        //   "File too Big, please select a file less than 2mb");
+    
+                        toastr["warning"]("File too Big, please select a file less than 5 MB");
+    
+    
+                          fileInput.value = '';
+                          
+                        return false;
+    
+                    }
+                    
+                    
+                    
+                  }
+      }
+     
+    });
+    </script>
+
+    <!-- script for Citizenship passport -->
+<script>
+
+
+    $('#id_citizenship_passport').on('change', function (e) {
+        
+    
+    
+        var fileInput = document.getElementById('id_citizenship_passport');
+        var filePath = fileInput.value;
+
+
+        var files = event.target.files
+   var filename = files[0].name
+    // alert(filename.length)
+
+    if(filename.length> 100){
+        toastr["warning"]('Please upload a filename of max 100 characters.');
+        fileInput.value = '';
+        return false;
+    }
+        var allowedExtensions = /(\.pdf|\.doc|\.docx|\.jpeg|\.jpg|\.png)$/i;
+        if(!allowedExtensions.exec(filePath) ){
+            // alert('Please upload file having extensions .jpeg/.jpg/.png/.gif only.');
+            toastr["warning"]('Please upload file having extensions .pdf/.doc/.docx only.');
+            fileInput.value = '';
+            return false;
+        }
+    
+    
+    
+    
+        else if (fileInput.files.length > 0) {
+                for (const i = 0; i <= fileInput.files.length - 1; i++) {
+      
+                    const fsize = fileInput.files.item(i).size;
+                    const file = Math.round((fsize / 1024));
+                    // The size of the file.
+                    if (file >= 5120) {
+                        // alert(
+                        //   "File too Big, please select a file less than 2mb");
+    
+                        toastr["warning"]("File too Big, please select a file less than 5 MB");
+    
+    
+                          fileInput.value = '';
+                          
+                        return false;
+    
+                    }
+                    
+                    
+                    
+                  }
+      }
+     
+    });
+    </script>
+
+
+<!-- script for CV -->
+<script>
+
+
+    $('#id_cv').on('change', function (e) {
+        
+    
+    
+        var fileInput = document.getElementById('id_cv');
+        var filePath = fileInput.value;
+
+
+        var files = event.target.files
+   var filename = files[0].name
+    // alert(filename.length)
+
+    if(filename.length> 100){
+        toastr["warning"]('Please upload a filename of max 100 characters.');
+        fileInput.value = '';
+        return false;
+    }
+        var allowedExtensions = /(\.pdf|\.doc|\.docx|\.jpeg|\.jpg|\.png)$/i;
+        if(!allowedExtensions.exec(filePath) ){
+            // alert('Please upload file having extensions .jpeg/.jpg/.png/.gif only.');
+            toastr["warning"]('Please upload file having extensions .pdf/.doc/.docx only.');
+            fileInput.value = '';
+            return false;
+        }
+    
+    
+    
+    
+        else if (fileInput.files.length > 0) {
+                for (const i = 0; i <= fileInput.files.length - 1; i++) {
+      
+                    const fsize = fileInput.files.item(i).size;
+                    const file = Math.round((fsize / 1024));
+                    // The size of the file.
+                    if (file >= 5120) {
+                        // alert(
+                        //   "File too Big, please select a file less than 2mb");
+    
+                        toastr["warning"]("File too Big, please select a file less than 5 MB");
+    
+    
+                          fileInput.value = '';
+                          
+                        return false;
+    
+                    }
+                    
+                    
+                    
+                  }
+      }
+     
+    });
+    </script>
+
+
+<!-- script for Tax Clearance -->
+<script>
+
+
+    $('#id_tax_clearance').on('change', function (e) {
+        
+    
+    
+        var fileInput = document.getElementById('id_tax_clearance');
+        var filePath = fileInput.value;
+
+
+        var files = event.target.files
+   var filename = files[0].name
+    // alert(filename.length)
+
+    if(filename.length> 100){
+        toastr["warning"]('Please upload a filename of max 100 characters.');
+        fileInput.value = '';
+        return false;
+    }
+        var allowedExtensions = /(\.pdf|\.doc|\.docx|\.jpeg|\.jpg|\.png)$/i;
+        if(!allowedExtensions.exec(filePath) ){
+            // alert('Please upload file having extensions .jpeg/.jpg/.png/.gif only.');
+            toastr["warning"]('Please upload file having extensions .pdf/.doc/.docx only.');
+            fileInput.value = '';
+            return false;
+        }
+    
+    
+    
+    
+        else if (fileInput.files.length > 0) {
+                for (const i = 0; i <= fileInput.files.length - 1; i++) {
+      
+                    const fsize = fileInput.files.item(i).size;
+                    const file = Math.round((fsize / 1024));
+                    // The size of the file.
+                    if (file >= 5120) {
+                        // alert(
+                        //   "File too Big, please select a file less than 2mb");
+    
+                        toastr["warning"]("File too Big, please select a file less than 5 MB");
+    
+    
+                          fileInput.value = '';
+                          
+                        return false;
+    
+                    }
+                    
+                    
+                    
+                  }
+      }
+     
+    });
+    </script>
+
+
+
+
+
+
+   
+<script>
+        
+    $('#membership_form').submit(function(e)  {
+      // e.preventDefault();
+      $('#submitbutton').attr("disabled", true);
+        $('#submitbutton').attr('value', 'Please wait...');
+    });
+   
+  
+  
+      </script>
+
+
+
+
+
+{% endblock %}

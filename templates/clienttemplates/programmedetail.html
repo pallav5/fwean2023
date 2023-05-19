@@ -1,0 +1,155 @@
+{% extends 'clienttemplates/clientbase.html' %}
+{% load static %}
+{% block programmes %}active{% endblock %}
+{% block projectsandprogrammes %}active{% endblock %}
+
+
+{% block css %}
+    <style>
+    .divider p{
+        color: black;
+    }
+    .description-image img {
+        margin-bottom: 20px;
+    }
+
+    @media only screen and (max-device-width: 750px) {
+         .image img {
+              height: 300px;
+          }
+
+         }
+
+     @media only screen and (max-width:1024px) and (min-width:750px) {
+         .image img {
+              height: 300px;
+          }
+     }
+
+    </style>
+{% endblock %}
+
+{% block title %}{{ programmedetail.title}}{% endblock %}
+
+{% block content %}
+
+    <!-- Start main-content -->
+  <div class="main-content">
+    <!-- Section: inner-header -->
+{#   <section class="inner-header divider parallax layer-overlay overlay-dark-5" data-stellar-background-ratio="0.5" data-bg-img="{{ slider.image1.url}}">#}
+{#      <div class="container pt-100 pb-50">#}
+{#        <!-- Section Content -->#}
+{#        <div class="section-content pt-100">#}
+{#          <div class="row">#}
+{#            <div class="col-md-8">#}
+{#              <h3 class="title text-white">{{ programmedetail.title }}</h3>#}
+{#            </div>#}
+{#              <div class="col-sm-4">#}
+{#              <ol class="breadcrumb white mt-10 text-right xs-text-center">#}
+{#                <li><a style="color: lightgrey" href="{% url 'fweanapp:indexpage' %}">Home</a></li>#}
+{##}
+{#                <li class="active">{{ programmedetail.title }}</li>#}
+{#              </ol>#}
+{#            </div>#}
+{#          </div>#}
+{#        </div>#}
+{#      </div>#}
+{#    </section>#}
+
+
+       <section class="divider parallax layer-overlay overlay-deep"  data-stellar-background-ratio="0.5">
+
+        <div class="row ">
+           <section>
+      <div class="container pb-0 pt-10">
+          <div class="breadcrumb mb-0"><a href="{% url 'fweanapp:indexpage' %}"><span class="font-13"><b>Home |</b></span></a> <a href="{% url 'fweanapp:clientprogrammes' %}"> <span class="font-13"><b>Programmes |</b></span></a> <span><b>{{programmedetail.title|truncatechars_html:44}}</b></span> </div>
+        <div class="row container-fluid ">
+        <div class="{% if moreprogrammes %} col-md-9{% else %}col-md-12{% endif %}">
+          <div class="image col-md-offset-3  hvr-grow  mx-auto text-center ">
+              {% if moreprogrammes.image%}
+
+
+            <img  style=" height: 250px; object-fit: cover;" class=" image mr-15 m-sm-5 h-50 " src="{{  programmedetail.image.url}}" alt="">
+
+           {% endif %}
+
+          </div>
+
+
+
+
+
+{#        <div class="row container-fluid">#}
+          <div class=" text-black description-image ">
+
+              <h3><b>{{ programmedetail.title }}</b></h3> <i class="fa fa-calendar mr-5 paragraph-color"></i>
+             <span class="paragraph-color"> {{programmedetail.date}} </span>
+            <p>{{ programmedetail.description|safe }}</p>
+
+            </div>
+        </div>
+          {% if moreprogrammes %}
+           <div class="bg-light  col-sm-12 col-md-3 pt-sm-30 mt-lg-50 mt-md-50">
+              <h4 class="text-uppercase title line-bottom mt-0 "><i class="fa  paragraph-color fa-calendar mr-10"></i>More Programmes</h4>
+
+              {% for programme in moreprogrammes %}
+                 {% if moreprogrammes %}
+
+
+
+
+              <article class="post media-post clearfix pb-0 mb-10">
+                <a href="#" class="post-thumb mr-20"><img style="width: 60px; height: 50px; object-fit: cover;" alt="" src="{{programme.image.url}}"></a>
+                <div class="post-right">
+                  <h5 class="mt-0 mb-5 "><a class="text-theme-colored" href="{% url 'fweanapp:clientprogrammedetail' programme.slug %}">{{ programme.title}}</a></h5>
+                  <ul class="list-inline font-12 mb-5">
+                    <li class="pr-0 paragraph-color"><i class="fa fa-calendar mr-5"></i> {{ programme.date}}
+
+                      {% if event.location %}
+
+                        <li class="pl-5"><i class="fa fa-map-marker mr-5"></i>{{ event.location}}</li>
+                              {% endif %}
+                      </ul>
+{#                  <p style="font-size: small"  class="mb-0">{{ event.description|truncatechars_html:40|safe}}</p>#}
+{#                  <a class="text-theme-colored font-13" href="{% url 'fweanapp:clientupcomingeventdetail' %}">Read More →</a>#}
+                </div>
+              </article>
+                   {% endif %}
+
+                {% endfor %}
+
+
+          <div class="section-title text-center">
+          <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+              <a href="{% url 'fweanapp:clientnewsandeventslist' %}" class="text-uppercase"><button class="btn btn-sm btn-success">See more</button></a>
+            </div>
+        </div>
+
+            </div>
+
+            </div>
+        {% endif %}
+
+        </div>
+{#        </div>#}
+      </div>
+    </section>
+  </div>
+
+  <!-- end main-content -->
+
+
+    </section>
+  </div>
+
+
+{% block js %}
+    <script>
+  $("span").removeAttr("style");
+
+
+    </script>
+
+    {% endblock %}
+{% endblock %}

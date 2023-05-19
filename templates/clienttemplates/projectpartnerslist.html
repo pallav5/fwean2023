@@ -1,0 +1,159 @@
+
+{% extends 'clienttemplates/clientbase.html' %}
+{% load static %}
+{% block projects %}active{% endblock %}
+{% block projectsandprogrammes %}active{% endblock %}
+{% block title %} Project Partners {% endblock %}
+
+{% block css %}
+    <style>
+
+    HTML CSSResult Skip Results Iframe
+EDIT ON
+*, *:after, *:before {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+body {
+      {#background: #835483;#}
+  /* fallback for old browsers */
+  {#background: -webkit-linear-gradient(to right, #0575E6,#835483);#}
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, lightgrey, lightgrey    );
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+  font-family: 'Lato', Arial, sans-serif;
+  color: #fff;
+  background-position: center;
+  background-size: cover;
+}
+.mt30 {
+  margin-top: 30px;
+}
+.wrapper {
+  margin: 0 auto 100px auto;
+  max-width: 960px;
+}
+.stage {
+  list-style: none;
+  padding: 0;
+}
+
+/* uild the scene and rotate on hover */
+
+.scene {
+  width: 245px;
+  height: 200px;
+  margin: 10px;
+  float: left;
+  -webkit-perspective: 1000px;
+  -moz-perspective: 1000px;
+  perspective: 1000px;
+}
+    .movie {
+      width: 260px;
+      {#height: 400px;#}
+      -webkit-transform-style: preserve-3d;
+      -moz-transform-style: preserve-3d;
+      transform-style: preserve-3d;
+      -webkit-transform: translateZ(-130px);
+      -moz-transform: translateZ(-130px);
+      transform: translateZ(-130px);
+      -webkit-transition: -webkit-transform 350ms;
+      -moz-transition: -moz-transform 350ms;
+      transition: transform 350ms;
+    }
+
+
+/* Transform and style the two planes */
+
+.movie .poster, .movie .info {
+  position: absolute;
+  width: 220px;
+  height: 150px;
+  background-color: #fff;
+
+}
+.movie .poster {
+  -webkit-transform: translateZ(130px);
+  -moz-transform: translateZ(130px);
+  transform: translateZ(130px);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+/* Media Queries */
+@media screen and (max-width: 60.75em) {
+  .scene {
+    float: none;
+    {#margin: 30px auto 60px;#}
+  }
+}
+
+
+    </style>
+{% endblock %}
+{% block content %}
+
+ <!-- Section: inner-header -->
+{#    <section class="inner-header divider parallax layer-overlay overlay-dark-5" data-stellar-background-ratio="0.5" data-bg-img="{{ slider.image2.url}}">#}
+{#      <div class="container pt-100 pb-50">#}
+{#        <!-- Section Content -->#}
+{#            <div class="section-content pt-100">#}
+{#         <div class="row">#}
+{#            <div class="col-md-8">#}
+{#              <h3 class="title text-white">Project Partners</h3>#}
+{#            </div>#}
+{#              <div class="col-sm-4">#}
+{#              <ol class="breadcrumb white mt-10 text-right xs-text-center">#}
+{#                <li><a style="color: lightgrey" href="{% url 'fweanapp:indexpage' %}">Home</a></li>#}
+{##}
+{#                <li class="active">Project Partners</li>#}
+{#              </ol>#}
+{#            </div>#}
+{#          </div>#}
+{#        </div>#}
+{#      </div>#}
+{#    </section>#}
+
+<div class="container mt-10">
+    <div class="breadcrumb"><a href="{% url 'fweanapp:indexpage' %}"><span class="font-13"><b>Home |</b></span></a>  <span class="font-13"><b>Project Partners</b></span></div>
+<h3 class="text-theme-colored text-uppercase text-center ">
+       <b>Our projects respective to the partners</b>
+    </h3>
+  <div class="wrapper">
+
+    <ul class="stage clearfix">
+
+
+        {% for donor in donors1 %}
+
+
+
+ <div class="col-lg-offset-0 col-lg-3 col-sm-4 pb-0 col-xs-offset-1  col-sm-offset-1 col-md-4 col-md-offset-1 ">
+            <a href="{% url 'fweanapp:clientprojectlist' donor.slug %}">
+      <li class=" hvr-grow scene">
+        <div class="movie  " onlclick="returntrue">
+            <div class="">
+             <p class=" text-center  ml-md-70 mr-lg-30 mr-sm-60" style=" font-size: 13pt; "><b>{{ donor.title }}</b></p>
+         </div>
+          <div   style="background-image: url({{ donor.logo.url }}); image-rendering: -webkit-optimize-contrast; " class="poster ml-md-50 ml-sm-20 ">
+          </div>
+
+        </div>
+      </li>
+            </a>
+ </div>
+
+          {% endfor %}
+
+
+    </ul>
+  </div>
+</div>
+
+
+
+
+{% endblock %}

@@ -1,0 +1,120 @@
+{% extends 'clienttemplates/clientbase.html' %}
+{% load static %}
+{% block projects %}active{% endblock %}
+{% block projectsandprogrammes %}active{% endblock %}
+
+{% block css %}
+    <style>
+    .divider p{
+        color: black;
+    }
+
+    @media only screen and (max-device-width: 750px) {
+         .image img {
+              height: 300px;
+          }
+
+         }
+
+     @media only screen and (max-width:1024px) and (min-width:750px) {
+         .image img {
+              height: 300px;
+          }
+     }
+    span,p{
+        color: rgb(0,32,96);
+    }
+
+    </style>
+{% endblock %}
+
+{% block title %}Projects{% endblock %}
+
+{% block content %}
+
+    <!-- Start main-content -->
+  <div class="main-content">
+    <!-- Section: inner-header -->
+{#    <section class="inner-header parallax layer-overlay" data-bg-img="{{slider.image1.url}}">#}
+{#     <div class="container pt-90 pb-50">#}
+{#        <!-- Section Content -->#}
+{#        <div class="section-content pt-100">#}
+{#          <div class="row">#}
+{#            <div class="col-md-8">#}
+{#              <h3 style="font-size: 18pt;" class="title text-white">{{ project.title}}</h3>#}
+{#            </div>#}
+{#              <div class="col-sm-4">#}
+{#              <ol class="breadcrumb white mt-10 text-right xs-text-center">#}
+{#                <li><a style="color: lightgrey" href="{% url 'fweanapp:indexpage' %}">Home</a></li>#}
+{##}
+{#                <li class="active">{{ project.title|truncatechars_html:30}}</li>#}
+{##}
+{#              </ol>#}
+{#            </div>#}
+{#          </div>#}
+{#        </div>#}
+{#      </div>#}
+{#    </section>#}
+
+
+       <section class="divider parallax layer-overlay overlay-deep"  data-stellar-background-ratio="0.5">
+
+        <div class="row text-justify">
+           <section>
+      <div class="container pt-10">
+          <div class="breadcrumb"><a href="{% url 'fweanapp:indexpage' %}"><span class="font-13"><b>Home |</b></span></a>  <a href="{% url 'fweanapp:clientprojectpartners' %}"><span class="font-13"><b>Projects |</b></span></a> <span class="font-13" style="color: purple;"><b>{% if project.accomplished == False %} <a style="color: purple;" href="{% url 'fweanapp:clientaccomplishedprojectlist' %}"> Ongoing Projects</a> | {% else %}<a style="color: purple;" href="{% url 'fweanapp:clientaccomplishedprojectlist' %}">  Accomplished Projects</a> | {% endif %}</b><b>{{project.title|truncatechars_html:44}}</b> </span> </div>
+        <div class="row container-fluid">
+
+
+         <div class="col-md-2  mx-auto text-center ">
+              {% if project.partner.logo %}
+
+
+            <img style="object-fit: contain;" class=" image mr-15 m-sm-5 h-50 mt-lg-90 " src="{{  project.partner.logo.url }}" alt="">
+           {% endif %}
+          </div>
+
+
+
+
+
+          <div class=" {% if project.logo %} col-md-10 {% else %} col-md-12 {% endif %} ">
+              <h3 class="text-center"><b>{{ project.title }}</b></h3>
+           <i class="fa fa-calendar paragraph-color"></i><span>   {{ project.date }}</span>
+           <span class="font-14"><b>- "{{ project.partner }}</b>"</span>
+
+            <p>{{ project.description|safe }}</p>
+
+            </div>
+
+
+        </div>
+{#        </div>#}
+      </div>
+    </section>
+  </div>
+
+  <!-- end main-content -->
+
+
+    </section>
+  </div>
+
+
+{% endblock %}
+
+{% block js %}
+ <script>
+  $("span").removeAttr("style");
+
+{#  var element1 = document.getElementsByClassName('introduction')#}
+{#element1.style.background = "red";#}
+
+
+{##}
+{#  var p = document.querySelector(".introduction p");#}
+{#p.style.color = "red";#}
+
+    </script>
+
+    {% endblock %}

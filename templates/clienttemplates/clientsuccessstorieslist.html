@@ -1,0 +1,166 @@
+
+{% extends 'clienttemplates/clientbase.html' %}
+{% load static %}
+{% block successstories %}active{% endblock %}
+
+{% block css %}
+    <style>
+    .thumb img  {
+        height: 240px;
+        width: 360px;
+        object-fit: cover;
+    }
+
+    p,span{
+        font-family:'Open Sans', sans-serif;
+            font-size: 15px;
+            color: rgb(0,32,96);
+
+        text-align: left!important;
+    }
+
+    .list-inline > li{
+         font-family:'Open Sans', sans-serif;
+            font-size: 14px;
+            color: rgb(0,32,96);
+
+
+    }
+
+
+
+
+
+    .schedule-box {
+  transition: box-shadow .3s;
+  {#border: 1px solid #ccc;#}
+ }
+.schedule-box:hover {
+  box-shadow: 0 0 5px rgb(91, 38, 91);
+}
+    </style>
+{% endblock %}
+
+{% block content %}
+
+
+
+<!-- Start main-content -->
+  <div class="main-content">
+
+    <!-- Section: inner-header -->
+{#    <section class="inner-header divider parallax layer-overlay overlay-dark-5" data-stellar-background-ratio="0.5" data-bg-img="{{ slider.image1.url}}">#}
+{#      <div class="container pt-90 pb-50">#}
+{#        <!-- Section Content -->#}
+{#        <div class="section-content pt-100">#}
+{#          <div class="row">#}
+{#            <div class="col-md-8">#}
+{#              <h3 class="title text-white">Success Stories</h3>#}
+{#            </div>#}
+{#              <div class="col-sm-4">#}
+{#              <ol class="breadcrumb white mt-10 text-right xs-text-center">#}
+{#                <li><a style="color: lightgrey" href="{% url 'fweanapp:indexpage' %}">Home</a></li>#}
+{##}
+{#                <li class="active">Success Stories</li>#}
+{#              </ol>#}
+{#            </div>#}
+{#          </div>#}
+{#        </div>#}
+{#      </div>#}
+{#    </section>#}
+
+
+   <!-- Section: Events Grid -->
+    <section>
+      <div class="container pt-10 pb-30">
+          <div class="breadcrumb"><a href="{% url 'fweanapp:indexpage' %}"><span class="font-13"><b>Home |</b></span></a>  <span class="font-13"><b>Success Stories</b></span></div>
+        <div class="section-content">
+          <div class="row ">
+          <h3 class="text-center "><b>SUCCESS STORIES</b></h3>
+              {% for stories in successstorieslist %}
+
+            <div class="col-sm-6 mt-lg-20 col-md-4 hvr-shadow-radial hvr-float col-lg-4">
+              <div class="schedule-box maxwidth500 bg-lighter mb-30">
+                <div  class="thumb ">
+                  <img style="object-fit: cover; object-position: 0px 0px;" class="" alt="" src="{{ stories.image1.url }}">
+                </div>
+                <div style="max-height: 334px;" class="schedule-details clearfix p-15 pt-10">
+                  <div class="text-center pull-left flip bg-theme-colored p-10 pt-5 pb-5 mr-10">
+                    <ul>
+                      <li class="font-19 text-white font-weight-600 border-bottom ">{{ stories.date.day }}</li>
+                      <li class="font-12 text-white text-uppercase">{{ stories.date|date:'M' }}</li>
+                    </ul>
+                  </div>
+                  <h4 class="title mt-0"><a class="text-theme-colored" href="{% url 'fweanapp:clientsuccessstoriesdetail' stories.slug %}">{{ stories.title}}</a></h4>
+                  <ul class="list-inline font-11 text-gray">
+                    <li><i class="fa fa-calendar mr-5"></i>
+                        {{stories.date}}</li>
+
+                  </ul>
+                  <div class="clearfix"></div>
+                  <div style="font-size: 18pt;  " class="mt-10 text-left">{{ stories.description|truncatechars_html:170|safe}}</div>
+                  <div class="mt-10 text-center">
+
+                   <a href="{% url 'fweanapp:clientsuccessstoriesdetail' stories.slug %}" class="btn btn-md btn-theme-colored mt-10">Details</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+              {% endfor %}
+
+          </div>
+        <div class="col-md-12 text-center ">
+                {% if is_paginated %}
+                    <ul class="pagination theme-colored">
+                    {% if page_obj.has_previous %}
+                      <li><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+                    {% else %}
+                      <li class="disabled"><span>&laquo;</span></li>
+                    {% endif %}
+                    {% for i in paginator.page_range %}
+                      {% if page_obj.number == i %}
+                        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                      {% else %}
+                        <li><a href="?page={{ i }}">{{ i }}</a></li>
+                      {% endif %}
+                    {% endfor %}
+                    {% if page_obj.has_next %}
+                      <li><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+                    {% else %}
+                      <li class="disabled"><span>&raquo;</span></li>
+                    {% endif %}
+                  </ul>
+                {% endif %}
+            </div>
+
+        </div>
+      </div>
+
+
+    </section>
+
+
+
+  </div>
+  <!-- end main-content -->
+
+{% endblock %}
+
+{% block js %}
+
+        <script>
+  $("span").removeAttr("style");
+
+  var element1 = document.getElementsByClassName('introduction')
+element1.style.background = "red";
+
+
+  var element = $("p")
+  element.removeAttr("style");
+
+
+
+    </script>
+
+{% endblock %}

@@ -1,0 +1,115 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %} FWEAN</title>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+
+
+   
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+<meta name="description" content="Federation of Woman Entrepreneurs' Associations of Nepal (FWEAN)
+
+" />
+<meta name="keywords" content="Federation of Woman Entrepreneurs' Associations of Nepal (FWEAN)
+
+" />
+<meta name="author" content="ThemeMascot" />
+
+<!-- Page Title -->
+<title>FWEAN</title>
+
+<!-- Favicon and Touch Icons -->
+<link href="/media/fav.png" rel="shortcut icon" type="image/png">
+<link href="/media/fav.png" rel="apple-touch-icon">
+<link href="/media/fav.png" rel="apple-touch-icon" sizes="72x72">
+<link href="/media/fav.png" rel="apple-touch-icon" sizes="114x114">
+<link href="/media/fav.png" rel="apple-touch-icon" sizes="144x144">
+
+
+<!-- Stylesheet -->
+<link href="{% static 'clientstatic/base/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
+<link href="{% static 'clientstatic/base/css/jquery-ui.min.css' %}" rel="stylesheet" type="text/css">
+<link href="{% static 'clientstatic/base/css/animate.css' %}" rel="stylesheet" type="text/css">
+<link href="{% static 'clientstatic/base/css/css-plugin-collections.css' %}" rel="stylesheet" type="text/css">
+
+<!-- CSS | menuzord megamenu skins -->
+<link id="menuzord-menu-skins" href="{% static 'clientstatic/base/css/menuzord-skins/menuzord-rounded-boxed.css' %}" rel="stylesheet"/>
+<!-- CSS | Main style file -->
+<link href="{% static 'clientstatic/base/css/style-main.css' %}" rel="stylesheet" type="text/css">
+<!-- CSS | Preloader Styles -->
+<link href="{% static 'clientstatic/base/css/preloader.css' %}" rel="stylesheet" type="text/css">
+<!-- CSS | Custom Margin Padding Collection -->
+<link href="{% static 'clientstatic/base/css/custom-bootstrap-margin-padding.css' %}" rel="stylesheet" type="text/css">
+<!-- CSS | Responsive media queries -->
+<link href="{% static 'clientstatic/base/css/responsive.css' %}" rel="stylesheet" type="text/css">
+<!-- CSS | Style css. This is the file where you can place your own custom css code. Just uncomment it and use it. -->
+<!-- <link href="css/style.css" rel="stylesheet" type="text/css"> -->
+
+<!-- Revolution Slider 5.x CSS settings -->
+<link  href="{% static 'clientstatic/base/js/revolution-slider/css/settings.css' %}" rel="stylesheet" type="text/css"/>
+<link  href="{% static 'clientstatic/base/js/revolution-slider/css/layers.css' %}" rel="stylesheet" type="text/css"/>
+<link  href="{% static 'clientstatic/base/js/revolution-slider/css/navigation.css' %}" rel="stylesheet" type="text/css"/>
+
+
+<!-- CSS | Theme Color -->
+<link href="{% static 'clientstatic/base/css/colors/theme-skin-blue.css' %}" rel="stylesheet" type="text/css">
+
+<link rel="stylesheet" href="{% static 'clientstatic/toaster/css/toastr.min.css' %}">
+
+
+
+ <section id="home" class="divider container fullscreen bg-lightest ">
+      <div class="display-table text-center">
+        <div style="height: 610px;" class="display-table-cell ">
+          <div class="container pt-0 pb-0">
+            <div class="row">
+              <div class="col-md-8 col-md-offset-2">
+                <h1 class="font-150 text-theme-colored mt-0 mb-0"><i class="fa fa-map-signs text-gray-silver"></i>404!</h1>
+                <h2 class="mt-0">Oops! Page Not Found</h2>
+                <p>The page you were looking for could not be found.</p>
+                <a class="btn btn-border btn-theme-colored btn-transparent btn-circled smooth-scroll-to-target" href="{% url 'fweanapp:indexpage' %}">Return Home</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
+<!-- external javascripts -->
+<script src="{% static 'clientstatic/base/js/jquery-2.2.4.min.js' %}"></script>
+<script src="{% static 'clientstatic/base/js/jquery-ui.min.js' %}"></script>
+<script src="{% static 'clientstatic/base/js/bootstrap.min.js' %}"></script>
+
+<!-- JS | jquery plugin collection for this theme -->
+<script src="{% static 'clientstatic/base/js/jquery-plugin-collection.js' %}"></script>
+
+
+<!-- Revolution Slider 5.x SCRIPTS -->
+
+<script src="{% static 'clientstatic/base/js/revolution-slider/js/jquery.themepunch.tools.min.js' %}"></script>
+<script src="{% static 'clientstatic/base/js/revolution-slider/js/jquery.themepunch.revolution.min.js' %}"></script>
+
+
+
+<script src = "{% static 'clientstatic/base/js/revolution-slider/js/extensions/revolution.extension.actions.min.js' %}"></script>
+<script src = "{% static 'clientstatic/base/js/revolution-slider/js/extensions/revolution.extension.carousel.min.js' %}"></script>
+<script src = "{% static 'clientstatic/base/js/revolution-slider/js/extensions/revolution.extension.kenburn.min.js' %}"></script>
+<script src = "{% static 'clientstatic/base/js/revolution-slider/js/extensions/revolution.extension.layeranimation.min.js' %}"></script>
+<script src = "{% static 'clientstatic/base/js/revolution-slider/js/extensions/revolution.extension.migration.min.js' %}"></script>
+<script src = "{% static 'clientstatic/base/js/revolution-slider/js/extensions/revolution.extension.navigation.min.js' %}"></script>
+<script src = "{% static 'clientstatic/base/js/revolution-slider/js/extensions/revolution.extension.parallax.min.js' %}"></script>
+<script src = "{% static 'clientstatic/base/js/revolution-slider/js/extensions/revolution.extension.slideanims.min.js' %}"></script>
+<script src = "{% static 'clientstatic/base/js/revolution-slider/js/extensions/revolution.extension.video.min.js' %}"></script>
+<script src="{% static 'clientstatic/toaster/js/toastr.min.js' %}"></script>
+
+
+
+</body>
+
+</html>

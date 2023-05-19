@@ -1,0 +1,103 @@
+{% extends 'admintemplates/adminbase.html' %}
+{% load static %}
+
+{% block head %}
+{{ form.media }}
+{% endblock %}
+{% block css %}
+
+{% endblock %}
+
+{% block content %}
+
+            <div class="row mt-2">
+                    <div class="col-md-12">
+                        <div class="card container-fluid">
+
+                            <form id="submitform" class="row g-3 mt-2 mb-5" action="" method="post" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <h3 class="unde">Add About Us</h3>
+
+                                     <div class="col-md-12">
+                                {% if form.errors %}
+                                    {% for field in form %}
+                                        {% for error in field.errors %}
+                                            <div class="alert alert-danger">
+                                                <strong>{{ error|escape }}</strong>
+                                            </div>
+                                        {% endfor %}
+                                    {% endfor %}
+                                    {% for error in form.non_field_errors %}
+                                        <div class="alert alert-danger">
+                                            <strong>{{ error|escape }}</strong>
+                                        </div>
+                                    {% endfor %}
+                                {% endif %}
+                                    </div>
+
+                            <div class="row">
+
+                                <div class="col-md-12">
+                                <label for="inputCity" class="form-label">Publish</label>
+                                 {{ form.is_active }}
+                              </div>
+
+                              <div class="col-md-6">
+                                <label for="inputCity" class="form-label">Title</label><span class="font-20" style="color:red;">*</span>
+                                 {{ form.title }}
+                              </div>
+
+                              <div class="col-md-6">
+                                <label for="inputState" class="form-label">Image </label>
+                                {{ form.image }}
+                              </div>
+                                    </div>
+
+                             <div class="row">
+                                 <div class="col-md-12 mt-2">
+                                  <label for="inputState" class="form-label">Description </label><span class="font-20" style="color:red;">*</span>
+                                 {{ form.description }}
+                                 </div>
+                             </div>
+
+
+                              <div class="col-12 text-center">
+                                <input id="submitbutton" value="Submit" type="submit" class="btn btn-lg btn-primary"></input>
+                              
+                              </div>
+                            </form>
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+
+
+{% endblock %}
+
+{% block js %}
+
+     <script>
+    const ps = document.querySelectorAll('a');
+ps.forEach(p =>{
+  if (a.textContent.includes('Unlicensed copy of the Froala Editor. Use it legally by purchasing a license.')){
+    a.remove();
+  }
+})
+    </script>
+
+
+<script>
+        
+    $('#submitform').submit(function(e)  {
+      // e.preventDefault();
+      $('#submitbutton').attr("disabled", true);
+        $('#submitbutton').attr('value', 'Please wait...');
+    });
+   
+  
+  
+      </script>
+{% endblock %}

@@ -1,0 +1,429 @@
+{% load static %}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+        
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap5.min.css">
+           <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    
+    <![endif]-->
+
+
+
+        <title>Membership Form</title>
+        <style type="text/css">
+
+h1 {
+    page-break-before:always;
+}
+
+
+
+
+            body {
+                font-weight: 200;
+                font-size: 14px;
+                margin-top: 10px;
+               
+            }
+            .header {
+                font-size: 20px;
+                font-weight: 100;
+                text-align: center;
+                /* color: #007cae; */
+            }
+
+            
+       h6
+        { font-size: 16px;
+
+        }
+
+        p,h5,h6,h4{
+            margin-top: 0px;
+        }
+
+       
+            .right{
+                text-align: right;
+            }
+            .title {
+                font-size: 22px;
+                font-weight: 100;
+               /* text-align: right;*/
+               padding: 10px 20px 0px 20px;  
+            }
+            .title span {
+                color: #007cae;
+            }
+            .details {
+                padding: 10px 20px 0px 20px;
+                text-align: left !important;
+                /*margin-left: 40%;*/
+            }
+            .hrItem {
+                border: none;
+                height: 1px;
+                /* Set the hr color */
+                color: #333; /* old IE */
+                background-color: #fff; Modern Browsers
+            }
+
+
+            
+table, th, td {
+  border:1px solid black;
+}
+
+</style>
+<body>
+
+
+        </style>
+    </head>
+    <body>
+        <div class='wrapper'>
+            <div  class='header'>
+                <img  src="http://127.0.0.1:8000/media/fwean_logo.jpg"  width="120" height="60">
+              <h6> FEDERATION OF WOMAN ENTREPRENEURS' ASSOCIATIONS OF NEPAL (FWEAN)</h6>            
+              <p style="font-size: 10pt; padding-top: -20px; padding-bottom: 5px;">Kathmandu, Nepal, Telephone: 01-4410775/ 4443085, E-mail: fwean.info@gmail.com</p>
+               <u> <h6 style="padding-top: -20px;" class="membership_text" >    Membership Form Details  </h6> </u>
+                <!-- <p class='title'>Membership Form {{membership_detail.name}}  </p> -->
+            </div>
+        <div>
+            <div class="row">
+                <div class="col-md-6">
+        <div class='details'>
+
+
+            <div>
+                
+
+                <div  class="col-md-6 right ">
+                 
+                    <img style="object-fit: cover;"  src="http://127.0.0.1:8000/media/{{membership_detail.picture}}"  width="100" height="100">
+                   
+                </div>
+                <h6 style="padding-top: -100px; padding-bottom: -20px;">   1.  <u>Personal Details </u></h6>
+                
+        <b>  <span style="font-size: 15pt;" >&#8226;</span> Name: </b> {{membership_detail.name}}  <br/>
+        <b> <span style="font-size: 15pt;" >&#8226;</span> Date of birth:</b> {{membership_detail.date_of_birth}} <br/>
+            <b> <span style="font-size: 15pt;" >&#8226;</span> Residential Address:</b> {{membership_detail.address}}  <br/>
+          <div>
+              <b>  <span style="font-size: 15pt;" >&#8226;</span> Family Detail:</b> <br>
+                
+              <div style="padding-top: 2px;" >  
+              &nbsp;&nbsp;&nbsp;&nbsp; <span> <b> <span style="font-size: 6pt;"> &#9658; </span> Father's Name:</b> {{membership_detail.fathers_name}}</span>  <br>
+              &nbsp;&nbsp;&nbsp;&nbsp; <span> <b> <span style="font-size: 6pt;"> &#9658; </span> Mother's Name:</b> {{membership_detail.mothers_name}}</span>
+             </div> 
+        </div> 
+
+        <div>
+            <b> <span style="font-size: 15pt;" >&#8226;</span> Marital Status:  </b> {{membership_detail.marital_status}}
+        </div>
+        {% if membership_detail.marital_status == "Married" %}
+        <div style="padding-top: 2px;" > 
+            {% if membership_detail.spouse_name %} 
+                &nbsp;&nbsp;&nbsp; <b><span style="font-size: 6pt;"> &#9658; </span> Spouse's Name:  </b> {{ membership_detail.spouse_name }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        {% endif %}
+        {% if membership_detail.spouse_profession %}
+
+        
+        &nbsp;&nbsp;&nbsp;&nbsp; <b> <span style="font-size: 6pt;"> &#9658; </span> Spouse's Profession:  </b> {{ membership_detail.spouse_profession }} <br/>
+
+        {% endif %}
+
+        {% if membership_detail.spouse_company_name %}
+        &nbsp;&nbsp;&nbsp;&nbsp; <b> <span style="font-size: 6pt;"> &#9658; </span> Spouse Company's Name:  </b> {{ membership_detail.spouse_company_name }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        {% endif %} 
+        
+        {% if membership_detail.son_name %}
+        &nbsp;&nbsp;&nbsp;&nbsp; <b> <span style="font-size: 6pt;"> &#9658; </span> Son's name:  </b> {{ membership_detail.son_name }} <br/>
+        {% endif %} 
+        
+        
+
+        {% if membership_detail.daughter_name %}
+        &nbsp;&nbsp;&nbsp;&nbsp; <b> <span style="font-size: 6pt;"> &#9658; </span> Daughter's name:  </b> {{ membership_detail.daughter_name }} 
+        {% endif %}
+
+        {% endif%}
+
+
+
+        <div>
+            <b> <span style="font-size: 15pt;" >&#8226;</span> Phone:  </b> {{membership_detail.phone_no}}  <br>
+            <b> <span style="font-size: 15pt;" >&#8226;</span> Mobile:  </b> {{membership_detail.mobile_no}} <br>
+            <b> <span style="font-size: 15pt;" >&#8226;</span> Email:  </b> {{membership_detail.email}} <br>
+            <b> <span style="font-size: 15pt;" >&#8226;</span>  Educational Qualification:  
+
+            </b> {{membership_detail.educational_qualification}} 
+            
+            {% if membership_detail.edu_qualifications_others %}
+
+        <br>
+            <b> <span style="font-size: 15pt;" >&#8226;</span>  Educational Qualification Others:  
+
+            </b> {{ membership_detail.edu_qualifications_others}}
+            
+        {% endif %}
+
+        <b> <p>  <span style="font-size: 15pt;" >&#8226;</span>  Enterprise Detail: </p></b>
+        &nbsp;&nbsp;&nbsp;&nbsp; <span> <b> <span style="font-size: 6pt;"> &#9658; </span> Enterprise Type:</b> </span>
+         {{membership_detail.enterprise_type}} 
+
+         &nbsp;&nbsp;&nbsp;&nbsp; <span> <b> <span style="font-size: 6pt;"> &#9658; </span> Enterprise Scale:</b> </span>
+         {{membership_detail.enterprise_scale}}
+            
+           
+
+        </div>
+
+        
+        
+        
+        
+
+        
+    </div>
+
+    
+
+        
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    {% if membership_detail.additional_personal_information  %}
+    <div >
+     <h6 style="padding-top: 25px; padding-bottom: -20px;">   2. <u>Additional Personal Information </u></h6>
+    
+    
+    <p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ membership_detail.additional_personal_information }}</p>
+    </div>
+    {% endif %}
+    
+    
+    <div class="">
+    
+        
+        <h6 style="padding-top: 10px; padding-bottom: -20px;">  3.  <u>Company Detail </u></h6>
+       
+       <ul>
+        <b> &#8226; Company Name:</b> {{ membership_detail.company_name }} <br> 
+        <b> &#8226; Company Address:</b> {{ membership_detail.company_address }} <br>
+       <b>  &#8226; Company Phone:</b> {{ membership_detail.company_phone_no }} <br>
+       {% if membership_detail.company_email %} 
+       <b> &#8226; Company Email:</b> {{ membership_detail.company_email }} <br>
+
+       {% endif %}
+       {% if membership_detail.company_website %} 
+        <b>  &#8226; Company Website:</b> {{ membership_detail.company_website }} <br>
+        
+        {% endif %}
+        <b> &#8226; Designation:</b> {{ membership_detail.designation }} <br>
+    
+        <b>  &#8226; PAN/VAT no:</b> {{ membership_detail.pan_vat }} <br>
+        <b> &#8226; Registration Date:</b> {{ membership_detail.registration_date }} <br>
+    
+        <b>  &#8226; Yearly Trunover:</b> {{ membership_detail.yearly_turnover }} <br>
+        <b> &#8226; Current Assets:</b> {{ membership_detail.current_assets }} <br>
+    </ul>
+       </div>
+    
+    
+    
+       <div >
+        <span style="padding-top: 20px; padding-bottom: -40px;">    <b>4. Which address you want your correspondence to reach? </b></span>
+        <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ membership_detail.correspondence_to_reach }}  {% if membership_detail.correspondence_to_reach_others %} <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <b>Others:</b>  {{membership_detail.correspondence_to_reach_others}} {% endif %}
+       </div>
+       <br> 
+    
+    
+     
+       <div style="padding-top: -30px;">
+        <span > <b>  5. Are you a member of any other organization? If yes, please specify here? </b></span>
+        &nbsp;&nbsp;&nbsp;
+
+    </div>
+    {% if memberships %} 
+    <div style = "">
+   
+   
+    <table>
+        <tr><th style="width: 100px;" >SN.</th>
+          <th>Name of Organization</th>
+          <th>Designation</th>
+          
+        </tr>
+        {% for membership in memberships %}
+        <tr>
+            <td>{{ forloop.counter }} </td>
+          <td>{{ membership.name_of_other_org }}</td>
+          <td>{{ membership.designation_of_other_org }}</td>
+         
+         
+        </tr>
+        {% endfor %}
+       
+      </table>
+     
+</div>
+
+{% else %}
+ 
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No </p>
+
+{% endif %}    
+
+   
+    
+    <div style="padding-bottom: -10px;  margin-top: 0px;">
+        <h6 style="margin-top: 30px;">6. <u>Details Related To FWEAN  </u></h6>
+        <b> a) How did you come to know about FWEAN? <br> </b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ membership_detail.how_did_you_know_about_fwean }} <br> <br>
+        <b> b) Why do you want to become a member of FWEAN?</b>    {% for a in membership_detail.why_do_you_want_to_become_a_member %} 
+    
+        <ul>  <li>  {{a}}</li>
+     
+     </ul>
+     
+         {% endfor%} 
+       
+         {% if not membership_detail.why_do_you_want_to_become_a_member_other %}
+         
+         <br>
+     
+         {% endif %}
+         
+         
+         {% if membership_detail.why_do_you_want_to_become_a_member_other %}
+         
+         <b>Others :</b> 
+         <li>{{ membership_detail.why_do_you_want_to_become_a_member_other }} </li> <br>
+     
+         {% endif %}
+    
+    
+    
+        <b> c) We would like to know how you see yourself contributing to the objectives of FWEAN. </b>  <br> {% for a in membership_detail.contributing_to_the_objectives %} 
+    
+        <ul> <li>{{a}}</li>
+     
+     </ul>
+     {% endfor%} 
+     
+    {% if membership_detail.contributing_to_the_objectives_other %}
+    
+    <b>Others:</b>
+    
+    <li> {{ membership_detail.contributing_to_the_objectives_other }} </li>  <br>
+     {% endif %}
+    
+     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b> Please elaborate your choices: </b>  <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ membership_detail.elborate_on_your_choices }} 
+    
+     <br> <br>
+     
+     <div><b>  d) How much time can you give to FWEAN activities? </b>  - {{ membership_detail.time_can_you_give_to_fwean_activities }} 
+    
+    </div>
+    
+     
+     <div><br><b>   e) What time would you prefer for FWEAN Programs? </b> - {{ membership_detail.time_would_yo_prefer_for_fwean_programs }} 
+    
+    </div>
+    
+    
+    <div><br><b>   f) What type of programs would you want in FWEAN? </b> <br> {% for a in membership_detail.type_of_programs_would_you_want_in_fwean %} 
+    
+        <ul> <li>{{a}}</li>
+       
+       </ul>
+       
+         {% endfor%} 
+        
+         {% if membership_detail.type_of_programs_would_you_want_in_fwean_others %}
+          <b>Others: </b>
+    
+         <li>{{ membership_detail.type_of_programs_would_you_want_in_fwean_others}}</li>
+         {% endif%}
+       </div>
+
+       <div>
+           <br> <b> g) Membership proposed by (Existing Member) :  </b>
+    
+            {{ membership_detail.membership_proposed_by }}
+    
+    </div>
+
+    <div>
+        <br> <b> h) Membership Applied for :  </b>
+ 
+         {{ membership_detail.membership_applied_for }}
+ 
+ </div>
+    
+    
+    </div>
+
+</div>
+
+
+ 
+
+  <!-- <div id="footerContent">This is a footer</div> -->
+  <!-- what goes here to switch frames after the first page? -->
+  <!-- <div id="footerOther"></div> -->
+
+    
+
+    
+    <!-- <hr class='hrItem' />     -->
+
+           
+
+               
+ 
+           
+                
+           
+            
+    </div>
+    
+
+    </div>
+
+    
+   
+    </div>
+    </div>
+
+    
+
+    </div>
+
+    
+    
+
+   
+    
+
+    
+
+
+    </body>
+</html>

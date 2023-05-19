@@ -1,0 +1,100 @@
+{% extends 'admintemplates/adminbase.html' %}
+
+{% block css %}
+
+{% endblock %}
+
+{% block content %}
+
+            <div class="row mt-2">
+                    <div class="col-md-12">
+                        <div class="card container-fluid">
+
+                            <form id="submitform" style="border:1px solid black;" class="row g-3 mt-2 mb-5" action="" method="post" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <h3 class="unde">Add Donors</h3>
+
+                                     <div class="col-md-12">
+                                {% if form.errors %}
+                                    {% for field in form %}
+                                        {% for error in field.errors %}
+                                            <div class="alert alert-danger">
+                                                <strong>{{ error|escape }}</strong>
+                                            </div>
+                                        {% endfor %}
+                                    {% endfor %}
+                                    {% for error in form.non_field_errors %}
+                                        <div class="alert alert-danger">
+                                            <strong>{{ error|escape }}</strong>
+                                        </div>
+                                    {% endfor %}
+                                {% endif %}
+                                    </div>
+
+                            <div class="row">
+
+                                <div class="col-md-12">
+                                <label for="inputCity" class="form-label">Publish</label>
+                                 {{ form.is_active }}
+                              </div>
+
+                              <div class="col-md-6">
+                                <label for="inputCity" class="form-label">Title</label><span class="font-20" style="color:red;">*</span>
+                                 {{ form.title }}
+                              </div>
+
+                              <div class="col-md-6">
+                                <label for="inputState" class="form-label">Logo </label><span class="font-20" style="color:red;">*</span>
+                                {{ form.logo}}
+                              </div>
+                                    </div>
+
+                             <div class="row">
+                                 <div class="col-md-4 mt-2">
+                                  <label for="inputState" class="form-label">Date </label><span class="font-20" style="color:red;">*</span>
+                                 {{ form.date }}
+                                 </div>
+                                 <div class="col-md-8 mt-2">
+                                  <label for="inputState" class="form-label">URL link:</label>
+                                 {{ form.link }}
+                                 </div>
+                             </div>
+                                <div class="row">
+                                 <div class="col-md-12 mt-2">
+                                  <label for="inputState" class="form-label">Description </label><span class="font-20" style="color:red;">*</span>
+                                 {{ form.description }}
+                                 </div>
+                             </div>
+
+
+                              <div class="col-12 text-center">
+                                
+                            <input id="submitbutton" value="Submit" type="submit" class="btn btn-lg btn-primary"></input>
+                              </div>
+                            </form>
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+
+
+{% endblock %}
+
+{% block js %}
+
+<script>
+        
+    $('#submitform').submit(function(e)  {
+      // e.preventDefault();
+      $('#submitbutton').attr("disabled", true);
+        $('#submitbutton').attr('value', 'Please wait...');
+    });
+   
+  
+  
+      </script>
+
+{% endblock %}

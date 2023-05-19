@@ -1,0 +1,90 @@
+{% extends 'admintemplates/adminbase.html' %}
+{% load static %}
+{% block css %}
+    <link href="{% static 'adminstatic/base/assets/libs/magnific-popup/dist/magnific-popup.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+
+
+            <!-- ============================================================== -->
+            <!-- Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <div class="page-breadcrumb">
+                <div class="row">
+                    <div class="col-12 d-flex no-block align-items-center">
+                        <h3 class="page-title">FAQ ({{ faqdetail.question }}) detail</h3>
+                        <div class="ms-auto text-end">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Library</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+            <div class="container-fluid">
+                <!-- ============================================================== -->
+                <!-- Start Page Content -->
+                <!-- ============================================================== -->
+
+
+                   <div class="container-fluid">
+                <!-- ============================================================== -->
+                <!-- Start Page Content -->
+                <!-- ============================================================== -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+
+
+                                 <div class="row el-element-overlay">
+
+
+
+
+                     <div class="card-action">
+
+                           <h5> FAQ Question:  "{{ faqdetail.question }}" </h5>
+                         <hr>
+
+                        </div>
+                        <div class="card-action">
+                           <h5>Answer</h5>  {{ faqdetail.answer|safe }}
+                            <hr>
+                        </div>
+                        </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Container fluid  -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- footer -->
+
+
+
+
+{% endblock %}
+
+{% block js %}
+{% endblock %}

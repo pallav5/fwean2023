@@ -1,0 +1,240 @@
+
+{% extends 'clienttemplates/clientbase.html' %}
+{% load static %}
+{% block projects %}active{% endblock %}
+{% block projectsandprogrammes %}active{% endblock %}
+{% block title %}{% if ongoing %}Ongoing  Projects  {% else %} Accomplished Projects{%endif%} {% endblock %}
+{% block css %}
+    <style>
+
+.well {
+  background-color: #ddd;
+}
+
+      .schedule-box {
+  transition: box-shadow .3s;
+  border: 1px solid #ccc;
+ }
+.schedule-box:hover {
+  box-shadow: 0 0 20px mediumpurple;
+}
+
+    </style>
+{% endblock %}
+{% block content %}
+
+
+
+<!-- Start main-content -->
+  <div class="main-content">
+
+
+
+    <!-- Section: projects List -->
+    <section>
+      <div class="container pb-0 pt-10">
+          <div class="breadcrumb"><a href="{% url 'fweanapp:indexpage' %}"><span class="font-13"><b>Home |</b></span></a>  <a href="{% url 'fweanapp:clientprojectpartners' %}"><span class="font-13"><b>Projects |</b></span></a> <span class="font-13"><b>{% if ongoing %} Ongoing Projects {% else %} Accomplished Projects {% endif %}</b></span> </div>
+
+        <div class="tab-content" >
+
+         <div class="col-md-9 col-lg-9 text-center ">
+
+        {% if ongoing %}
+                <h3 class="text-center text-uppercase"><b>Ongoing Projects</b></h3>
+
+
+
+                    {% elif accomplished %}
+                     <h3 class="text-center text-uppercase"><b>Accomplished Projects</b></h3>
+
+              {% endif %}
+             </div>
+
+
+
+
+
+
+
+
+        {% if ongoing %}
+
+
+            <div class="col-sm-12 col-md-9 col-lg-9">
+                {% for project in ongoing %}
+              <div class="schedule-box maxwidth500 bg-lighter clearfix mb-30">
+
+                <div class="col-md-12">
+                  <div class="schedule-details clearfix p-15 pt-30">
+
+                    <h4 class="title mt-0"><a class="text-theme-colored" href="{% url 'fweanapp:clientprojectdetail' project.slug %}">{{ project.title}}</a></h3>
+                    <ul class="list-inline text-gray">
+                      <li class="paragraph-color" ><i class="fa fa-calendar mr-5 "></i>{{project.date}} </li>
+
+                    </ul>
+                    <div class="clearfix"></div>
+                    <p class="mt-10 text-justify text-black">{{ project.description|truncatechars_html:200|safe }}</p>
+
+                  </div>
+                </div>
+              </div>
+                   {% endfor %}
+            </div>
+
+         <div class="bg-light  col-sm-12 col-md-3 pt-sm-30">
+              <h4 class="text-uppercase title line-bottom mt-0 "><i class="fa fa-calendar text-gray-darkgray mr-10"></i>Upcoming Events</h4>
+              {% if upcomingeventshomepage %}
+              {% for event in upcomingeventshomepage %}
+                
+
+
+
+
+              <article class="post media-post clearfix pb-0 mb-10">
+                <a href="#" class="post-thumb mr-20"><img style="width: 60px; height: 50px; object-fit: cover;" alt="" src="{{event.image1.url}}"></a>
+                <div class="post-right">
+                  <h5 class="mt-0 mb-5"><a href="{% url 'fweanapp:clientupcomingeventdetail' event.slug %}">{{ event.title}}</a></h5>
+                  <ul class="list-inline font-12 mb-5">
+                    <li class="pr-0"><i class="fa fa-calendar mr-5"></i> {{ event.start_date}}
+
+                      {% if event.location %}
+
+                        <li class="pl-5"><i class="fa fa-map-marker mr-5"></i>{{ event.location}}</li>
+                              {% endif %}
+                      </ul>
+{#                    <br>#}
+{#                  <p style="font-size: small"  class="mb-0">{{ event.description|truncatechars_html:70|safe}}</p>#}
+{#                  <a class="text-theme-colored font-13" href="{% url 'fweanapp:clientupcomingeventdetail' %}">Read More →</a>#}
+                </div>
+              </article>
+                 
+
+                {% endfor %}
+                {%else%} <h5 class="text-center pb-20">No any upcoming events.</h5>
+                {% endif %}
+
+
+          <div class="section-title text-center">
+            {%if upcomingeventshomepage %}
+          <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+              <a href="{% url 'fweanapp:clientupcomingeventlist' %}" class="text-uppercase"><button class="btn btn-sm btn-success">See more</button></a>
+            </div>
+        </div>
+        {%endif%}
+
+            </div>
+
+            </div>
+
+  {% endif %}
+    </div>
+
+    <div id="page1" class="tab-pane active">
+    {% if accomplished %}
+
+
+ <div class="col-sm-12 col-md-9 col-lg-9">
+     {% for project in accomplished %}
+
+
+
+
+              <div class="schedule-box maxwidth500 bg-lighter clearfix mb-30">
+
+                <div class="col-md-12">
+                  <div class="schedule-details clearfix p-15 pt-30">
+
+                    <h4 class="title text-theme-colored mt-0"><a href="{% url 'fweanapp:clientprojectdetail' project.slug %}">{{ project.title}}</a></h3>
+                    <ul class="list-inline paragraph-color">
+                      <li><i class="fa fa-calendar mr-5"></i> {{project.date}}  </li>
+
+                    </ul>
+                    <div class="clearfix"></div>
+                    <p class="mt-10 text-justify text-black">{{ project.description|truncatechars_html:400|safe }}</p>
+
+                  </div>
+                </div>
+              </div>
+
+               {% endfor %}
+
+   </div>
+      <div class="bg-light  col-sm-12 col-md-3 pt-sm-30">
+              <h4 class="text-uppercase title line-bottom mt-0 "><i class="fa fa-calendar text-gray-darkgray mr-10"></i>Upcoming Events</h4>
+              {% if upcomingeventshomepage %}
+
+              {% for event in upcomingeventshomepage %}
+                
+
+
+
+              <article class="post media-post clearfix pb-0 mb-10">
+                <a href="#" class="post-thumb mr-20"><img style="width: 60px; height: 50px; object-fit: cover;" alt="" src="{{event.image1.url}}"></a>
+                <div class="post-right">
+                  <h5 class="mt-0 mb-5"><a href="{% url 'fweanapp:clientupcomingeventdetail' event.slug %}">{{ event.title}}</a></h5>
+                  <ul class="list-inline font-12 mb-5">
+                    <li class="pr-0"><i class="fa fa-calendar mr-5"></i> {{ event.start_date}}
+
+                      {% if event.location %}
+
+                        <li class="pl-5"><i class="fa fa-map-marker mr-5"></i>{{ event.location}}</li>
+                              {% endif %}
+                      </ul>
+{#                    <br>#}
+{#                  <p style="font-size: small"  class="mb-0">{{ event.description|truncatechars_html:70|safe}}</p>#}
+{#                  <a class="text-theme-colored font-13" href="{% url 'fweanapp:clientupcomingeventdetail' %}">Read More →</a>#}
+                </div>
+              </article>
+                  
+
+                {% endfor %}
+                {%else%} <h5 class="text-center pb-20">No any upcoming events.</h5>
+                {% endif %}
+
+
+          <div class="section-title text-center">
+            {%if upcomingeventshomepage %}
+          <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+              <a href="{% url 'fweanapp:clientupcomingeventlist' %}" class="text-uppercase"><button class="btn btn-sm btn-success">See more</button></a>
+            </div>
+        </div>
+        {%endif%}
+
+            </div>
+
+            </div>
+     {% endif %}
+
+    </div>
+
+  </div>
+  </section>
+
+      </div>
+
+
+
+
+
+
+
+  <!-- end main-content -->
+
+{% endblock %}
+{% block js %}
+   <script>
+  $("span").removeAttr("style");
+
+{#  var element1 = document.getElementsByClassName('introduction')#}
+{#element1.style.background = "red";#}
+
+
+
+{##}
+{#  var p = document.querySelector(".introduction p");#}
+{#p.style.color = "red";#}
+
+    </script>
+{% endblock %}

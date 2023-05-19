@@ -1,0 +1,343 @@
+{% extends 'admintemplates/adminbase.html' %}
+{% load static %}
+
+{% block css %}
+
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/css/select2.min.css" rel="stylesheet" />
+
+     <style>
+    .add-row, .delete-row {
+        margin-top: 5px;
+
+
+
+
+    }
+
+
+    .select2-container .select2-selection--multiple {
+
+    min-height: 300px;
+
+    }
+
+     .select2-container--default .select2-selection--multiple .select2-selection__choice {
+    background-color: lightcoral;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    cursor: default;
+    float: left;
+    margin-right: 5px;
+    margin-top: 5px;
+    padding: 0 5px;
+}
+
+    </style>
+
+{% endblock %}
+
+
+{% block content %}
+
+
+
+
+<div class="container-fluid">
+<div style="border-style: double;" class="container-fluid">
+<form id="submitform" method="post" action="." enctype="multipart/form-data">
+
+    {% csrf_token %}
+
+          <div class="row">
+
+                                <div class="col-12">
+
+		<table class="table form-table table-bordered table-sm">
+                            <thead class="text-center text-dark">
+                            <tr>    <th><h6>Title</h6></th>
+                                <th><h6>Name<span class="font-20" style="color:red;">*</span></h6></th>
+                                <th><h6>Designation<span class="font-20" style="color:red;">*</span></h6></th>
+                                <th><h6>Image<span class="font-20" style="color:red;">*</span></h6></th>
+                                <th></th>
+                            </tr>
+
+                            </thead>
+
+
+
+                             {% for dict in executivememberformset.errors %}
+                                {% for error in dict.values %}
+                                    <div class="alert alert-danger">
+                                                <strong>{{ error|escape }}</strong>
+                                            </div>
+                                {% endfor %}
+                           {% endfor %}
+
+                    {% for dict in vicepresidentformset.errors %}
+                                {% for error in dict.values %}
+                                    <div class="alert alert-danger">
+                                                <strong>{{ error|escape }}</strong>
+                                            </div>
+                                {% endfor %}
+                           {% endfor %}
+
+
+
+
+
+
+
+                          <div class="col-12">
+
+                            <tr class="item">
+
+                            <td><h6>President:<span class="font-20" style="color:red;">*</span></h6>  </td>
+
+                                    <td>
+
+                                        {{ form.president_name }}
+                                    </td>
+                                    <td>
+                                        {{ form.president_designation }}
+                                    </td>
+                                    <td>
+                                    	{{ form.president_image }}
+                                    </td>
+
+                                </tr>
+
+                          </div>
+
+
+
+                            <tr class="item">
+
+                              <td><h6>General Secretary:<span class="font-20" style="color:red;">*</span></h6>  </td>
+
+                                    <td>
+
+                                        {{ form.general_secretary_name }}
+                                    </td>
+                                    <td>
+                                        {{ form.general_secretary_designation }}
+                                    </td>
+                                    <td>
+                                    	{{ form.general_secretary_image }}
+                                    </td>
+
+                                </tr>
+
+                            <tr class="item">
+
+                              <td><h6>Secretary:<span class="font-20" style="color:red;">*</span></h6>  </td>
+
+                                    <td>
+
+                                        {{ form.secretary_name }}
+                                    </td>
+                                    <td>
+                                        {{ form.secretary_designation }}
+                                    </td>
+                                    <td>
+                                    	{{ form.secretary_image }}
+                                    </td>
+
+                                </tr>
+
+                            <tr class="item">
+
+                                          <td><h6>Treasurer:<span class="font-20" style="color:red;">*</span></h6>  </td>
+
+                                    <td>
+
+                                        {{ form.treasurer_name }}
+                                    </td>
+                                    <td>
+                                        {{ form.treasurer_designation }}
+                                    </td>
+                                    <td>
+                                    	{{ form.treasurer_image }}
+                                    </td>
+
+                                </tr>
+
+         <tr>
+            <td colspan="4">
+
+                            <h6>Vice President:<span class="font-20" style="color:red;">*</span></h6>
+                            {{ form.vice_presidents}}
+
+                <i class="fa fa-plus-circle fa-3x " data-toggle="modal" data-target="#exampleModal" aria-hidden="true"></i>
+            </td>
+        </tr>
+            <tr>
+            <td colspan="4">
+
+
+                            <h6>Immediate Past President:<span class="font-20" style="color:red;">*</span></h6>
+                            {{ form.immediate_past_presidents }}
+
+                <i class="fa fa-plus-circle fa-3x " data-toggle="modal" data-target="#exampleModal2" aria-hidden="true"></i>
+            </td>
+        </tr>
+            <tr>
+            <td colspan="4">
+
+
+                            <h6>Executive Members:<span class="font-20" style="color:red;">*</span></h6>
+                               {{ form.executive_members }}
+
+                <i class="fa fa-plus-circle fa-3x " data-toggle="modal" data-target="#exampleModal1" aria-hidden="true"></i>
+            </td>
+        </tr>
+
+
+
+                                </table>
+                                </div>
+
+
+
+                             </div>
+
+
+                         <div class="container bg-light">
+                        <div class="col-md-12 text-center mt-2">
+                          <input id="submitbutton" value="Submit" type="submit" class="btn btn-lg btn-primary"></input>
+                           </div>
+                         </div>
+
+
+
+
+  </form>
+
+
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Vice Presidents</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <form id="submitformvice" enctype="multipart/form-data" action="{% url 'fweanapp:adminboardvicepresidentadd' %}" method="post">
+
+              {% csrf_token %}
+              {{ vicepresidentform.as_p }}
+              <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <input id="submitbuttonvice" value="Submit" type="submit" class="btn btn-md btn-primary"></input>
+      </div>
+          </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+    <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Executive Members</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <form id="submitformexecutive" enctype="multipart/form-data"  action="{% url 'fweanapp:adminexecutivemembersadd' %}" method="post">
+
+              {% csrf_token %}
+              {{ executivemembersform.as_p }}
+              <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <input id="submitbuttonexecutive" value="Submit" type="submit" class="btn btn-md btn-primary"></input>
+
+      </div>
+          </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+    <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Immediate Vice President</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <form  id="submitformimmediate" action="{% url 'fweanapp:adminimmediatepastpresidentadd' %}" method="post" enctype="multipart/form-data">
+
+              {% csrf_token %}
+              {{ immediatepastpresidentsform.as_p }}
+              <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <input id="submitbuttonimmediate" value="Submit" type="submit" class="btn btn-md btn-primary"></input>
+      </div>
+          </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+        </div>
+</div>
+
+{% endblock %}
+
+{% block js %}
+
+ <script src="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+        $('.multipleselect').select2();
+    });
+    </script>
+
+
+
+<script>
+        
+  $('#submitform').submit(function(e)  {
+    // e.preventDefault();
+    $('#submitbutton').attr("disabled", true);
+      $('#submitbutton').attr('value', 'Please wait...');
+  });
+
+
+  $('#submitformvice').submit(function(e)  {
+    // e.preventDefault();
+    $('#submitbuttonvice').attr("disabled", true);
+      $('#submitbuttonvice').attr('value', 'Please wait...');
+  });
+
+
+  $('#submitformimmediate').submit(function(e)  {
+    // e.preventDefault();
+    $('#submitbuttonimmediate').attr("disabled", true);
+      $('#submitbuttonimmediate').attr('value', 'Please wait...');
+  });
+
+
+  $('#submitformexecutive').submit(function(e)  {
+    // e.preventDefault();
+    $('#submitbuttonexecutive').attr("disabled", true);
+      $('#submitbuttonexecutive').attr('value', 'Please wait...');
+  });
+
+ 
+
+
+    </script>
+
+{% endblock %}

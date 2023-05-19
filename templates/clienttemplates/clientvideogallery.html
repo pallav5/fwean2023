@@ -1,0 +1,253 @@
+{% extends 'clienttemplates/clientbase.html' %}
+{% load static %}
+{% block gallery %}active{% endblock %}
+
+{% block title %}
+    Video Gallery
+{% endblock %}
+
+{% block css %}
+{#    <link rel="stylesheet" href="{% static 'clientstatic/gallery+lightbox/css/bootstrap.min.css' %}">#}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://s3-us-west-2.amazonaws.com/s.cdpn.io/50598/jquery.fancybox-three.min.css">
+    <link rel="stylesheet" href="{% static 'clientstatic/gallery+lightbox/css/glightbox.css' %}">
+
+     <style>
+
+
+
+
+
+      @media (max-width:1281px),(min-width:801px) {
+
+         .video-thumbnail > img {
+
+            height: 200px;
+             width: 100%;
+
+        }
+        .gslide-image > img {
+                {#height: 500px;#}
+                {#width: 1000px;#}
+            }
+
+            .video-thumbnail {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  margin-right: 0px;
+
+    height: 200px;
+    width: 100%;
+}
+
+    }
+
+
+     @media only screen and (max-device-width: 480px){
+
+        {#.gallery_product > img {#}
+        {#    height: 100%;#}
+        {#    width : 100%;#}
+        {#}#}
+        .gslide-image > img {
+                height: 100%;
+                width: 100%;
+            }
+
+            .video-thumbnail {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  margin-right: 0px;
+
+    height: 200px;
+    width: 100%;
+}
+    }
+
+.gallery-title
+{
+    font-size: 36px;
+    color: #7C0000;
+    text-align: center;
+    font-weight: 500;
+    margin-bottom: 70px;
+}
+.gallery-title:after {
+    content: "";
+    position: absolute;
+    width: 7.5%;
+    left: 46.5%;
+    height: 45px;
+
+}
+.filter-button
+{
+    font-size: 18px;
+    border: 1px solid #7C0000;
+    border-radius: 5px;
+    text-align: center;
+    color: #7C0000;
+    margin-bottom: 30px;
+
+}
+.filter-button:hover
+{
+    font-size: 18px;
+    border: 1px solid #7C0000;
+    border-radius: 5px;
+    text-align: center;
+    color: #ffffff;
+    background-color: #7C0000;
+
+}
+.filter-button.active
+{
+    background-color:#7C0000;
+    color: white;
+}
+.port-image
+{
+    width: 100%;
+}
+
+.gallery_product
+{
+    margin-bottom: 30px;
+	-webkit-animation-duration: 1s;
+            animation-duration: 1s;
+            -webkit-animation-fill-mode: both;
+            animation-fill-mode: both;
+}
+
+.block{
+    opacity: 0;
+}
+
+@-webkit-keyframes fadeIn {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+}
+@keyframes fadeIn {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+}
+.fadeIn {
+    -webkit-animation-name: fadeIn;
+    animation-name: fadeIn;
+}
+
+
+
+.video-thumbnail {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  margin-right: 0px;
+
+    {#height: 200px;#}
+    {#width: 320px;#}
+}
+.video-thumbnail:before {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  content: "";
+  font-family: FontAwesome;
+  font-size: 100px;
+  color: #fff;
+  opacity: 0.5;
+  text-shadow: 0px 0px 30px rgba(0, 0, 0, 0.5);
+}
+.video-thumbnail:hover:before {
+  color: #eee;
+}
+
+
+
+
+    </style>
+
+
+
+{% endblock %}
+
+{% block content %}
+
+ <!-- Section: inner-header -->
+{#    <section class="inner-header parallax layer-overlay" data-bg-img="http://i3.ytimg.com/vi/{{ thumbnail.video_id }}/maxresdefault.jpg">#}
+{#     <div class="container pt-90 pb-50">#}
+{#        <!-- Section Content -->#}
+{#        <div class="section-content pt-100">#}
+{#          <div class="row">#}
+{#            <div class="col-md-8">#}
+{#              <h3 class="title text-white">Video Gallery</h3>#}
+{#            </div>#}
+{#              <div class="col-sm-4">#}
+{#              <ol class="breadcrumb white mt-10 text-right xs-text-center">#}
+{#                <li><a style="color: lightgrey" href="{% url 'fweanapp:indexpage' %}">Home</a></li>#}
+{##}
+{#                <li class="active">Video Gallery</li>#}
+{##}
+{#              </ol>#}
+{#            </div>#}
+{#          </div>#}
+{#        </div>#}
+{#      </div>#}
+{#    </section>#}
+
+     <section>
+    <div class="container pb-0 pt-10">
+        <div class="breadcrumb"><a href="{% url 'fweanapp:indexpage' %}"><span class="font-13"><b>Home |</b></span></a>  <span class="font-13"><b>Video Gallery</b></span></div>
+    <div class="row">
+      <div class="gallery col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <h3 class="text-center pb-20 pt-5 "><b>VIDEO GALLERY</b></h3>
+
+      </div>
+
+            {% for videos in videos_list %}
+
+
+         <a data-fancybox style="" href="{{ videos.video_url}}"
+
+               class="glightbo mt-20 featured-video m hvr-float gallery_product video-wrapper  col-sm-6 col-xs-12  col-lg-4 col-md-4 ">
+                <div class="video-thumbnail">
+              <img style="object-fit: cover; background-color: #57257D;
+    padding: 1px;" src="http://i3.ytimg.com/vi/{{ videos.video_id }}/hqdefault.jpg" alt="Video thumbnail">
+            </div>
+
+         <div class="text-center">
+             <p style="color: #5b265b; "><b>{{ videos.title }}</b></p>
+         </div>
+             </a>
+
+
+
+
+            {% endfor %}
+
+
+
+
+
+
+
+    </div>
+  </div>
+
+    </section>
+
+
+
+{% endblock %}
+{% block js %}
+    <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/50598/jquery.fancybox-three.min.js"></script>
+    <script src="{% static 'clientstatic/gallery+lightbox/js/glightbox.min.js' %}"></script>
+    <script src="{% static 'clientstatic/gallery+lightbox/js/index.js' %}"></script>
+
+
+{% endblock %}
+
